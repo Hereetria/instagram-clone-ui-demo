@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Jr</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="includes/css/style.css"> 
+</head>
+
+<body class="bg-dark">
+  <!--Overlay Start-->
+  <div id="overlay" class="d-flex justify-content-center align-items-center" style="height: 100vh; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 999; visibility: hidden;">
+    <!--Switch Account Start-->
+    <div id="switchAccount" class="d-none flex-column justify-content-center rounded position-relative" style="width: 400px; height: 250px; z-index: 1000; background-color: rgb(53, 53, 53);">
+       <div class="d-flex justify-content-center align-items-center w-100 border-bottom" style="height: 45px; border-bottom-color: rgb(65, 65, 66) !important;; ">
+        <p class="fw-semibold text-white m-0">Switch accounts</p>
+        <button id="switchAccountCloseButton" class="closeButton btn-close position-absolute top-0 end-0 m-2 me-3"></button>
+       </div>
+       <div class="w-100 pb-2" style="flex-grow: 1; max-height: 160px; overflow-y: auto;">
+        <article>
+          <div class="d-flex justify-content-center mx-auto mt-2 ms-3" style="width: 95%; height: 55px;">
+            <div class="me-auto rounded-circle h-100" style="width: 55px; overflow: hidden;">
+              <img src="includes/images/example.jpg" alt="" class="h-100 w-100" style="object-fit: cover;">
+            </div>
+            <div class="d-flex align-items-center flex-grow-1">
+              <p class="text-white ms-3 mt-3 fw-semibold" style="font-size: 15px;">hereetria</p>
+            </div>
+            <div class="d-flex align-items-center ms-auto h-100" style="width: 55px;">
+              <a href="#" class="d-flex align-items-center ms-auto" style="text-decoration: none;">
+                <i class="far fa-check-circle text-white fs-4 ms-auto me-3"></i>
+              </a>
+            </div>
+         </div>
+         </article>
+         <article>
+          <div class="d-flex justify-content-center mx-auto mt-2 ms-3" style="width: 95%; height: 55px;">
+            <div class="me-auto rounded-circle h-100" style="width: 55px; overflow: hidden;">
+              <img src="includes/images/example.jpg" alt="" class="h-100 w-100" style="object-fit: cover;">
+            </div>
+            <div class="d-flex align-items-center flex-grow-1">
+              <p class="text-white ms-3 mt-3 fw-semibold" style="font-size: 15px;">hereetria</p>
+            </div>
+            <div class="d-flex align-items-center ms-auto h-100" style="width: 55px;">
+              <a href="#" class="d-flex align-items-center ms-auto" style="text-decoration: none;">
+                <i class="far fa-check-circle text-white fs-4 ms-auto me-3"></i>
+              </a>
+            </div>
+         </div>
+         </article>
+         <article>
+          <div class="d-flex justify-content-center mx-auto mt-2 ms-3" style="width: 95%; height: 55px;">
+            <div class="me-auto rounded-circle h-100" style="width: 55px; overflow: hidden;">
+              <img src="includes/images/example.jpg" alt="" class="h-100 w-100" style="object-fit: cover;">
+            </div>
+            <div class="d-flex align-items-center flex-grow-1">
+              <p class="text-white ms-3 mt-3 fw-semibold" style="font-size: 15px;">hereetria</p>
+            </div>
+            <div class="d-flex align-items-center ms-auto h-100" style="width: 55px;">
+              <a href="#" class="d-flex align-items-center ms-auto" style="text-decoration: none;">
+                <i class="far fa-check-circle text-white fs-4 ms-auto me-3"></i>
+              </a>
+            </div>
+         </div>
+         </article>
+         
+       </div>
+
+       <div class="d-flex justify-content-center align-items-center mt-auto w-100" style="height: 45px;">
+        <a id="logExistingAccountLink" href="#" class="text-decoration-none">
+          <p id="logExistingAccountText" class="fw-semibold m-0">
+            Log into an Existing Account
+          </p>
+        </a>
+        
+      </div>
+      
+    </div>
+    <!--Switch Accound End-->
+    <!--Login Start-->
+    <div id="login" class="d-none flex-column justify-content-center align-items-center rounded position-relative" style="width: 400px; height: 370px; z-index: 1000; background-color: rgb(53, 53, 53);">
+      <button id="loginCloseButton" class="closeButton btn-close position-absolute top-0 end-0 mt-3 me-3"></button>
+      <div class="d-flex flex-column mt-auto mb-4" style="width: 75%; height: 280px;">
+        <div class=" d-flex justify-content-center align-items-center w-100" style="height: 60px;">
+          <span class="fst-italic fw-semibold text-white fs-2 my-3" style="min-width: 128px; min-height: 36px;">Instagram Jr</span>
+        </div>
+
+<div class="d-flex align-items-center w-100 mt-4" style="height: 120px;">
+  <div class="container pt-3">
+    <!-- Username or Email -->
+    <div class="mb-3 position-relative">
+      <label for="usernameOrEmail" class="form-label mt-3 ms-2 text-secondary" style="font-size: 10px; position: absolute; top: -10px; color: rgb(58, 57, 57);">Username or Email</label>
+      <input id="usernameOrEmail" type="text" class="form-control text-white" placeholder=" " style="height: 45px; font-size: 14px; padding-top: 20px; padding-right: 50px; background-color: rgb(44, 44, 44); outline: none; box-shadow: none;">
+    </div>
+    
+
+    <!-- Password -->
+    <div class="mb-3 position-relative">
+      <label for="password" class="form-label mt-3 ms-2 text-secondary" style="font-size: 10px; position: absolute; top: -10px;">Password</label>
+      <input id="password" type="password" class="form-control text-white" placeholder=" " style="height: 45px; font-size: 14px; padding-top: 20px; padding-right: 50px; background-color: rgb(44, 44, 44); outline: none; box-shadow: none;">
+      <a href="#" id="showHideLink">
+        <span id="showHide" class="position-absolute top-50 end-0 translate-middle-y fw-semibold text-white" style="font-size: 14px; padding-right: 8px;">Show</span>
+      </a>      
+    </div>
+  </div>
+</div>
+
+        <div class="d-flex justify-content-center align-items-center w-100" style="height: 50px;">
+        <button id="loginButton" class="btn btn-primary fw-semibold text-white" style="width: 92%; height: 35px; font-size: 14px; background-color: rgb(19, 133, 255)">
+          Log in
+        </button>
+        
+      </div>
+    </div>
+    </div>
+    <!--Login End-->
+  </div>
+  <!--Overlay End-->
+  
+  <!--Page Start-->  
+  <div class="h-100 d-flex flex-row">
+    
+    <!--Sidebar Start-->
+    <div id="sidebar" class="d-flex justify-content- flex-row flex-shrink-0 p-2 text-white bg-dark"
+    style="max-width: 470px; height: 100vh; position: fixed; z-index: 999;">
+    <!--Sidebar Content Start-->
+    <div id="sidebarContent" class="border-end border-secondary pe-2" style="width: 235px;">
+      <div id="sidebarContentInner" class="d-flex flex-column flex-shrink-0 h-100" style="width: 225px;">
+        <div class="d-flex justify-content-center align-items-center border-bottom border-secondary my-2" style="min-height: 69px;">
+          <a href="/" id="sidebarIconLink" class="d-flex align-items-center text-white text-decoration-none">
+            <i id="sidebarIcon" class="fa fa-globe d-none fs-3 d-flex justify-content-center align-items-center" style="min-width: 40px; min-height: 40px;"></i>
+            <span class="sidebarHideableItem fst-italic fs-4 my-3" style="min-width: 128px; min-height: 36px;">Instagram Jr</span>
+          </a>
+        </div>
+      <div class=" h-100 mt-4">
+        <ul class="nav nav-pills flex-column mb-auto">
+  
+          <li class="nav-item mb-3 w-100">
+            <a href="#" class="d-flex flex-row nav-link text-white m-0" data-action="homeAction">
+              <img src="includes/images/home.png" class="d-none sidebarIconPassive me-3" style="width: 1.5em; height: 1.5em;" alt="">
+              <i class="fa fa-home me-3 sidebarIconActive" style="font-size: 1.5em;"></i>
+              <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px;">Home</span>
+            </a>
+          </li>
+          
+          <li class="nav-item mb-3">
+            <a href="#" class="d-flex flex-row nav-link text-white" data-action="searchAction">
+              <img src="includes/images/search.png" class="sidebarIconPassive me-3" style="width: 1.5em; height: 1.5em;" alt="">
+              <i class="d-none fa fa-search me-3 sidebarIconActive" style="font-size: 1.5em;"></i>
+              <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px;">Search</span>
+            </a>
+          </li>
+          
+          <li class="nav-item mb-3">
+            <a href="#" class="d-flex flex-row nav-link text-white" data-action="exploreAction">
+              <i class="far fa-compass me-3 sidebarIconPassive" style="font-size: 1.5em;"></i>
+              <i class="d-none fa fa-compass me-3 sidebarIconActive" style="font-size: 1.5em;"></i>
+              <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px;">Explore</span>
+            </a>
+          </li>
+          
+          <li class="nav-item mb-3">
+            <a href="#" class="d-flex flex-row nav-link text-white" data-action="reelsAction">
+              <i class="far fa-caret-square-right me-3 sidebarIconPassive" style="font-size: 1.5em;"></i>
+              <i class="d-none fa fa-caret-square-right me-3 sidebarIconActive" style="font-size: 1.5em;"></i>
+              <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px;">Reels</span>
+            </a>
+          </li>
+          
+          <li class="nav-item mb-3">
+            <a href="#" class="d-flex flex-row nav-link text-white" data-action="messagesAction">
+              <i class="far fa-comment me-3 sidebarIconPassive" style="font-size: 1.5em;"></i>
+              <i class="d-none fa fa-comment me-3 sidebarIconActive" style="font-size: 1.5em;"></i>
+              <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px;">Messages</span>
+            </a>
+          </li>
+          
+          <li class="nav-item mb-3">
+            <a href="#" class="d-flex flex-row nav-link text-white" data-action="notificationsAction">
+              <i class="far fa-bell me-3 sidebarIconPassive" style="font-size: 1.5em;"></i>
+              <i class="d-none fa fa-bell me-3 sidebarIconActive" style="font-size: 1.5em;"></i>
+              <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px;">Notifications</span>
+            </a>
+          </li>
+          
+          <li class="nav-item mb-3">
+            <a href="#" class="d-flex flex-row nav-link text-white" data-action="createAction">
+              <i class="far fa-plus-square me-3 sidebarIconPassive" style="font-size: 1.5em;"></i>
+              <i class="d-none fa fa-plus-square me-3 sidebarIconActive" style="font-size: 1.5em;"></i>
+              <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px;">Create</span>
+            </a>
+          </li>
+          
+          <li class="nav-item mb-3">
+            <a href="#" class="d-flex flex-row nav-link text-white" data-action="profileAction">
+              <img src="includes/images/example.jpg" alt="" class="rounded-circle me-3" style="width: 1.5em; height: 1.5em;">
+              <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px;">Profile</span>
+            </a>
+          </li>
+                   
+          
+        </ul>
+      </div>
+      <div class="d-flex flex-column pt-auto border-top border-secondary mt-auto mb-2" style="min-height: 40px; height: 12%;">
+        <div class="mt-auto">
+          <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+              id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-bars rounded-circle ms-3" style="font-size: 1.5em;"></i>
+              <span class="sidebarHideableItem w-bold ms-3">More</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="#">Saved Posts</a></li>
+              <li>
+              </li>
+              <li><a class="dropdown-item" href="#">Sign out</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!--Sidebar Content End-->
+
+  <!--Sidebar Openable Start-->
+<div id="sidebarOpenable" class="d-none flex-column h-100 ms-3" style="width: 420px;">
+  <!--Search Start-->
+  <div id="search" class="d-none flex-column h-100 w-100">
+  <div class=" w-100 "style="height: 150px;">
+    <p class="fw-semibold fs-3 text-white mt-2 ms-2">Search</p>
+    <div class="position-relative w-100 d-flex justify-content-center align-items-center border-bottom border-secondary  flex-grow-1 pt-4"  style="height: 85px;">
+      <i class="searchBarIcon fas fa-search position-absolute text-white px-2" style="left: 8px; color: #a9a9a9 !important; font-size: 15px;"></i>
+      <input type="text" class="searchBar text-white rounded px-3 py-1 border-0" placeholder="     Search" style="width: 97%; height: 35px; background-color: rgb(71, 71, 71);">
+      <a href="" class="clearSearchLink position-absolute m-0" style="right: 15px; font-size: 15px; top: 52%;">
+        <i class="far fa-times-circle" style="color:#a9a9a9;"></i>
+      </a>
+      
+    </div>
+  </div>
+  <div class="position-relative flex-grow-1 d-flex flex-column mx-2 my-2">
+    <div class="d-flex flex-row justify-content-between align-items-center px-2 w-100" style="height: 50px;">
+      <p class="text-white fw-semibold m-0">Recent</p>
+      <a href="" class="clearAllLink text-white fw-semibold text-decoration-none"><p class="clearAllText m-0" style="font-size: 14px; color:rgb(19, 133, 255);">Clear all</p></a>
+    </div>
+    <!--Searched Profiles Start-->
+    <div class="w-100 flex-grow-1 custom-scroll" style="height: 50px; overflow-y: auto;">
+      <article>
+        <div class="search-profile d-flex align-items-center flex-row w-100 mt-2" style="height: 60px;">
+          <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px;">
+            <div class="rounded-circle" style="width: 48px; height: 48px">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary" style="width: 50px; height: 50px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle" style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="h-100 flex-grow-1 py-2">
+            <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px;">yusufokansirkeci</p>
+            <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color:#a9a9a9;">hereetria</p>
+          </div>
+          <div class="d-flex justify-content-center align-items-center ms-auto" style="width: 50px; height: 50px;">
+            <a href="">
+              <i class="fa fa-times fs-5" style="color: #a9a9a9;"></i>
+            </a>
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="search-profile d-flex align-items-center flex-row w-100 mt-2" style="height: 60px;">
+          <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px;">
+            <div class="rounded-circle" style="width: 48px; height: 48px">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary" style="width: 50px; height: 50px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle" style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="h-100 flex-grow-1 py-2">
+            <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px;">yusufokansirkeci</p>
+            <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color:#a9a9a9;">hereetria</p>
+          </div>
+          <div class="d-flex justify-content-center align-items-center ms-auto" style="width: 50px; height: 50px;">
+            <a href="">
+              <i class="fa fa-times fs-5" style="color: #a9a9a9;"></i>
+            </a>
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="search-profile d-flex align-items-center flex-row w-100 mt-2" style="height: 60px;">
+          <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px;">
+            <div class="rounded-circle" style="width: 48px; height: 48px">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary" style="width: 50px; height: 50px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle" style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="h-100 flex-grow-1 py-2">
+            <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px;">yusufokansirkeci</p>
+            <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color:#a9a9a9;">hereetria</p>
+          </div>
+          <div class="d-flex justify-content-center align-items-center ms-auto" style="width: 50px; height: 50px;">
+            <a href="">
+              <i class="fa fa-times fs-5" style="color: #a9a9a9;"></i>
+            </a>
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="search-profile d-flex align-items-center flex-row w-100 mt-2" style="height: 60px;">
+          <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px;">
+            <div class="rounded-circle" style="width: 48px; height: 48px">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary" style="width: 50px; height: 50px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle" style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="h-100 flex-grow-1 py-2">
+            <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px;">yusufokansirkeci</p>
+            <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color:#a9a9a9;">hereetria</p>
+          </div>
+          <div class="d-flex justify-content-center align-items-center ms-auto" style="width: 50px; height: 50px;">
+            <a href="">
+              <i class="fa fa-times fs-5" style="color: #a9a9a9;"></i>
+            </a>
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="search-profile d-flex align-items-center flex-row w-100 mt-2" style="height: 60px;">
+          <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px;">
+            <div class="rounded-circle" style="width: 48px; height: 48px">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary" style="width: 50px; height: 50px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle" style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="h-100 flex-grow-1 py-2">
+            <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px;">yusufokansirkeci</p>
+            <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color:#a9a9a9;">hereetria</p>
+          </div>
+          <div class="d-flex justify-content-center align-items-center ms-auto" style="width: 50px; height: 50px;">
+            <a href="">
+              <i class="fa fa-times fs-5" style="color: #a9a9a9;"></i>
+            </a>
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="search-profile d-flex align-items-center flex-row w-100 mt-2" style="height: 60px;">
+          <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px;">
+            <div class="rounded-circle" style="width: 48px; height: 48px">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary" style="width: 50px; height: 50px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle" style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="h-100 flex-grow-1 py-2">
+            <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px;">yusufokansirkeci</p>
+            <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color:#a9a9a9;">hereetria</p>
+          </div>
+          <div class="d-flex justify-content-center align-items-center ms-auto" style="width: 50px; height: 50px;">
+            <a href="">
+              <i class="fa fa-times fs-5" style="color: #a9a9a9;"></i>
+            </a>
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="search-profile d-flex align-items-center flex-row w-100 mt-2" style="height: 60px;">
+          <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px;">
+            <div class="rounded-circle" style="width: 48px; height: 48px">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary" style="width: 50px; height: 50px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle" style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="h-100 flex-grow-1 py-2">
+            <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px;">yusufokansirkeci</p>
+            <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color:#a9a9a9;">hereetria</p>
+          </div>
+          <div class="d-flex justify-content-center align-items-center ms-auto" style="width: 50px; height: 50px;">
+            <a href="">
+              <i class="fa fa-times fs-5" style="color: #a9a9a9;"></i>
+            </a>
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="search-profile d-flex align-items-center flex-row w-100 mt-2" style="height: 60px;">
+          <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px;">
+            <div class="rounded-circle" style="width: 48px; height: 48px">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary" style="width: 50px; height: 50px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle" style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="h-100 flex-grow-1 py-2">
+            <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px;">yusufokansirkeci</p>
+            <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color:#a9a9a9;">hereetria</p>
+          </div>
+          <div class="d-flex justify-content-center align-items-center ms-auto" style="width: 50px; height: 50px;">
+            <a href="">
+              <i class="fa fa-times fs-5" style="color: #a9a9a9;"></i>
+            </a>
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="search-profile d-flex align-items-center flex-row w-100 mt-2" style="height: 60px;">
+          <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px;">
+            <div class="rounded-circle" style="width: 48px; height: 48px">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary" style="width: 50px; height: 50px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle" style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="h-100 flex-grow-1 py-2">
+            <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px;">yusufokansirkeci</p>
+            <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color:#a9a9a9;">hereetria</p>
+          </div>
+          <div class="d-flex justify-content-center align-items-center ms-auto" style="width: 50px; height: 50px;">
+            <a href="">
+              <i class="fa fa-times fs-5" style="color: #a9a9a9;"></i>
+            </a>
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="search-profile d-flex align-items-center flex-row w-100 mt-2" style="height: 60px;">
+          <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px;">
+            <div class="rounded-circle" style="width: 48px; height: 48px">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary" style="width: 50px; height: 50px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle" style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="h-100 flex-grow-1 py-2">
+            <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px;">yusufokansirkeci</p>
+            <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color:#a9a9a9;">hereetria</p>
+          </div>
+          <div class="d-flex justify-content-center align-items-center ms-auto" style="width: 50px; height: 50px;">
+            <a href="">
+              <i class="fa fa-times fs-5" style="color: #a9a9a9;"></i>
+            </a>
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="search-profile d-flex align-items-center flex-row w-100 mt-2" style="height: 60px;">
+          <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px;">
+            <div class="rounded-circle" style="width: 48px; height: 48px">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary" style="width: 50px; height: 50px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle" style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="h-100 flex-grow-1 py-2">
+            <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px;">yusufokansirkeci</p>
+            <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color:#a9a9a9;">hereetria</p>
+          </div>
+          <div class="d-flex justify-content-center align-items-center ms-auto" style="width: 50px; height: 50px;">
+            <a href="">
+              <i class="fa fa-times fs-5" style="color: #a9a9a9;"></i>
+            </a>
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="search-profile d-flex align-items-center flex-row w-100 mt-2" style="height: 60px;">
+          <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px;">
+            <div class="rounded-circle" style="width: 48px; height: 48px">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary" style="width: 50px; height: 50px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle" style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="h-100 flex-grow-1 py-2">
+            <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px;">yusufokansirkeci</p>
+            <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color:#a9a9a9;">hereetria</p>
+          </div>
+          <div class="d-flex justify-content-center align-items-center ms-auto" style="width: 50px; height: 50px;">
+            <a href="">
+              <i class="fa fa-times fs-5" style="color: #a9a9a9;"></i>
+            </a>
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="search-profile d-flex align-items-center flex-row w-100 mt-2" style="height: 60px;">
+          <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px;">
+            <div class="rounded-circle" style="width: 48px; height: 48px">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary" style="width: 50px; height: 50px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle" style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="h-100 flex-grow-1 py-2">
+            <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px;">yusufokansirkeci</p>
+            <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color:#a9a9a9;">hereetria</p>
+          </div>
+          <div class="d-flex justify-content-center align-items-center ms-auto" style="width: 50px; height: 50px;">
+            <a href="">
+              <i class="fa fa-times fs-5" style="color: #a9a9a9;"></i>
+            </a>
+          </div>
+        </div>
+      </article>
+      
+      
+    </div>
+        <!--Searched Profiles End-->
+  </div>
+</div>
+  <!--Search End-->
+</div>
+  <!--Sidebar Openable End-->
+    </div>  
+    <!--Sidebar End-->
+    
+
+    <!--Footerbar Start-->
+    <div id="footerbar" class="d-none fixed-bottom bg-dark border-top border-secondary text-white text-center py-1">
+      <div class="d-flex justify-content-center text-align-center mx-3">
+        <ul class="nav nav-pills w-100 justify-content-evenly mb-0">
+
+          <li class="nav-item">
+            <a href="#" class="nav-link text-white">
+              <i class="fa fa-home" style="font-size: 1.5em;"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link text-white">
+              <i class="far fa-compass" style="font-size: 1.5em;"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link text-white">
+              <i class="far fa-plus-square" style="font-size: 1.5em;"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link text-white">
+              <i class="far fa-comment" style="font-size: 1.5em;"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link text-white">
+              <img src="includes/images/example.jpg" alt="" class="rounded-circle me-3" style="width: 23px; height: 23px;">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!--Footerbar End-->
+    
+
+
+    <!--Main Start-->
+    <div id="main" class="d-flex justify-content-evenly flex-row" 
+     style="flex-grow: 1; margin-left: 250px; min-height: 100vh;">
+    
+     
+     <!--Main Container Start-->
+     <div id="mainContainer" class="d-flex justify-content-between" style="max-width: 1040px; width: 100%;">
+      <!--Content Start-->
+
+      
+      <div class="d-flex justify-content-center h-100 mt-2" style="width: 630px;">
+        <div class="flex-column d-flex mx-auto" style="position: relative; width: 630px; top: 0; height: auto;">
+          <!--Navbar Start-->
+          <div id="navbar" class="d-none justify-content-between" style="min-height: 64px; top: 0; height: 90px; width: 100%; overflow: hidden;">
+            <div class="d-flex justify-content-center align-items-center h-100" style="width: 125px;">
+              <div class="d-flex justify-content-center align-items-center w-100 h-75">
+                <div id="toggleButton" class="d-flex justify-content-center" style="position: relative;">
+                  <a href="#" class="d-flex align-items-center justify-content-center text-white text-decoration-none" id="dropdownUser1">
+                    <span id="toggleText" class="fw-bold fs-3">For you</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end align-items-center h-100 flex-grow-1">
+              <div class="d-flex align-items-center">
+                <input type="text" class="bg-secondary text-white rounded px-3 py-1 border-0" placeholder="Search" style="width: 250px; height: 35px;">
+              </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center h-100" style="width: 60px;">
+              <a href="#" class="nav-link text-white">
+                <i class="far fa-bell" style="font-size: 1.5em;"></i>
+              </a>
+            </div>
+          </div>
+          
+          <!--Navbar End-->
+      
+      <!--Content Selection Start-->
+        <div id="contentSelection" class="d-flex text-align-center border-bottom border-1 border-secondary w-100" style="height: 90px;">
+          <div class="d-flex pt-4 fw-bold text-white" style="height: 50px;">
+            <a href="#" class="ms-3 text-white text-decoration-none">For you</a>
+            <a href="#" class="ms-3 text-secondary text-decoration-none">Following</a>
+          </div>
+        </div>
+        <!--Content Selection End-->
+       
+        <!--Stories Start-->
+        <div id="stories" class="position-relative mt-3" style="width: 630px; min-width: 630px; height:70px; display: flex; justify-content: flex-start; align-items: center;">
+          <!--Center Line Start-->
+          <div class="d-flex align-items-center center-line" style="position: absolute; top: 50%; left: 0; right: 0; height: 25px; width: 100%; transform: translateY(-50%); pointer-events: none;">
+                    <!-- Left Scroll Buton -->
+                    <button id="scrollLeft" class="btn btn-secondary rounded-circle"
+                    style="width: 25px; height: 25px; padding: 0; pointer-events: auto;">
+                &#10094;
+            </button>
+                      <!-- Right Scroll Button -->
+                      <button id="scrollRight" class="btn btn-secondary rounded-circle"
+                      style="width: 25px; height: 25px; padding: 0; position: absolute; top: 50%; right: 0; transform: translateY(-50%); z-index: 1; pointer-events: auto;">
+                  &#10095;
+              </button>
+          </div>
+          <!--Center Line End-->
+
+        
+        
+          <!-- Scrollable Container -->
+          <div class="py-4" id="scrollContainer"
+            style="width: 630px; border: none; outline: none; overflow-x: auto; white-space: nowrap; display: flex; overflow-x: hidden;">
+            <div class="p-2 ps-1">
+              <a href="">
+                <div class="rounded-circle border border-3 border-danger"
+                  style="width: 60px; height: 60px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle"
+                    style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+            <div class="p-2">
+              <a href="">
+                <div class="rounded-circle border border-3 border-danger"
+                  style="width: 60px; height: 60px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle"
+                    style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+            <div class="p-2">
+              <a href="">
+                <div class="rounded-circle border border-3 border-danger"
+                  style="width: 60px; height: 60px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle"
+                    style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+            <div class="p-2">
+              <a href="">
+                <div class="rounded-circle border border-3 border-danger"
+                  style="width: 60px; height: 60px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle"
+                    style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+            <div class="p-2">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary"
+                  style="width: 60px; height: 60px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle"
+                    style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+            <div class="p-2">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary"
+                  style="width: 60px; height: 60px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle"
+                    style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+            <div class="p-2">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary"
+                  style="width: 60px; height: 60px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle"
+                    style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+            <div class="p-2">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary"
+                  style="width: 60px; height: 60px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle"
+                    style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+            <div class="p-2">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary"
+                  style="width: 60px; height: 60px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle"
+                    style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+            <div class="p-2">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary"
+                  style="width: 60px; height: 60px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle"
+                    style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+            <div class="p-2">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary"
+                  style="width: 60px; height: 60px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle"
+                    style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+            <div class="p-2">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary"
+                  style="width: 60px; height: 60px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle"
+                    style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+            <div class="p-2">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary"
+                  style="width: 60px; height: 60px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle"
+                    style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+            <div class="p-2">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary"
+                  style="width: 60px; height: 60px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle"
+                    style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+            <div class="p-2">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary"
+                  style="width: 60px; height: 60px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle"
+                    style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+            <div class="p-2">
+              <a href="">
+                <div class="rounded-circle border border-3 border-secondary"
+                  style="width: 60px; height: 60px; overflow:hidden">
+                  <img src="includes/images/example.jpg" alt="Chamber 1" class="img-fluid rounded-circle"
+                    style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+              </a>
+            </div>
+          </div>
+        
+
+        </div>
+        <!--Stories End-->
+
+        <!--Posts Start-->
+        <div class="full-screen-wrapper">
+        <div class="black-div">
+          <div class="blue-div" style="width: 470px; min-height: 100vh; padding-bottom: 100%;">
+        
+            <article>
+              <div class="d-flex flex-column mt-3 w-100" style="min-height: 590px;">
+                <div class="w-100 d-flex flex-row align-items-center mb-2 ps-1" style="height: 7%;">
+                  <div class="" style="max-width: 100%; max-height: 100%">
+                    <a href="" class="d-flex align-items-center" style="text-decoration: none;">
+                      <img src="includes/images/example.jpg" alt="" class="rounded-circle me-2 border border-secondary" style="width: 35px; height: 35px;">
+                      <p class="mb-0 fw-semibold text-white">hereetria</p>
+                      <p class="mb-0 ms-1 text-secondary">• 1w</p>
+                    </a>
+                  </div>
+                  <div class="ms-auto me-1">
+                    <a href="">
+                      <i class="fa fa-ellipsis-h ms-auto text-light mb-1 me-1 fs-5"></i>
+                    </a>
+                  </div>
+                </div>
+                
+                <div class="w-100 d-flex align-items-center justify-content-center border border-secondary rounded-3" style="aspect-ratio: 1/1; background-color:black">
+                  <img src="includes/images/example.jpg" alt="" style="max-width: 100%; height: auto;">
+                </div>
+                
+                <div class="d-flex flex-column flex-grow-1 border-bottom border-2 border-secondary" style="max-height: 100%; overflow: auto;">
+                  <div style="height: 100px; overflow-y: hidden; overflow-x: hidden;">
+                    <!-- İlk bölüm (ikonlar) -->
+                    <div class="w-100 d-flex mt-1 ps-1 gap-3" style="height: 40%; flex-grow: 0;">
+                      <div class="d-flex align-items-center" style="max-width: 40px; max-height: 40px;">
+                        <a href="" class="d-flex justify-content-center">
+                          <img src="includes/images/heart.png" alt="like" style="max-width: 60%;">
+                        </a>
+                      </div>
+                      <div class="d-flex align-items-center" style="max-width: 40px; max-height: 40px;">
+                        <a href="" class="d-flex justify-content-center">
+                          <img src="includes/images/comment.png" alt="comment" style="max-width: 60%;">
+                        </a>
+                      </div>
+                      <div class="d-flex align-items-center" style="max-width: 40px; max-height: 40px;">
+                        <a href="" class="d-flex justify-content-center">
+                          <img src="includes/images/paper_plane.png" alt="share" style="max-width: 60%;">
+                        </a>
+                      </div>
+                      <div class="d-flex align-items-center ms-auto me-1" style="max-width: 40px; max-height: 40px;">
+                        <a href="" class="d-flex justify-content-center">
+                          <img src="includes/images/bookmark.png" alt="save" style="max-width: 60%;">
+                        </a>
+                      </div>
+                    </div>
+                    
+                    <!-- İkinci bölüm (like sayısı) -->
+                    <div class="w-100 d-flex align-items-center mt-1 ps-1" style="height: 15%; flex-grow: 0;">
+                      <a href="" style="text-decoration: none;">
+                        <strong class="text-white" style="font-size: 14px;">46 Likes</strong>
+                      </a>
+                    </div>
+                    
+                    <!-- Üçüncü bölüm (yorumlar) -->
+                    <div class="w-100 mt-2 ps-1" style="height: 20%; flex-grow: 0;">
+                      <a href="" style="text-decoration: none;">
+                        <p class="text-secondary mt-1" style="font-size: 14px">View 3 comment</p>
+                      </a>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <!-- Dördüncü bölüm (yorum ekleme) -->
+                    <div class="mt-0 w-100 d-flex direction-row" style="flex-grow: 1;">
+                      <div class="ps-1 d-flex direction-row" style="position: relative; overflow: visible; width: 100%; margin: 0; padding: 0;">
+                        <form action="post" class="w-100 h-100 d-flex flex-column">
+                          <textarea id="comment-textarea" class="form-control border-0 bg-transparent text-white" 
+                                    placeholder="Add a comment..." 
+                                    style="font-size: 14px; resize: none; outline: none; box-shadow: none; margin: 0; padding: 0; max-height: 80px; min-height: 40px; overflow-y: auto;" 
+                                    rows="1"></textarea>
+                        </form>
+                      </div>
+                      <div id="post-link" style="display: none;">
+                        <a href="" class="d-flex align-items-center text-decoration-none">
+                          <p class="text-primary fw-semibold mb-0">Post</p>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article>
+              <div class="d-flex flex-column mt-3 w-100" style="min-height: 590px;">
+                <div class="w-100 d-flex flex-row align-items-center mb-2 ps-1" style="height: 7%;">
+                  <div class="" style="max-width: 100%; max-height: 100%">
+                    <a href="" class="d-flex align-items-center" style="text-decoration: none;">
+                      <img src="includes/images/example.jpg" alt="" class="rounded-circle me-2 border border-secondary" style="width: 35px; height: 35px;">
+                      <p class="mb-0 fw-semibold text-white">hereetria</p>
+                      <p class="mb-0 ms-1 text-secondary">• 1w</p>
+                    </a>
+                  </div>
+                  <div class="ms-auto me-1">
+                    <a href="">
+                      <i class="fa fa-ellipsis-h ms-auto text-light mb-1 me-1 fs-5"></i>
+                    </a>
+                  </div>
+                </div>
+                
+                <div class="w-100 d-flex align-items-center justify-content-center border border-secondary rounded-3" style="aspect-ratio: 1/1; background-color:black">
+                  <img src="includes/images/example.jpg" alt="" style="max-width: 100%; height: auto;">
+                </div>
+                
+                <div class="d-flex flex-column flex-grow-1 border-bottom border-2 border-secondary" style="max-height: 100%; overflow: auto;">
+                  <div style="height: 100px;">
+                    <!-- İlk bölüm (ikonlar) -->
+                    <div class="w-100 d-flex mt-1 ps-1 gap-3" style="height: 40%; flex-grow: 0;">
+                      <div class="d-flex align-items-center" style="max-width: 40px; max-height: 40px;">
+                        <a href="" class="d-flex justify-content-center">
+                          <img src="includes/images/heart.png" alt="like" style="max-width: 60%;">
+                        </a>
+                      </div>
+                      <div class="d-flex align-items-center" style="max-width: 40px; max-height: 40px;">
+                        <a href="" class="d-flex justify-content-center">
+                          <img src="includes/images/comment.png" alt="comment" style="max-width: 60%;">
+                        </a>
+                      </div>
+                      <div class="d-flex align-items-center" style="max-width: 40px; max-height: 40px;">
+                        <a href="" class="d-flex justify-content-center">
+                          <img src="includes/images/paper_plane.png" alt="share" style="max-width: 60%;">
+                        </a>
+                      </div>
+                      <div class="d-flex align-items-center ms-auto me-1" style="max-width: 40px; max-height: 40px;">
+                        <a href="" class="d-flex justify-content-center">
+                          <img src="includes/images/bookmark.png" alt="save" style="max-width: 60%;">
+                        </a>
+                      </div>
+                    </div>
+                    
+                    <!-- İkinci bölüm (like sayısı) -->
+                    <div class="w-100 d-flex align-items-center mt-1 ps-1" style="height: 15%; flex-grow: 0;">
+                      <a href="" style="text-decoration: none;">
+                        <strong class="text-white" style="font-size: 14px;">46 Likes</strong>
+                      </a>
+                    </div>
+                    
+                    <!-- Üçüncü bölüm (yorumlar) -->
+                    <div class="w-100 mt-2 ps-1" style="height: 20%; flex-grow: 0;">
+                      <a href="" style="text-decoration: none;">
+                        <p class="text-secondary mt-1" style="font-size: 14px">View 3 comment</p>
+                      </a>
+                    </div>
+                  </div>
+                  
+                  <div style="height: 35px;">
+                    <!-- Dördüncü bölüm (yorum ekleme) -->
+                    <div class="mt-0 w-100 d-flex direction-row" style="flex-grow: 1;">
+                      <div class="ps-1 d-flex direction-row" style="position: relative; overflow: visible; width: 100%; margin: 0; padding: 0;">
+                        <form action="post" class="w-100 h-100 d-flex flex-column">
+                          <textarea id="comment-textarea" class="form-control border-0 bg-transparent text-white" 
+                                    placeholder="Add a comment..." 
+                                    style="font-size: 14px; resize: none; outline: none; box-shadow: none; margin: 0; padding: 0; max-height: 80px; min-height: 40px; overflow-y: auto;" 
+                                    rows="1"></textarea>
+                        </form>
+                      </div>
+                      <div id="post-link" style="display: none;">
+                        <a href="" class="d-flex align-items-center text-decoration-none">
+                          <p class="text-primary fw-semibold mb-0">Post</p>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article>
+              <div class="d-flex flex-column mt-3 w-100" style="min-height: 590px;">
+                <div class="w-100 d-flex flex-row align-items-center mb-2 ps-1" style="height: 7%;">
+                  <div class="" style="max-width: 100%; max-height: 100%">
+                    <a href="" class="d-flex align-items-center" style="text-decoration: none;">
+                      <img src="includes/images/example.jpg" alt="" class="rounded-circle me-2 border border-secondary" style="width: 35px; height: 35px;">
+                      <p class="mb-0 fw-semibold text-white">hereetria</p>
+                      <p class="mb-0 ms-1 text-secondary">• 1w</p>
+                    </a>
+                  </div>
+                  <div class="ms-auto me-1">
+                    <a href="">
+                      <i class="fa fa-ellipsis-h ms-auto text-light mb-1 me-1 fs-5"></i>
+                    </a>
+                  </div>
+                </div>
+                
+                <div class="w-100 d-flex align-items-center justify-content-center border border-secondary rounded-3" style="aspect-ratio: 1/1; background-color:black">
+                  <img src="includes/images/example.jpg" alt="" style="max-width: 100%; height: auto;">
+                </div>
+                
+                <div class="d-flex flex-column flex-grow-1 border-bottom border-2 border-secondary" style="max-height: 100%; overflow: auto;">
+                  <div style="height: 100px; overflow-y: hidden; overflow-x: hidden;">
+                    <!-- İlk bölüm (ikonlar) -->
+                    <div class="w-100 d-flex mt-1 ps-1 gap-3" style="height: 40%; flex-grow: 0;">
+                      <div class="d-flex align-items-center" style="max-width: 40px; max-height: 40px;">
+                        <a href="" class="d-flex justify-content-center">
+                          <img src="includes/images/heart.png" alt="like" style="max-width: 60%;">
+                        </a>
+                      </div>
+                      <div class="d-flex align-items-center" style="max-width: 40px; max-height: 40px;">
+                        <a href="" class="d-flex justify-content-center">
+                          <img src="includes/images/comment.png" alt="comment" style="max-width: 60%;">
+                        </a>
+                      </div>
+                      <div class="d-flex align-items-center" style="max-width: 40px; max-height: 40px;">
+                        <a href="" class="d-flex justify-content-center">
+                          <img src="includes/images/paper_plane.png" alt="share" style="max-width: 60%;">
+                        </a>
+                      </div>
+                      <div class="d-flex align-items-center ms-auto me-1" style="max-width: 40px; max-height: 40px;">
+                        <a href="" class="d-flex justify-content-center">
+                          <img src="includes/images/bookmark.png" alt="save" style="max-width: 60%;">
+                        </a>
+                      </div>
+                    </div>
+                    
+                    <!-- İkinci bölüm (like sayısı) -->
+                    <div class="w-100 d-flex align-items-center mt-1 ps-1" style="height: 15%; flex-grow: 0;">
+                      <a href="" style="text-decoration: none;">
+                        <strong class="text-white" style="font-size: 14px;">46 Likes</strong>
+                      </a>
+                    </div>
+                    
+                    <!-- Üçüncü bölüm (yorumlar) -->
+                    <div class="w-100 mt-2 ps-1" style="height: 20%; flex-grow: 0;">
+                      <a href="" style="text-decoration: none;">
+                        <p class="text-secondary mt-1" style="font-size: 14px">View 3 comment</p>
+                      </a>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <!-- Dördüncü bölüm (yorum ekleme) -->
+                    <div class="mt-0 w-100 d-flex direction-row" style="flex-grow: 1;">
+                      <div class="ps-1 d-flex direction-row" style="position: relative; overflow: visible; width: 100%; margin: 0; padding: 0;">
+                        <form action="post" class="w-100 h-100 d-flex flex-column">
+                          <textarea id="comment-textarea" class="form-control border-0 bg-transparent text-white" 
+                                    placeholder="Add a comment..." 
+                                    style="font-size: 14px; resize: none; outline: none; box-shadow: none; margin: 0; padding: 0; max-height: 80px; min-height: 40px; overflow-y: auto;" 
+                                    rows="1"></textarea>
+                        </form>
+                      </div>
+                      <div id="post-link" style="display: none;">
+                        <a href="" class="d-flex align-items-center text-decoration-none">
+                          <p class="text-primary fw-semibold mb-0">Post</p>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article>
+              <div class="d-flex flex-column mt-3 w-100" style="min-height: 590px;">
+                <div class="w-100 d-flex flex-row align-items-center mb-2 ps-1" style="height: 7%;">
+                  <div class="" style="max-width: 100%; max-height: 100%">
+                    <a href="" class="d-flex align-items-center" style="text-decoration: none;">
+                      <img src="includes/images/example.jpg" alt="" class="rounded-circle me-2 border border-secondary" style="width: 35px; height: 35px;">
+                      <p class="mb-0 fw-semibold text-white">hereetria</p>
+                      <p class="mb-0 ms-1 text-secondary">• 1w</p>
+                    </a>
+                  </div>
+                  <div class="ms-auto me-1">
+                    <a href="">
+                      <i class="fa fa-ellipsis-h ms-auto text-light mb-1 me-1 fs-5"></i>
+                    </a>
+                  </div>
+                </div>
+                
+                <div class="w-100 d-flex align-items-center justify-content-center border border-secondary rounded-3" style="aspect-ratio: 1/1; background-color:black">
+                  <img src="includes/images/example.jpg" alt="" style="max-width: 100%; height: auto;">
+                </div>
+                
+                <div class="d-flex flex-column flex-grow-1 border-bottom border-2 border-secondary" style="max-height: 100%; overflow: auto;">
+                  <div style="height: 100px; overflow-y: hidden; overflow-x: hidden;">
+                    <!-- İlk bölüm (ikonlar) -->
+                    <div class="w-100 d-flex mt-1 ps-1 gap-3" style="height: 40%; flex-grow: 0;">
+                      <div class="d-flex align-items-center" style="max-width: 40px; max-height: 40px;">
+                        <a href="" class="d-flex justify-content-center">
+                          <img src="includes/images/heart.png" alt="like" style="max-width: 60%;">
+                        </a>
+                      </div>
+                      <div class="d-flex align-items-center" style="max-width: 40px; max-height: 40px;">
+                        <a href="" class="d-flex justify-content-center">
+                          <img src="includes/images/comment.png" alt="comment" style="max-width: 60%;">
+                        </a>
+                      </div>
+                      <div class="d-flex align-items-center" style="max-width: 40px; max-height: 40px;">
+                        <a href="" class="d-flex justify-content-center">
+                          <img src="includes/images/paper_plane.png" alt="share" style="max-width: 60%;">
+                        </a>
+                      </div>
+                      <div class="d-flex align-items-center ms-auto me-1" style="max-width: 40px; max-height: 40px;">
+                        <a href="" class="d-flex justify-content-center">
+                          <img src="includes/images/bookmark.png" alt="save" style="max-width: 60%;">
+                        </a>
+                      </div>
+                    </div>
+                    
+                    <!-- İkinci bölüm (like sayısı) -->
+                    <div class="w-100 d-flex align-items-center mt-1 ps-1" style="height: 15%; flex-grow: 0;">
+                      <a href="" style="text-decoration: none;">
+                        <strong class="text-white" style="font-size: 14px;">46 Likes</strong>
+                      </a>
+                    </div>
+                    
+                    <!-- Üçüncü bölüm (yorumlar) -->
+                    <div class="w-100 mt-2 ps-1" style="height: 20%; flex-grow: 0;">
+                      <a href="" style="text-decoration: none;">
+                        <p class="text-secondary mt-1" style="font-size: 14px">View 3 comment</p>
+                      </a>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <!-- Dördüncü bölüm (yorum ekleme) -->
+                    <div class="mt-0 w-100 d-flex direction-row" style="flex-grow: 1;">
+                      <div class="ps-1 d-flex direction-row" style="position: relative; overflow: visible; width: 100%; margin: 0; padding: 0;">
+                        <form action="post" class="w-100 h-100 d-flex flex-column">
+                          <textarea id="comment-textarea" class="form-control border-0 bg-transparent text-white" 
+                                    placeholder="Add a comment..." 
+                                    style="font-size: 14px; resize: none; outline: none; box-shadow: none; margin: 0; padding: 0; max-height: 80px; min-height: 40px; overflow-y: auto;" 
+                                    rows="1"></textarea>
+                        </form>
+                      </div>
+                      <div id="post-link" style="display: none;">
+                        <a href="" class="d-flex align-items-center text-decoration-none">
+                          <p class="text-primary fw-semibold mb-0">Post</p>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <!--Posts End-->
+          </div>
+        </div>
+    </div>
+        <!--Content End-->
+      <!--Rightbar Start-->
+      <div id="rightbar" class="mt-5" style="position: relative; width: 320px; height: 500px; min-width: 20%">
+        <div class="d-flex w-100" style="height: 44px;">
+          <div class="h-100" style="width: 44px;">
+            <img src="includes/images/example.jpg" alt="" class="w-100 h-100 rounded-circle border border-secondary">
+          </div>
+          <div class="d-flex align-items-center" style="width: 220px;">
+            <div class="d-flex flex-column w-100" style="height: 85%;">
+              <p class="h-50 m-0 d-flex align-items-center ms-2 text-white">yusufokansirkeci</p>
+              <p class="h-50 m-0  d-flex align-items-center ms-2 text-secondary">Hereetria</p>
+            </div>
+          </div>
+          
+          <div class="d-flex justify-content-center align-items-center ms-auto fw-semibold text-primary" style="font-size: 14px; width: 50px;">
+            <a id="switchButton" href="" class="text-decoration-none">
+              Switch
+            </a>
+          </div>
+        </div>
+        <div class="mt-3 d-flex align-items-center flex-row w-100" style="height: 25px;">
+          <p class="fw-semibold text-secondary m-0 me-auto">Suggest for you</p>
+          <a href="" style="text-decoration: none;"><p class="text-white m-0" style="font-size: 15px;">See All</p></a> 
+        </div>
+
+        <div class="d-flex w-100 mt-3" style="height: 44px;">
+          <div class="h-100" style="width: 44px; min-width: 44px;">
+            <img src="includes/images/example.jpg" alt="" class="w-100 h-100 rounded-circle border border-secondary">
+          </div>
+          <div class="d-flex align-items-center" style="width: 220px;">
+            <div class="d-flex flex-column w-100" style="height: 85%;">
+              <p class="h-50 m-0 d-flex align-items-center ms-2 text-white">yusufokansirkeci</p>
+              <div class="h-50 m-0 d-flex align-items-center ms-2 text-secondary" style="overflow: hidden; display: flex; width: 100%;">
+                <p class="m-0 text-truncate" style="flex-shrink: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                  Followed by hereetria + 8 more users
+                </p>
+              </div>
+            </div>
+            
+            
+          </div>
+          
+          <div class="d-flex justify-content-center align-items-center ms-auto fw-semibold text-primary" style="font-size: 14px; width: 50px;">
+            <a href="" class="text-decoration-none">
+              Follow
+            </a>
+          </div>
+        </div>
+        <div class="d-flex w-100 mt-3" style="height: 44px;">
+          <div class="h-100" style="width: 44px; min-width: 44px;">
+            <img src="includes/images/example.jpg" alt="" class="w-100 h-100 rounded-circle border border-secondary">
+          </div>
+          <div class="d-flex align-items-center" style="width: 220px;">
+            <div class="d-flex flex-column w-100" style="height: 85%;">
+              <p class="h-50 m-0 d-flex align-items-center ms-2 text-white">yusufokansirkeci</p>
+              <div class="h-50 m-0 d-flex align-items-center ms-2 text-secondary" style="overflow: hidden; display: flex; width: 100%;">
+                <p class="m-0 text-truncate" style="flex-shrink: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                  Followed by hereetria + 8 more users
+                </p>
+              </div>
+            </div>
+            
+            
+          </div>
+          
+          <div class="d-flex justify-content-center align-items-center ms-auto fw-semibold text-primary" style="font-size: 14px; width: 50px;">
+            <a href="" class="text-decoration-none">
+              Follow
+            </a>
+          </div>
+        </div>
+        <div class="d-flex w-100 mt-3" style="height: 44px;">
+          <div class="h-100" style="width: 44px; min-width: 44px;">
+            <img src="includes/images/example.jpg" alt="" class="w-100 h-100 rounded-circle border border-secondary">
+          </div>
+          <div class="d-flex align-items-center" style="width: 220px;">
+            <div class="d-flex flex-column w-100" style="height: 85%;">
+              <p class="h-50 m-0 d-flex align-items-center ms-2 text-white">yusufokansirkeci</p>
+              <div class="h-50 m-0 d-flex align-items-center ms-2 text-secondary" style="overflow: hidden; display: flex; width: 100%;">
+                <p class="m-0 text-truncate" style="flex-shrink: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                  Followed by hereetria + 8 more users
+                </p>
+              </div>
+            </div>
+            
+            
+          </div>
+          
+          <div class="d-flex justify-content-center align-items-center ms-auto fw-semibold text-primary" style="font-size: 14px; width: 50px;">
+            <a href="" class="text-decoration-none">
+              Follow
+            </a>
+          </div>
+        </div>
+        <div class="d-flex w-100 mt-3" style="height: 44px;">
+          <div class="h-100" style="width: 44px; min-width: 44px;">
+            <img src="includes/images/example.jpg" alt="" class="w-100 h-100 rounded-circle border border-secondary">
+          </div>
+          <div class="d-flex align-items-center" style="width: 220px;">
+            <div class="d-flex flex-column w-100" style="height: 85%;">
+              <p class="h-50 m-0 d-flex align-items-center ms-2 text-white">yusufokansirkeci</p>
+              <div class="h-50 m-0 d-flex align-items-center ms-2 text-secondary" style="overflow: hidden; display: flex; width: 100%;">
+                <p class="m-0 text-truncate" style="flex-shrink: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                  Followed by hereetria + 8 more users
+                </p>
+              </div>
+            </div>
+            
+            
+          </div>
+          
+          <div class="d-flex justify-content-center align-items-center ms-auto fw-semibold text-primary" style="font-size: 14px; width: 50px;">
+            <a href="" class="text-decoration-none">
+              Follow
+            </a>
+          </div>
+        </div>
+        <div class="d-flex w-100 mt-3" style="height: 44px;">
+          <div class="h-100" style="width: 44px; min-width: 44px;">
+            <img src="includes/images/example.jpg" alt="" class="w-100 h-100 rounded-circle border border-secondary">
+          </div>
+          <div class="d-flex align-items-center" style="width: 220px;">
+            <div class="d-flex flex-column w-100" style="height: 85%;">
+              <p class="h-50 m-0 d-flex align-items-center ms-2 text-white">yusufokansirkeci</p>
+              <div class="h-50 m-0 d-flex align-items-center ms-2 text-secondary" style="overflow: hidden; display: flex; width: 100%;">
+                <p class="m-0 text-truncate" style="flex-shrink: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                  Followed by hereetria + 8 more users
+                </p>
+              </div>
+            </div>
+            
+            
+          </div>
+          
+          <div class="d-flex justify-content-center align-items-center ms-auto fw-semibold text-primary" style="font-size: 14px; width: 50px;">
+            <a href="" class="text-decoration-none">
+              Follow
+            </a>
+          </div>
+        </div>
+        
+      </div>
+      <!--Rightbar End-->
+    </div>
+    <!--Main Container End-->
+  </div>
+  <!--Main End-->
+
+<!--NavMenu End-->
+
+
+
+
+
+
+
+
+
+    </div>
+    <!--Page End-->
+    <script src="includes/js/script.js"></script>
+</body>
+
+</html>

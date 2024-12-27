@@ -1,0 +1,219 @@
+body {
+  min-width: 470px;
+  margin: 0 auto; /* Ortalanmış olmasını sağlar */
+  overflow-x: hidden; /* Yatay kaydırma çubuğunu gizler */
+}
+
+#comment-textarea::placeholder {
+    color: #6c757d !important; /* Apply Bootstrap's secondary color to placeholder */
+  }
+
+  html, body {
+    height: 100%;  /* Sayfanın tamamını kaplayacak şekilde ayarla */    /* Sayfanın kenar boşluklarını sıfırla */
+  }
+
+#sidebarIcon::before {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+
+/* Ekran genişliği 1340px ve daha küçük olduğunda yazıyı gizle */
+@media (max-width: 1340px) {
+  .sidebarHideableItem {
+    display: none; /* Yazıyı gizler */
+  }
+
+  #main {
+    margin-left: 90px !important;
+  }
+
+  #sidebar {
+    min-width: 90px !important;
+  }
+
+  #sidebarIcon {
+    display: inline-block !important; /* Make sure the icon is displayed */
+  }
+
+  #sidebarContent {
+    width: 68px !important;
+  }
+
+  #sidebarContentInner {
+    width: 60px !important;
+  }
+}
+
+@media (max-width: 1180px) {
+  #rightbar {
+    display: none !important;
+  }
+
+  #mainContainer {
+    justify-content: center !important;
+  }
+}
+
+@media (max-width: 800px) {
+  #stories{
+    margin-top: 6px !important;
+  }
+  .black-div {
+    padding: 20px 20px 0 20px !important;
+  }
+  #main {
+    margin-left: 0px !important;
+  }
+
+  #sidebar {
+    display: none !important;
+  }
+
+  #footerbar {
+    display: inline-block !important; 
+  }
+
+  #navbar {
+    display: inline-flex !important;
+  }
+
+  #contentSelection {
+    display: none !important;
+  }
+
+}
+
+@media (max-width: 650px) {
+
+  .center-line {
+    width: calc(100vw - 17px) !important;
+  }
+}
+
+.full-screen-wrapper {
+  max-width: 630px;
+  left: 0;
+  height: 100vh; /* Sayfa yüksekliği kadar */
+  display: flex;
+  justify-content: center; /* Yatayda ortalar */
+  align-items: flex-start; /* Dikeyde normalde başladığı yerden başlasın */
+  margin: 0; /* margin'i sıfırlıyoruz */
+  padding: 0; /* padding'i sıfırlıyoruz */
+}
+
+  .black-div {
+    position: absolute;  /* Sayfanın sol tarafına sabitler */  /* Sayfanın en üstünden başlar */ /* Sayfanın en solundan başlar */
+    width: 100%;  /* Sayfanın tamamını yatayda kaplar */
+    max-width: 470px;  /* Maksimum genişlik 470px ile sınırlı */
+    min-height: 100vh;  /* Sayfa boyutuna göre minimum yükseklik */
+    display: flex;
+    justify-content: center;  /* Yatayda içerikleri ortalar */
+    align-items: center;  /* Dikeyde içerikleri ortalar */
+    color: white;
+    padding: 20px;
+    margin: 0;  /* Margin'i sıfırlıyoruz */
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+#toggleButton:hover {
+  background-color: #6c757d;
+}
+
+/* İkon rengini beyaz yap */
+.closeButton {
+  filter: brightness(0) invert(1); /* İkonu beyaza çevirir */
+  outline: none; /* Tıklama sonrası outline kaldır */
+  box-shadow: none; /* Bootstrap'in box-shadow özelliğini sıfırla */
+}
+
+/* Üzerine gelince arkaplan gri olsun */
+.closeButton:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Hafif gri arka plan */
+}
+
+/* Tıklama sırasında mavi kutucukları kaldır */
+.closeButton:focus {
+  outline: none; /* Tıklama sonrası outline kaldır */
+  box-shadow: none; /* Bootstrap'in box-shadow özelliğini sıfırla */
+}
+
+
+#logExistingAccountText {
+  color: rgb(19, 133, 255); /* Başlangıçtaki renk */
+  font-size: 14px;
+  transition: color 0.3s ease; /* Yumuşak geçiş */
+}
+
+#logExistingAccountText:hover {
+  color: white; /* Hover durumunda yazı beyaz olacak */
+}
+
+#logExistingAccountText:active {
+  color: grey; /* Tıklama (active) durumunda yazı gri olacak */
+}
+
+#usernameOrEmail:focus {
+  border-color: white !important;
+}
+
+#password:focus {
+  border-color: white !important;
+}
+
+#showHide:hover {
+  color: #a9a9a9 !important;
+}
+
+
+.searchBar::placeholder {
+  color: #a9a9a9; /* Placeholder rengi */
+  text-indent: 8px !important;
+}
+
+.custom-scroll {
+  scrollbar-width: thin; /* Firefox için ince scrollbar */
+  scrollbar-color: #3d3d3d transparent; /* Scrollbar ve track rengi (Firefox) */
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 6px; /* Scrollbar genişliği */
+  height: 6px; /* Yatay scrollbar genişliği */
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent; /* Track arka planını şeffaf yap */
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #555555; /* `bg-dark` rengine yakın, daha koyu ton */
+  border-radius: 3px; /* Köşe yuvarlama */
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: #0e0e0e; /* Hover sırasında biraz daha koyu */
+}
+
+.dimmed {
+  background-color: rgba(0, 0, 0, 0.5); /* Hafif kararma efekti */
+  transition: background-color 0.3s ease; /* Yumuşak geçiş efekti */
+}
+
+.icon {
+  width: 35px;  /* Boyutları birleştirdik */
+  height: 35px; /* Aynı boyutta tutmak için */
+  font-size: 35px;/* i etiketleri için font boyutu */
+}
+
+.sidebarBorder {
+  border-right: 1px solid rgb(104, 104, 104);
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
