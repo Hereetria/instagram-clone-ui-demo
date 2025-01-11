@@ -1,0 +1,13 @@
+{
+    "server": {
+      "baseDir": "./dist",
+      "routes": {
+        "/src": "./src"
+      }
+    },
+    "files": ["./dist/**/*"],
+    "watchOptions": {
+      "ignoreInitial": true
+    }
+  }
+  

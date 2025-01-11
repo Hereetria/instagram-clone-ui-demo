@@ -1,0 +1,45 @@
+import checkNull from "./nullguard.js";
+
+export const spinner: string = '<i class="fa fa-spinner fa-spin"></i>';
+
+export const makeElementHidden = (element: HTMLElement, visibleClass: string = "d-flex"): void => {
+  element.classList.remove(visibleClass);
+  element.classList.add("d-none");
+};
+
+export const makeElementVisible = (element: HTMLElement, visibleClass: string = "d-flex"): void => {
+  element.classList.remove("d-none");
+  element.classList.add(visibleClass);
+};
+
+export const changeVisibleElement = (
+  elementToHide: HTMLElement,
+  elementToShow: HTMLElement,
+  visibleClass: string = "d-flex"
+) => {
+  makeElementHidden(elementToHide, visibleClass);
+  makeElementVisible(elementToShow, visibleClass);
+};
+
+export const toggleElementVisibility = (element: HTMLElement, visibleClass: string): void => {
+  if (element.classList.contains("d-none")) {
+    makeElementVisible(element, visibleClass);
+  } else {
+    makeElementHidden(element, visibleClass);
+  }
+};
+
+export const initializePreventDefault = () => {
+  const preventDefaultElements = document.querySelectorAll(".preventDefault") as NodeListOf<HTMLElement>;
+  if (!checkNull(preventDefaultElements, "preventDefaultElements")) return;
+
+  preventDefaultElements.forEach((element: HTMLElement) => {
+    element.addEventListener("click", (event: MouseEvent) => {
+      event.preventDefault();
+    });
+  });
+};
+
+export const getScrollbarWidth = (): number => {
+  return window.innerWidth - document.documentElement.clientWidth;
+};

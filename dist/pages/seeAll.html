@@ -1,0 +1,1954 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instagram Jr</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zY2hlbWFzIj4KPHJlY3Qgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBmaWxsPSIjZmY1NzMzIiBzdHJva2U9IiNmZjU3MzMiLz4KPC9zdmc+Cg=="
+    />
+    <link rel="stylesheet" href="../styles/style.css" />
+  </head>
+  <body class="bg-dark">
+    <!--Overlay Start-->
+    <div
+      id="overlay"
+      class="d-flex justify-content-center align-items-center"
+      style="
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        visibility: hidden;
+      "
+    >
+      <!--Clear Search History Start-->
+      <div
+        id="clearSearchHistory"
+        class="d-none flex-column justify-content-center rounded"
+        style="width: 400px; height: 240px; z-index: 1000; background-color: rgb(53, 53, 53)"
+      >
+        <div class="d-flex justify-content-center flex-column w-100 flex-grow-1 px-5 text-center">
+          <span class="text-white fs-5">Clear search history?</span>
+          <span style="color: #a9a9a9; font-size: 14px"
+            >You won't able to undo this. If you clear your search history, you may still see accounts you've searched
+            for as suggested results.</span
+          >
+        </div>
+        <div
+          id="clearAllButtonDiv"
+          class="d-flex justify-content-center align-items-center border-top border-bottom border-secondary w-100"
+          style="height: 50px"
+        >
+          <span class="text-danger fw-bold no-select" style="font-size: 15px; user-select: none !important"
+            >Clear all</span
+          >
+        </div>
+        <div
+          id="clearAllNotNowButtonDiv"
+          class="w-100 d-flex justify-content-center align-items-center"
+          style="height: 50px"
+        >
+          <span class="text-white fw-semibold" style="font-size: 14px; user-select: none !important">Not now</span>
+        </div>
+      </div>
+      <!--Clear Search History End-->
+      <!--Unfollow Start-->
+      <div
+        id="unfollow"
+        class="d-none flex-column justify-content-center rounded"
+        style="width: 400px; height: 310px; z-index: 1000; background-color: rgb(53, 53, 53); border-radius: 15px"
+      >
+        <div class="d-flex justify-content-evenly align-items-center flex-column w-100 flex-grow-1 px-5">
+          <div class="align-items-center" style="width: 90px; height: 90px">
+            <img src="../assets/images/example.jpg" alt="" class="rounded-circle" style="width: 90px; height: 90px" />
+          </div>
+          <div class="w-100 h-auto text-center">
+            <span class="text-white" style="font-size: 14px"
+              >If you change your mind, you'll have to request to follow @yusufokansirkeci again.</span
+            >
+          </div>
+        </div>
+        <div
+          id="unfollowButtonDiv"
+          class="d-flex justify-content-center align-items-center border-top border-bottom border-secondary w-100"
+          style="height: 50px"
+        >
+          <span class="text-danger fw-bold no-select" style="font-size: 15px; user-select: none !important"
+            >Unfollow</span
+          >
+        </div>
+        <div
+          id="unfollowCancelButtonDiv"
+          class="w-100 d-flex justify-content-center align-items-center"
+          style="height: 50px"
+        >
+          <span class="text-white fw-semibold" style="font-size: 14px; user-select: none !important">Cancel</span>
+        </div>
+      </div>
+      <!--Unfollow End-->
+    </div>
+    <!--Overlay End-->
+    <!--Page Start-->
+    <div class="h-100 d-flex flex-row">
+      <!--Sidebar Start-->
+      <div
+        id="sidebar"
+        class="d-flex flex-row flex-shrink-0 p-2 text-white bg-dark"
+        style="max-width: 470px; height: 100vh; position: fixed; z-index: 997"
+      >
+        <!--Sidebar Content Start-->
+        <div id="sidebarContent" class="border-end border-secondary pe-2" style="width: 235px">
+          <div id="sidebarContentInner" class="d-flex flex-column flex-shrink-0 h-100" style="width: 225px">
+            <div
+              class="d-flex justify-content-center align-items-center border-bottom border-secondary my-2"
+              style="min-height: 69px"
+            >
+              <a href="/" id="sidebarIconLink" class="d-flex align-items-center text-white text-decoration-none">
+                <i
+                  id="sidebarIcon"
+                  class="fa fa-globe d-none fs-3 d-flex justify-content-center align-items-center"
+                  style="min-width: 40px; min-height: 40px"
+                ></i>
+                <span class="sidebarHideableItem fst-italic fs-4 my-3" style="min-width: 128px; min-height: 36px"
+                  >Instagram Jr</span
+                >
+              </a>
+            </div>
+            <div class="h-100 mt-4">
+              <ul class="nav nav-pills flex-column mb-auto d-flex justify-content-center">
+                <li class="nav-item mb-3 w-100" style="min-height: 42px !important">
+                  <a href="mainstream.html" class="d-flex flex-row nav-link text-white m-0" data-action="homeAction">
+                    <img
+                      src="../assets/images/home.png"
+                      class="d-none sidebarIconPassive me-3"
+                      style="width: 1.5em; height: 1.5em"
+                      alt=""
+                    />
+                    <i class="fa fa-home me-3 sidebarIconActive" style="font-size: 1.5em"></i>
+                    <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px"
+                      >Home</span
+                    >
+                  </a>
+                </li>
+
+                <li class="nav-item mb-3" style="min-height: 42px !important">
+                  <a href="" class="d-flex flex-row nav-link text-white" data-action="searchAction">
+                    <img
+                      src="../assets/images/search.png"
+                      class="sidebarIconPassive me-3"
+                      style="width: 1.5em; height: 1.5em"
+                      alt=""
+                    />
+                    <i class="d-none fa fa-search me-3 sidebarIconActive" style="font-size: 1.5em"></i>
+                    <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px"
+                      >Search</span
+                    >
+                  </a>
+                </li>
+
+                <li class="nav-item mb-3" style="min-height: 42px !important">
+                  <a href="explore.html" class="d-flex flex-row nav-link text-white" data-action="exploreAction">
+                    <i class="far fa-compass me-3 sidebarIconPassive" style="font-size: 1.5em"></i>
+                    <i class="d-none fa fa-compass me-3 sidebarIconActive" style="font-size: 1.5em"></i>
+                    <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px"
+                      >Explore</span
+                    >
+                  </a>
+                </li>
+
+                <li class="nav-item mb-3" style="min-height: 42px !important">
+                  <a href="reels.html" class="d-flex flex-row nav-link text-white" data-action="reelsAction">
+                    <i class="far fa-caret-square-right me-3 sidebarIconPassive" style="font-size: 1.5em"></i>
+                    <i class="d-none fa fa-caret-square-right me-3 sidebarIconActive" style="font-size: 1.5em"></i>
+                    <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px"
+                      >Reels</span
+                    >
+                  </a>
+                </li>
+
+                <li class="nav-item mb-3" style="min-height: 42px !important">
+                  <a href="messages.html" class="d-flex flex-row nav-link text-white" data-action="messagesAction">
+                    <i class="far fa-comment me-3 sidebarIconPassive" style="font-size: 1.5em"></i>
+                    <i class="d-none fa fa-comment me-3 sidebarIconActive" style="font-size: 1.5em"></i>
+                    <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px"
+                      >Messages</span
+                    >
+                  </a>
+                </li>
+
+                <li class="nav-item mb-3" style="min-height: 42px !important">
+                  <a href="" class="d-flex flex-row nav-link text-white" data-action="notificationsAction">
+                    <i class="far fa-bell me-3 sidebarIconPassive" style="font-size: 1.5em"></i>
+                    <i class="d-none fa fa-bell me-3 sidebarIconActive" style="font-size: 1.5em"></i>
+                    <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px"
+                      >Notifications</span
+                    >
+                  </a>
+                </li>
+
+                <li class="nav-item mb-3" style="min-height: 42px !important">
+                  <a href="" class="d-flex flex-row nav-link text-white" data-action="createAction">
+                    <i class="far fa-plus-square me-3 " style="font-size: 1.5em"></i>
+                    <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px"
+                      >Create</span
+                    >
+                  </a>
+                </li>
+
+                <li class="nav-item mb-3" style="min-height: 42px !important">
+                  <a href="profile.html" class="d-flex flex-row nav-link text-white">
+                    <img
+                      src="../assets/images/example.jpg"
+                      alt=""
+                      class="rounded-circle me-3"
+                      style="width: 1.5em; height: 1.5em"
+                    />
+                    <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px"
+                      >Profile</span
+                    >
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div
+              class="d-flex flex-column pt-auto border-top border-secondary mt-auto mb-2"
+              style="min-height: 40px; height: 12%"
+            >
+              <div class="mt-auto">
+                <div class="dropdown">
+                  <a
+                    href="#"
+                    class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                    id="dropdownLink"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <i class="fa fa-bars rounded-circle ms-3" style="font-size: 1.5em"></i>
+                    <span class="sidebarHideableItem fw-bold ms-3">More</span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownLink">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Saved Posts</a></li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Sidebar Content End-->
+
+        <!--Sidebar Openable Start-->
+        <div id="sidebarOpenable" class="d-none flex-column h-100 ms-3" style="width: 420px">
+          <!--Search Start-->
+          <div id="search" class="d-none flex-column h-100 w-100">
+            <div class="w-100" style="height: 150px">
+              <p class="fw-semibold fs-3 text-white mt-2 ms-2">Search</p>
+              <div
+                class="position-relative w-100 d-flex justify-content-center align-items-center border-bottom border-secondary flex-grow-1 pt-4"
+                style="height: 85px"
+              >
+                <i
+                  class="searchBarIcon fas fa-search position-absolute text-white px-2"
+                  style="left: 8px; color: #a9a9a9 !important; font-size: 15px; order: 1"
+                ></i>
+                <input
+                  type="text"
+                  class="searchBar text-white rounded px-3 py-1 border-0"
+                  placeholder="     Search"
+                  style="width: 97%; height: 35px; background-color: rgb(71, 71, 71); order: 2"
+                />
+                <a
+                  href=""
+                  class="clearSearchLink position-absolute m-0"
+                  style="right: 15px; font-size: 15px; top: 52%; order: 3"
+                >
+                  <i class="far fa-times-circle" style="color: #a9a9a9"></i>
+                </a>
+              </div>
+            </div>
+            <div
+              class="position-relative flex-grow-1 d-flex flex-column px-2 pt-2 pb-3"
+              style="height: calc(100% - 150px); overflow-y: auto"
+            >
+              <div class="d-flex flex-row justify-content-between align-items-center px-2 w-100" style="height: 50px">
+                <p class="text-white fw-semibold m-0">Recent</p>
+                <a href="" id="clearAllLink" class="text-white fw-semibold text-decoration-none"
+                  ><p id="clearAllText" class="m-0" style="font-size: 14px; color: rgb(19, 133, 255)">Clear all</p></a
+                >
+              </div>
+              <!--Searched Profiles Start-->
+              <div class="w-100 flex-grow-1 customScrollbar" style="height: 50px; overflow-y: auto">
+                <article>
+                  <div
+                    class="searchedProfileContainer d-flex align-items-center flex-row w-100 mt-2"
+                    style="height: 60px"
+                  >
+                    <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px">
+                      <div class="rounded-circle" style="width: 48px; height: 48px">
+                        <a href="" class="searchedProfiles">
+                          <div
+                            class="rounded-circle position-relative border border-3 border-secondary"
+                            style="width: 50px; height: 50px; overflow: hidden"
+                          >
+                            <img
+                              src="../assets/images/example.jpg"
+                              alt="Chamber 1"
+                              class="img-fluid rounded-circle"
+                              style="object-fit: cover; width: 100%; height: 100%"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="h-100 flex-grow-1 py-2">
+                      <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px">
+                        yusufokansirkeci
+                      </p>
+                      <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color: #a9a9a9">
+                        hereetria
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center ms-auto"
+                      style="width: 50px; height: 50px"
+                    >
+                      <a href="" class="preventDefault">
+                        <i class="fa fa-times fs-5" style="color: #a9a9a9"></i>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div
+                    class="searchedProfileContainer d-flex align-items-center flex-row w-100 mt-2"
+                    style="height: 60px"
+                  >
+                    <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px">
+                      <div class="rounded-circle" style="width: 48px; height: 48px">
+                        <a href="" class="preventDefault">
+                          <div
+                            class="rounded-circle border border-3 border-secondary"
+                            style="width: 50px; height: 50px; overflow: hidden"
+                          >
+                            <img
+                              src="../assets/images/example.jpg"
+                              alt="Chamber 1"
+                              class="img-fluid rounded-circle"
+                              style="object-fit: cover; width: 100%; height: 100%"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="h-100 flex-grow-1 py-2">
+                      <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px">
+                        yusufokansirkeci
+                      </p>
+                      <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color: #a9a9a9">
+                        hereetria
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center ms-auto"
+                      style="width: 50px; height: 50px"
+                    >
+                      <a href="" class="preventDefault">
+                        <i class="fa fa-times fs-5" style="color: #a9a9a9"></i>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div
+                    class="searchedProfileContainer d-flex align-items-center flex-row w-100 mt-2"
+                    style="height: 60px"
+                  >
+                    <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px">
+                      <div class="rounded-circle" style="width: 48px; height: 48px">
+                        <a href="" class="preventDefault">
+                          <div
+                            class="rounded-circle border border-3 border-secondary"
+                            style="width: 50px; height: 50px; overflow: hidden"
+                          >
+                            <img
+                              src="../assets/images/example.jpg"
+                              alt="Chamber 1"
+                              class="img-fluid rounded-circle"
+                              style="object-fit: cover; width: 100%; height: 100%"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="h-100 flex-grow-1 py-2">
+                      <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px">
+                        yusufokansirkeci
+                      </p>
+                      <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color: #a9a9a9">
+                        hereetria
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center ms-auto"
+                      style="width: 50px; height: 50px"
+                    >
+                      <a href="" class="preventDefault">
+                        <i class="fa fa-times fs-5" style="color: #a9a9a9"></i>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div
+                    class="searchedProfileContainer d-flex align-items-center flex-row w-100 mt-2"
+                    style="height: 60px"
+                  >
+                    <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px">
+                      <div class="rounded-circle" style="width: 48px; height: 48px">
+                        <a href="" class="preventDefault">
+                          <div
+                            class="rounded-circle border border-3 border-secondary"
+                            style="width: 50px; height: 50px; overflow: hidden"
+                          >
+                            <img
+                              src="../assets/images/example.jpg"
+                              alt="Chamber 1"
+                              class="img-fluid rounded-circle"
+                              style="object-fit: cover; width: 100%; height: 100%"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="h-100 flex-grow-1 py-2">
+                      <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px">
+                        yusufokansirkeci
+                      </p>
+                      <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color: #a9a9a9">
+                        hereetria
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center ms-auto"
+                      style="width: 50px; height: 50px"
+                    >
+                      <a href="" class="preventDefault">
+                        <i class="fa fa-times fs-5" style="color: #a9a9a9"></i>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div
+                    class="searchedProfileContainer d-flex align-items-center flex-row w-100 mt-2"
+                    style="height: 60px"
+                  >
+                    <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px">
+                      <div class="rounded-circle" style="width: 48px; height: 48px">
+                        <a href="" class="preventDefault">
+                          <div
+                            class="rounded-circle border border-3 border-secondary"
+                            style="width: 50px; height: 50px; overflow: hidden"
+                          >
+                            <img
+                              src="../assets/images/example.jpg"
+                              alt="Chamber 1"
+                              class="img-fluid rounded-circle"
+                              style="object-fit: cover; width: 100%; height: 100%"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="h-100 flex-grow-1 py-2">
+                      <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px">
+                        yusufokansirkeci
+                      </p>
+                      <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color: #a9a9a9">
+                        hereetria
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center ms-auto"
+                      style="width: 50px; height: 50px"
+                    >
+                      <a href="" class="preventDefault">
+                        <i class="fa fa-times fs-5" style="color: #a9a9a9"></i>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div
+                    class="searchedProfileContainer d-flex align-items-center flex-row w-100 mt-2"
+                    style="height: 60px"
+                  >
+                    <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px">
+                      <div class="rounded-circle" style="width: 48px; height: 48px">
+                        <a href="" class="preventDefault">
+                          <div
+                            class="rounded-circle border border-3 border-secondary"
+                            style="width: 50px; height: 50px; overflow: hidden"
+                          >
+                            <img
+                              src="../assets/images/example.jpg"
+                              alt="Chamber 1"
+                              class="img-fluid rounded-circle"
+                              style="object-fit: cover; width: 100%; height: 100%"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="h-100 flex-grow-1 py-2">
+                      <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px">
+                        yusufokansirkeci
+                      </p>
+                      <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color: #a9a9a9">
+                        hereetria
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center ms-auto"
+                      style="width: 50px; height: 50px"
+                    >
+                      <a href="" class="preventDefault">
+                        <i class="fa fa-times fs-5" style="color: #a9a9a9"></i>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div
+                    class="searchedProfileContainer d-flex align-items-center flex-row w-100 mt-2"
+                    style="height: 60px"
+                  >
+                    <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px">
+                      <div class="rounded-circle" style="width: 48px; height: 48px">
+                        <a href="" class="preventDefault">
+                          <div
+                            class="rounded-circle border border-3 border-secondary"
+                            style="width: 50px; height: 50px; overflow: hidden"
+                          >
+                            <img
+                              src="../assets/images/example.jpg"
+                              alt="Chamber 1"
+                              class="img-fluid rounded-circle"
+                              style="object-fit: cover; width: 100%; height: 100%"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="h-100 flex-grow-1 py-2">
+                      <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px">
+                        yusufokansirkeci
+                      </p>
+                      <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color: #a9a9a9">
+                        hereetria
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center ms-auto"
+                      style="width: 50px; height: 50px"
+                    >
+                      <a href="" class="preventDefault">
+                        <i class="fa fa-times fs-5" style="color: #a9a9a9"></i>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div
+                    class="searchedProfileContainer d-flex align-items-center flex-row w-100 mt-2"
+                    style="height: 60px"
+                  >
+                    <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px">
+                      <div class="rounded-circle" style="width: 48px; height: 48px">
+                        <a href="" class="preventDefault">
+                          <div
+                            class="rounded-circle border border-3 border-secondary"
+                            style="width: 50px; height: 50px; overflow: hidden"
+                          >
+                            <img
+                              src="../assets/images/example.jpg"
+                              alt="Chamber 1"
+                              class="img-fluid rounded-circle"
+                              style="object-fit: cover; width: 100%; height: 100%"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="h-100 flex-grow-1 py-2">
+                      <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px">
+                        yusufokansirkeci
+                      </p>
+                      <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color: #a9a9a9">
+                        hereetria
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center ms-auto"
+                      style="width: 50px; height: 50px"
+                    >
+                      <a href="" class="preventDefault">
+                        <i class="fa fa-times fs-5" style="color: #a9a9a9"></i>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div
+                    class="searchedProfileContainer d-flex align-items-center flex-row w-100 mt-2"
+                    style="height: 60px"
+                  >
+                    <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px">
+                      <div class="rounded-circle" style="width: 48px; height: 48px">
+                        <a href="" class="preventDefault">
+                          <div
+                            class="rounded-circle border border-3 border-secondary"
+                            style="width: 50px; height: 50px; overflow: hidden"
+                          >
+                            <img
+                              src="../assets/images/example.jpg"
+                              alt="Chamber 1"
+                              class="img-fluid rounded-circle"
+                              style="object-fit: cover; width: 100%; height: 100%"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="h-100 flex-grow-1 py-2">
+                      <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px">
+                        yusufokansirkeci
+                      </p>
+                      <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color: #a9a9a9">
+                        hereetria
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center ms-auto"
+                      style="width: 50px; height: 50px"
+                    >
+                      <a href="" class="preventDefault">
+                        <i class="fa fa-times fs-5" style="color: #a9a9a9"></i>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div
+                    class="searchedProfileContainer d-flex align-items-center flex-row w-100 mt-2"
+                    style="height: 60px"
+                  >
+                    <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px">
+                      <div class="rounded-circle" style="width: 48px; height: 48px">
+                        <a href="" class="preventDefault">
+                          <div
+                            class="rounded-circle border border-3 border-secondary"
+                            style="width: 50px; height: 50px; overflow: hidden"
+                          >
+                            <img
+                              src="../assets/images/example.jpg"
+                              alt="Chamber 1"
+                              class="img-fluid rounded-circle"
+                              style="object-fit: cover; width: 100%; height: 100%"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="h-100 flex-grow-1 py-2">
+                      <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px">
+                        yusufokansirkeci
+                      </p>
+                      <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color: #a9a9a9">
+                        hereetria
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center ms-auto"
+                      style="width: 50px; height: 50px"
+                    >
+                      <a href="" class="preventDefault">
+                        <i class="fa fa-times fs-5" style="color: #a9a9a9"></i>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div
+                    class="searchedProfileContainer d-flex align-items-center flex-row w-100 mt-2"
+                    style="height: 60px"
+                  >
+                    <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px">
+                      <div class="rounded-circle" style="width: 48px; height: 48px">
+                        <a href="" class="preventDefault">
+                          <div
+                            class="rounded-circle border border-3 border-secondary"
+                            style="width: 50px; height: 50px; overflow: hidden"
+                          >
+                            <img
+                              src="../assets/images/example.jpg"
+                              alt="Chamber 1"
+                              class="img-fluid rounded-circle"
+                              style="object-fit: cover; width: 100%; height: 100%"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="h-100 flex-grow-1 py-2">
+                      <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px">
+                        yusufokansirkeci
+                      </p>
+                      <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color: #a9a9a9">
+                        hereetria
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center ms-auto"
+                      style="width: 50px; height: 50px"
+                    >
+                      <a href="" class="preventDefault">
+                        <i class="fa fa-times fs-5" style="color: #a9a9a9"></i>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div
+                    class="searchedProfileContainer d-flex align-items-center flex-row w-100 mt-2"
+                    style="height: 60px"
+                  >
+                    <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px">
+                      <div class="rounded-circle" style="width: 48px; height: 48px">
+                        <a href="" class="preventDefault">
+                          <div
+                            class="rounded-circle border border-3 border-secondary"
+                            style="width: 50px; height: 50px; overflow: hidden"
+                          >
+                            <img
+                              src="../assets/images/example.jpg"
+                              alt="Chamber 1"
+                              class="img-fluid rounded-circle"
+                              style="object-fit: cover; width: 100%; height: 100%"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="h-100 flex-grow-1 py-2">
+                      <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px">
+                        yusufokansirkeci
+                      </p>
+                      <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color: #a9a9a9">
+                        hereetria
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center ms-auto"
+                      style="width: 50px; height: 50px"
+                    >
+                      <a href="" class="preventDefault">
+                        <i class="fa fa-times fs-5" style="color: #a9a9a9"></i>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div
+                    class="searchedProfileContainer d-flex align-items-center flex-row w-100 mt-2"
+                    style="height: 60px"
+                  >
+                    <div class="h-100 d-flex justify-content-center align-items-center" style="width: 50px">
+                      <div class="rounded-circle" style="width: 48px; height: 48px">
+                        <a href="" class="preventDefault">
+                          <div
+                            class="rounded-circle border border-3 border-secondary"
+                            style="width: 50px; height: 50px; overflow: hidden"
+                          >
+                            <img
+                              src="../assets/images/example.jpg"
+                              alt="Chamber 1"
+                              class="img-fluid rounded-circle"
+                              style="object-fit: cover; width: 100%; height: 100%"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="h-100 flex-grow-1 py-2">
+                      <p class="h-50 m-0 d-flex align-items-center ms-2 text-white" style="font-size: 14px">
+                        yusufokansirkeci
+                      </p>
+                      <p class="h-50 m-0 d-flex align-items-center ms-2" style="font-size: 15px; color: #a9a9a9">
+                        hereetria
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center ms-auto"
+                      style="width: 50px; height: 50px"
+                    >
+                      <a href="" class="preventDefault">
+                        <i class="fa fa-times fs-5" style="color: #a9a9a9"></i>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <!--Searched Profiles End-->
+            </div>
+          </div>
+          <!--Search End-->
+          <!--Notifications Start-->
+          <div id="notifications" class="d-none flex-column h-100 w-100 customScrollbar" style="overflow-y: auto">
+            <!--Notifications Header Start-->
+            <div
+              class="w-100 d-flex flex-row justify-content-between align-items-center ps-3 pe-4 pt-3"
+              style="height: 50px"
+            >
+              <p class="fw-bold fs-4 text-white my-0">Notifications</p>
+              <a href="" class="text-decoration-none">
+                <span class="my-0 fw-semibold" style="color: rgb(19, 133, 255); font-size: 14px">Filter</span>
+              </a>
+            </div>
+
+            <!--Notifications Header End-->
+            <!--Notifications TimePeriod Start-->
+            <div id="notificationsTimePeriod" class="d-flex flex-column w-100" style="min-height: 110px">
+              <div class="d-flex flex-column w-100 border-bottom border-secondary px-2 py-3" style="min-height: 110px">
+                <div class="w-100" style="height: 25px">
+                  <p class="text-white fw-semibold" style="font-size: 17px">Today</p>
+                </div>
+                <article>
+                  <div class="notificationItem d-flex align-items-center flex-row w-100 mt-1" style="height: 60px">
+                    <div class="d-flex align-items-center h-100" style="width: 45px">
+                      <a href="">
+                        <img
+                          src="../assets/images/example.jpg"
+                          alt=""
+                          class="rounded-circle"
+                          style="width: 45px; height: 45px"
+                        />
+                      </a>
+                    </div>
+                    <div class="h-100 ps-2 pe-1 flex-grow-1 text-wrap">
+                      <p class="m-0" style="font-size: 13px; user-select: none">
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        and
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        started following you.
+                        <span class="text-end fw-semibold" style="color: #a9a9a9">1d</span>
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center mx-2 ms-auto h-100"
+                      style="max-width: 110px; width: 110px"
+                    >
+                      <button
+                        class="requestedButton btn text-white d-flex align-items-center border-rounded fw-semibold px-3"
+                        style="font-size: 14px; height: 30px"
+                      >
+                        Requested
+                      </button>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div class="notificationItem d-flex align-items-center flex-row w-100 mt-1" style="height: 60px">
+                    <div class="d-flex align-items-center h-100" style="width: 45px">
+                      <a href="">
+                        <img
+                          src="../assets/images/example.jpg"
+                          alt=""
+                          class="rounded-circle"
+                          style="width: 45px; height: 45px"
+                        />
+                      </a>
+                    </div>
+                    <div class="h-100 ps-2 pe-1 flex-grow-1 text-wrap">
+                      <p class="m-0" style="font-size: 13px; user-select: none">
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        and
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        started following you.
+                        <span class="text-end fw-semibold" style="color: #a9a9a9">1d</span>
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center mx-2 ms-auto h-100"
+                      style="max-width: 110px; width: 110px"
+                    >
+                      <button
+                        class="followingButton deneme btn text-white d-flex align-items-center border-rounded fw-semibold px-3"
+                        style="font-size: 14px; height: 30px"
+                      >
+                        Following
+                      </button>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div class="notificationItem d-flex align-items-center flex-row w-100 mt-1" style="height: 60px">
+                    <div class="d-flex align-items-center h-100" style="width: 45px">
+                      <a href="">
+                        <img
+                          src="../assets/images/example.jpg"
+                          alt=""
+                          class="rounded-circle"
+                          style="width: 45px; height: 45px"
+                        />
+                      </a>
+                    </div>
+                    <div class="h-100 ps-2 pe-1 flex-grow-1 text-wrap">
+                      <p class="m-0" style="font-size: 13px; user-select: none">
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        and
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        started following you.
+                        <span class="text-end fw-semibold" style="color: #a9a9a9">1d</span>
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center mx-2 ms-auto h-100"
+                      style="max-width: 110px; width: 110px"
+                    >
+                      <a href="">
+                        <img
+                          src="../assets/images/example.jpg"
+                          alt=""
+                          class="border-rounded"
+                          style="width: 45px; height: 45px; border-radius: px"
+                        />
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <div class="d-flex flex-column w-100 border-bottom border-secondary px-2 py-3" style="min-height: 110px">
+                <div class="w-100" style="height: 25px">
+                  <p class="text-white fw-semibold" style="font-size: 17px">Yesterday</p>
+                </div>
+                <article>
+                  <div class="notificationItem d-flex align-items-center flex-row w-100 mt-1" style="height: 60px">
+                    <div class="d-flex align-items-center h-100" style="width: 45px">
+                      <a href="">
+                        <img
+                          src="../assets/images/example.jpg"
+                          alt=""
+                          class="rounded-circle"
+                          style="width: 45px; height: 45px"
+                        />
+                      </a>
+                    </div>
+                    <div class="h-100 ps-2 pe-1 flex-grow-1 text-wrap">
+                      <p class="m-0" style="font-size: 13px; user-select: none">
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        and
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        started following you.
+                        <span class="text-end fw-semibold" style="color: #a9a9a9">1d</span>
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center mx-2 ms-auto h-100"
+                      style="max-width: 110px; width: 110px"
+                    >
+                      <button
+                        class="requestedButton btn text-white d-flex align-items-center border-rounded fw-semibold px-3"
+                        style="background-color: #555555; font-size: 14px; height: 30px"
+                      >
+                        Requested
+                      </button>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div class="notificationItem d-flex align-items-center flex-row w-100 mt-1" style="height: 60px">
+                    <div class="d-flex align-items-center h-100" style="width: 45px">
+                      <a href="">
+                        <img
+                          src="../assets/images/example.jpg"
+                          alt=""
+                          class="rounded-circle"
+                          style="width: 45px; height: 45px"
+                        />
+                      </a>
+                    </div>
+                    <div class="h-100 ps-2 pe-1 flex-grow-1 text-wrap">
+                      <p class="m-0" style="font-size: 13px; user-select: none">
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        and
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        started following you.
+                        <span class="text-end fw-semibold" style="color: #a9a9a9">1d</span>
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center mx-2 ms-auto h-100"
+                      style="max-width: 110px; width: 110px"
+                    >
+                      <button
+                        class="followingButton btn text-white d-flex align-items-center border-rounded fw-semibold px-3"
+                        style="background-color: #555555; font-size: 14px; height: 30px"
+                      >
+                        Following
+                      </button>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div class="notificationItem d-flex align-items-center flex-row w-100 mt-1" style="height: 60px">
+                    <div class="d-flex align-items-center h-100" style="width: 45px">
+                      <a href="">
+                        <img
+                          src="../assets/images/example.jpg"
+                          alt=""
+                          class="rounded-circle"
+                          style="width: 45px; height: 45px"
+                        />
+                      </a>
+                    </div>
+                    <div class="h-100 ps-2 pe-1 flex-grow-1 text-wrap">
+                      <p class="m-0" style="font-size: 13px; user-select: none">
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        and
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        started following you.
+                        <span class="text-end fw-semibold" style="color: #a9a9a9">1d</span>
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center mx-2 ms-auto h-100"
+                      style="max-width: 110px; width: 110px"
+                    >
+                      <button
+                        class="followButton btn text-white d-flex align-items-center border-rounded fw-semibold px-3"
+                        style="font-size: 14px; height: 30px"
+                      >
+                        Follow
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <div class="d-flex flex-column w-100 border-bottom border-secondary px-2 py-3" style="min-height: 110px">
+                <div class="w-100" style="height: 25px">
+                  <p class="text-white fw-semibold" style="font-size: 17px">This week</p>
+                </div>
+                <article>
+                  <div class="notificationItem d-flex align-items-center flex-row w-100 mt-1" style="height: 60px">
+                    <div class="d-flex align-items-center h-100" style="width: 45px">
+                      <a href="">
+                        <img
+                          src="../assets/images/example.jpg"
+                          alt=""
+                          class="rounded-circle"
+                          style="width: 45px; height: 45px"
+                        />
+                      </a>
+                    </div>
+                    <div class="h-100 ps-2 pe-1 flex-grow-1 text-wrap">
+                      <p class="m-0" style="font-size: 13px; user-select: none">
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        and
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        started following you.
+                        <span class="text-end fw-semibold" style="color: #a9a9a9">1d</span>
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center mx-2 ms-auto h-100"
+                      style="max-width: 110px; width: 110px"
+                    >
+                      <button
+                        class="requestedButton btn text-white d-flex align-items-center border-rounded fw-semibold px-3"
+                        style="background-color: #555555; font-size: 14px; height: 30px"
+                      >
+                        Requested
+                      </button>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div class="notificationItem d-flex align-items-center flex-row w-100 mt-1" style="height: 60px">
+                    <div class="d-flex align-items-center h-100" style="width: 45px">
+                      <a href="">
+                        <img
+                          src="../assets/images/example.jpg"
+                          alt=""
+                          class="rounded-circle"
+                          style="width: 45px; height: 45px"
+                        />
+                      </a>
+                    </div>
+                    <div class="h-100 ps-2 pe-1 flex-grow-1 text-wrap">
+                      <p class="m-0" style="font-size: 13px; user-select: none">
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        and
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        started following you.
+                        <span class="text-end fw-semibold" style="color: #a9a9a9">1d</span>
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center mx-2 ms-auto h-100"
+                      style="max-width: 110px; width: 110px"
+                    >
+                      <button
+                        class="followingButton btn text-white d-flex align-items-center border-rounded fw-semibold px-3"
+                        style="background-color: #555555; font-size: 14px; height: 30px"
+                      >
+                        Following
+                      </button>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div class="notificationItem d-flex align-items-center flex-row w-100 mt-1" style="height: 60px">
+                    <div class="d-flex align-items-center h-100" style="width: 45px">
+                      <a href="">
+                        <img
+                          src="../assets/images/example.jpg"
+                          alt=""
+                          class="rounded-circle"
+                          style="width: 45px; height: 45px"
+                        />
+                      </a>
+                    </div>
+                    <div class="h-100 ps-2 pe-1 flex-grow-1 text-wrap">
+                      <p class="m-0" style="font-size: 13px; user-select: none">
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        and
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        started following you.
+                        <span class="text-end fw-semibold" style="color: #a9a9a9">1d</span>
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center mx-2 ms-auto h-100"
+                      style="max-width: 110px; width: 110px"
+                    >
+                      <button
+                        class="followButton btn text-white d-flex align-items-center border-rounded fw-semibold px-3"
+                        style="font-size: 14px; height: 30px"
+                      >
+                        Follow
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <div class="d-flex flex-column w-100 px-2 py-3" style="min-height: 110px">
+                <div class="w-100" style="height: 25px">
+                  <p class="text-white fw-semibold" style="font-size: 17px">Earlier</p>
+                </div>
+                <article>
+                  <div class="notificationItem d-flex align-items-center flex-row w-100 mt-1" style="height: 60px">
+                    <div class="d-flex align-items-center h-100" style="width: 45px">
+                      <a href="">
+                        <img
+                          src="../assets/images/example.jpg"
+                          alt=""
+                          class="rounded-circle"
+                          style="width: 45px; height: 45px"
+                        />
+                      </a>
+                    </div>
+                    <div class="h-100 ps-2 pe-1 flex-grow-1 text-wrap">
+                      <p class="m-0" style="font-size: 13px; user-select: none">
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        and
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        started following you.
+                        <span class="text-end fw-semibold" style="color: #a9a9a9">1d</span>
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center mx-2 ms-auto h-100"
+                      style="max-width: 110px; width: 110px"
+                    >
+                      <button
+                        class="requestedButton btn text-white d-flex align-items-center border-rounded fw-semibold px-3"
+                        style="background-color: #555555; font-size: 14px; height: 30px"
+                      >
+                        Requested
+                      </button>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div class="notificationItem d-flex align-items-center flex-row w-100 mt-1" style="height: 60px">
+                    <div class="d-flex align-items-center h-100" style="width: 45px">
+                      <a href="">
+                        <img
+                          src="../assets/images/example.jpg"
+                          alt=""
+                          class="rounded-circle"
+                          style="width: 45px; height: 45px"
+                        />
+                      </a>
+                    </div>
+                    <div class="h-100 ps-2 pe-1 flex-grow-1 text-wrap">
+                      <p class="m-0" style="font-size: 13px; user-select: none">
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        and
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        started following you.
+                        <span class="text-end fw-semibold" style="color: #a9a9a9">1d</span>
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center mx-2 ms-auto h-100"
+                      style="max-width: 110px; width: 110px"
+                    >
+                      <button
+                        class="followingButton btn text-white d-flex align-items-center border-rounded fw-semibold px-3"
+                        style="background-color: #555555; font-size: 14px; height: 30px"
+                      >
+                        Following
+                      </button>
+                    </div>
+                  </div>
+                </article>
+                <article>
+                  <div class="notificationItem d-flex align-items-center flex-row w-100 mt-1" style="height: 60px">
+                    <div class="d-flex align-items-center h-100" style="width: 45px">
+                      <a href="">
+                        <img
+                          src="../assets/images/example.jpg"
+                          alt=""
+                          class="rounded-circle"
+                          style="width: 45px; height: 45px"
+                        />
+                      </a>
+                    </div>
+                    <div class="h-100 ps-2 pe-1 flex-grow-1 text-wrap">
+                      <p class="m-0" style="font-size: 13px; user-select: none">
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        and
+                        <span class="fw-semibold"
+                          ><a href="" class="text-white text-decoration-none">yusufokansirkeci</a></span
+                        >
+                        started following you.
+                        <span class="text-end fw-semibold" style="color: #a9a9a9">1d</span>
+                      </p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-center align-items-center mx-2 ms-auto h-100"
+                      style="max-width: 110px; width: 110px"
+                    >
+                      <button
+                        class="followButton btn text-white d-flex align-items-center border-rounded fw-semibold px-3"
+                        style="font-size: 14px; height: 30px"
+                      >
+                        Follow
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <!--Notifications TimePeriod End-->
+          </div>
+          <!--Notifications End-->
+        </div>
+        <!--Sidebar Openable End-->
+      </div>
+      <!--Sidebar End-->
+
+      <!--Footerbar Start-->
+      <div id="footerbar" class="d-none fixed-bottom bg-dark border-top border-secondary text-white text-center py-1">
+        <div class="d-flex justify-content-center text-align-center mx-3">
+          <ul class="nav nav-pills w-100 justify-content-evenly mb-0">
+            <li class="nav-item">
+              <a href="#" class="nav-link text-white">
+                <i class="fa fa-home" style="font-size: 1.5em"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-white">
+                <i class="far fa-compass" style="font-size: 1.5em"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-white">
+                <i class="far fa-plus-square" style="font-size: 1.5em"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-white">
+                <i class="far fa-comment" style="font-size: 1.5em"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-white">
+                <img
+                  src="../assets/images/example.jpg"
+                  alt=""
+                  class="rounded-circle me-3"
+                  style="width: 23px; height: 23px"
+                />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!--Footerbar End-->
+      <!--Main Start-->
+      <div id="main" class="d-flex align-items-center flex-column w-100" style="min-height: 100vh">
+        <div class="d-flex align-items-end pb-2 border-bottom border-secondary" style="width: 93%; min-height: 80px">
+          <span class="text-white fw-bold pt-auto ps-3">Suggested for you</span>
+        </div>
+        <div
+          id="suggestedProfileContainer"
+          class="d-flex flex-column pt-3 pb-4 customScrollbar"
+          style="width: 600px; min-width: 455px; max-width: 600px; height: auto"
+        >
+          <article>
+            <div class="d-flex flex-row w-100 mt-2" style="height: 60px">
+              <div class="d-flex justify-content-center align-items-center h-100" style="width: 55px">
+                <a href="" class="preventDefault">
+                  <img
+                    src="../assets/images/example.jpg"
+                    alt=""
+                    class="border border-2 border-danger rounded-circle img-fluid"
+                    style="object-fit: cover; width: 50px; min-width: 50px; height: 50px; min-height: 50px"
+                  />
+                </a>
+              </div>
+              <div
+                class="suggestedProfileBody h-100 d-flex justify-content-evenly flex-column ps-2 flex-grow-1"
+                style="width: 125px"
+              >
+                <span class="text-white fw-semibold" style="font-size: 14px">
+                  <a href="" class="preventDefault text-white text-decoration-none"> hereetria </a>
+                </span>
+                <span class="fw-semibold" style="font-size: 14px; color: #a9a9a9">yusufokansirkeci</span>
+                <span class="fw-semibold" style="font-size: 13px; color: #a9a9a9"
+                  >Followed by yusufokansirkeci + 7 more</span
+                >
+              </div>
+              <div
+                class="notificationsTimePeriod d-flex justify-content-center align-items-center h-100 ms-auto"
+                style="width: 90px"
+              >
+                <button
+                  class="followButton btn text-white d-flex align-items-center border-rounded fw-semibold mx-3"
+                  style="font-size: 14px; height: 30px"
+                >
+                  Follow
+                </button>
+              </div>
+              <div class="suggestedAlignHelper d-none h-100" style="width: 20px"></div>
+            </div>
+          </article>
+          <article>
+            <div class="d-flex flex-row w-100 mt-2" style="height: 60px">
+              <div class="d-flex justify-content-center align-items-center h-100" style="width: 55px">
+                <a href="" class="preventDefault">
+                  <img
+                    src="../assets/images/example.jpg"
+                    alt=""
+                    class="border border-2 border-danger rounded-circle img-fluid"
+                    style="object-fit: cover; width: 50px; min-width: 50px; height: 50px; min-height: 50px"
+                  />
+                </a>
+              </div>
+              <div
+                class="suggestedProfileBody h-100 d-flex justify-content-evenly flex-column ps-2 flex-grow-1"
+                style="width: 125px"
+              >
+                <span class="text-white fw-semibold" style="font-size: 14px">
+                  <a href="" class="preventDefault text-white text-decoration-none"> hereetria </a>
+                </span>
+                <span class="fw-semibold" style="font-size: 14px; color: #a9a9a9">yusufokansirkeci</span>
+                <span class="fw-semibold" style="font-size: 13px; color: #a9a9a9"
+                  >Followed by yusufokansirkeci + 7 more</span
+                >
+              </div>
+              <div
+                class="notificationsTimePeriod d-flex justify-content-center align-items-center h-100 ms-auto"
+                style="width: 90px"
+              >
+                <button
+                  class="followButton btn text-white d-flex align-items-center border-rounded fw-semibold mx-3"
+                  style="font-size: 14px; height: 30px"
+                >
+                  Follow
+                </button>
+              </div>
+              <div class="suggestedAlignHelper d-none h-100" style="width: 20px"></div>
+            </div>
+          </article>
+          <article>
+            <div class="d-flex flex-row w-100 mt-2" style="height: 60px">
+              <div class="d-flex justify-content-center align-items-center h-100" style="width: 55px">
+                <a href="" class="preventDefault">
+                  <img
+                    src="../assets/images/example.jpg"
+                    alt=""
+                    class="border border-2 border-danger rounded-circle img-fluid"
+                    style="object-fit: cover; width: 50px; min-width: 50px; height: 50px; min-height: 50px"
+                  />
+                </a>
+              </div>
+              <div
+                class="suggestedProfileBody h-100 d-flex justify-content-evenly flex-column ps-2 flex-grow-1"
+                style="width: 125px"
+              >
+                <span class="text-white fw-semibold" style="font-size: 14px">
+                  <a href="" class="preventDefault text-white text-decoration-none"> hereetria </a>
+                </span>
+                <span class="fw-semibold" style="font-size: 14px; color: #a9a9a9">yusufokansirkeci</span>
+                <span class="fw-semibold" style="font-size: 13px; color: #a9a9a9"
+                  >Followed by yusufokansirkeci + 7 more</span
+                >
+              </div>
+              <div
+                class="notificationsTimePeriod d-flex justify-content-center align-items-center h-100 ms-auto"
+                style="width: 90px"
+              >
+                <button
+                  class="followButton btn text-white d-flex align-items-center border-rounded fw-semibold mx-3"
+                  style="font-size: 14px; height: 30px"
+                >
+                  Follow
+                </button>
+              </div>
+              <div class="suggestedAlignHelper d-none h-100" style="width: 20px"></div>
+            </div>
+          </article>
+          <article>
+            <div class="d-flex flex-row w-100 mt-2" style="height: 60px">
+              <div class="d-flex justify-content-center align-items-center h-100" style="width: 55px">
+                <a href="" class="preventDefault">
+                  <img
+                    src="../assets/images/example.jpg"
+                    alt=""
+                    class="border border-2 border-danger rounded-circle img-fluid"
+                    style="object-fit: cover; width: 50px; min-width: 50px; height: 50px; min-height: 50px"
+                  />
+                </a>
+              </div>
+              <div
+                class="suggestedProfileBody h-100 d-flex justify-content-evenly flex-column ps-2 flex-grow-1"
+                style="width: 125px"
+              >
+                <span class="text-white fw-semibold" style="font-size: 14px">
+                  <a href="" class="preventDefault text-white text-decoration-none"> hereetria </a>
+                </span>
+                <span class="fw-semibold" style="font-size: 14px; color: #a9a9a9">yusufokansirkeci</span>
+                <span class="fw-semibold" style="font-size: 13px; color: #a9a9a9"
+                  >Followed by yusufokansirkeci + 7 more</span
+                >
+              </div>
+              <div
+                class="notificationsTimePeriod d-flex justify-content-center align-items-center h-100 ms-auto"
+                style="width: 90px"
+              >
+                <button
+                  class="followButton btn text-white d-flex align-items-center border-rounded fw-semibold mx-3"
+                  style="font-size: 14px; height: 30px"
+                >
+                  Follow
+                </button>
+              </div>
+              <div class="suggestedAlignHelper d-none h-100" style="width: 20px"></div>
+            </div>
+          </article>
+          <article>
+            <div class="d-flex flex-row w-100 mt-2" style="height: 60px">
+              <div class="d-flex justify-content-center align-items-center h-100" style="width: 55px">
+                <a href="" class="preventDefault">
+                  <img
+                    src="../assets/images/example.jpg"
+                    alt=""
+                    class="border border-2 border-danger rounded-circle img-fluid"
+                    style="object-fit: cover; width: 50px; min-width: 50px; height: 50px; min-height: 50px"
+                  />
+                </a>
+              </div>
+              <div
+                class="suggestedProfileBody h-100 d-flex justify-content-evenly flex-column ps-2 flex-grow-1"
+                style="width: 125px"
+              >
+                <span class="text-white fw-semibold" style="font-size: 14px">
+                  <a href="" class="preventDefault text-white text-decoration-none"> hereetria </a>
+                </span>
+                <span class="fw-semibold" style="font-size: 14px; color: #a9a9a9">yusufokansirkeci</span>
+                <span class="fw-semibold" style="font-size: 13px; color: #a9a9a9"
+                  >Followed by yusufokansirkeci + 7 more</span
+                >
+              </div>
+              <div
+                class="notificationsTimePeriod d-flex justify-content-center align-items-center h-100 ms-auto"
+                style="width: 90px"
+              >
+                <button
+                  class="followButton btn text-white d-flex align-items-center border-rounded fw-semibold mx-3"
+                  style="font-size: 14px; height: 30px"
+                >
+                  Follow
+                </button>
+              </div>
+              <div class="suggestedAlignHelper d-none h-100" style="width: 20px"></div>
+            </div>
+          </article>
+          <article>
+            <div class="d-flex flex-row w-100 mt-2" style="height: 60px">
+              <div class="d-flex justify-content-center align-items-center h-100" style="width: 55px">
+                <a href="" class="preventDefault">
+                  <img
+                    src="../assets/images/example.jpg"
+                    alt=""
+                    class="border border-2 border-danger rounded-circle img-fluid"
+                    style="object-fit: cover; width: 50px; min-width: 50px; height: 50px; min-height: 50px"
+                  />
+                </a>
+              </div>
+              <div
+                class="suggestedProfileBody h-100 d-flex justify-content-evenly flex-column ps-2 flex-grow-1"
+                style="width: 125px"
+              >
+                <span class="text-white fw-semibold" style="font-size: 14px">
+                  <a href="" class="preventDefault text-white text-decoration-none"> hereetria </a>
+                </span>
+                <span class="fw-semibold" style="font-size: 14px; color: #a9a9a9">yusufokansirkeci</span>
+                <span class="fw-semibold" style="font-size: 13px; color: #a9a9a9"
+                  >Followed by yusufokansirkeci + 7 more</span
+                >
+              </div>
+              <div
+                class="notificationsTimePeriod d-flex justify-content-center align-items-center h-100 ms-auto"
+                style="width: 90px"
+              >
+                <button
+                  class="followButton btn text-white d-flex align-items-center border-rounded fw-semibold mx-3"
+                  style="font-size: 14px; height: 30px"
+                >
+                  Follow
+                </button>
+              </div>
+              <div class="suggestedAlignHelper d-none h-100" style="width: 20px"></div>
+            </div>
+          </article>
+          <article>
+            <div class="d-flex flex-row w-100 mt-2" style="height: 60px">
+              <div class="d-flex justify-content-center align-items-center h-100" style="width: 55px">
+                <a href="" class="preventDefault">
+                  <img
+                    src="../assets/images/example.jpg"
+                    alt=""
+                    class="border border-2 border-danger rounded-circle img-fluid"
+                    style="object-fit: cover; width: 50px; min-width: 50px; height: 50px; min-height: 50px"
+                  />
+                </a>
+              </div>
+              <div
+                class="suggestedProfileBody h-100 d-flex justify-content-evenly flex-column ps-2 flex-grow-1"
+                style="width: 125px"
+              >
+                <span class="text-white fw-semibold" style="font-size: 14px">
+                  <a href="" class="preventDefault text-white text-decoration-none"> hereetria </a>
+                </span>
+                <span class="fw-semibold" style="font-size: 14px; color: #a9a9a9">yusufokansirkeci</span>
+                <span class="fw-semibold" style="font-size: 13px; color: #a9a9a9"
+                  >Followed by yusufokansirkeci + 7 more</span
+                >
+              </div>
+              <div
+                class="notificationsTimePeriod d-flex justify-content-center align-items-center h-100 ms-auto"
+                style="width: 90px"
+              >
+                <button
+                  class="followButton btn text-white d-flex align-items-center border-rounded fw-semibold mx-3"
+                  style="font-size: 14px; height: 30px"
+                >
+                  Follow
+                </button>
+              </div>
+              <div class="suggestedAlignHelper d-none h-100" style="width: 20px"></div>
+            </div>
+          </article>
+          <article>
+            <div class="d-flex flex-row w-100 mt-2" style="height: 60px">
+              <div class="d-flex justify-content-center align-items-center h-100" style="width: 55px">
+                <a href="" class="preventDefault">
+                  <img
+                    src="../assets/images/example.jpg"
+                    alt=""
+                    class="border border-2 border-danger rounded-circle img-fluid"
+                    style="object-fit: cover; width: 50px; min-width: 50px; height: 50px; min-height: 50px"
+                  />
+                </a>
+              </div>
+              <div
+                class="suggestedProfileBody h-100 d-flex justify-content-evenly flex-column ps-2 flex-grow-1"
+                style="width: 125px"
+              >
+                <span class="text-white fw-semibold" style="font-size: 14px">
+                  <a href="" class="preventDefault text-white text-decoration-none"> hereetria </a>
+                </span>
+                <span class="fw-semibold" style="font-size: 14px; color: #a9a9a9">yusufokansirkeci</span>
+                <span class="fw-semibold" style="font-size: 13px; color: #a9a9a9"
+                  >Followed by yusufokansirkeci + 7 more</span
+                >
+              </div>
+              <div
+                class="notificationsTimePeriod d-flex justify-content-center align-items-center h-100 ms-auto"
+                style="width: 90px"
+              >
+                <button
+                  class="followButton btn text-white d-flex align-items-center border-rounded fw-semibold mx-3"
+                  style="font-size: 14px; height: 30px"
+                >
+                  Follow
+                </button>
+              </div>
+              <div class="suggestedAlignHelper d-none h-100" style="width: 20px"></div>
+            </div>
+          </article>
+          <article>
+            <div class="d-flex flex-row w-100 mt-2" style="height: 60px">
+              <div class="d-flex justify-content-center align-items-center h-100" style="width: 55px">
+                <a href="" class="preventDefault">
+                  <img
+                    src="../assets/images/example.jpg"
+                    alt=""
+                    class="border border-2 border-danger rounded-circle img-fluid"
+                    style="object-fit: cover; width: 50px; min-width: 50px; height: 50px; min-height: 50px"
+                  />
+                </a>
+              </div>
+              <div
+                class="suggestedProfileBody h-100 d-flex justify-content-evenly flex-column ps-2 flex-grow-1"
+                style="width: 125px"
+              >
+                <span class="text-white fw-semibold" style="font-size: 14px">
+                  <a href="" class="preventDefault text-white text-decoration-none"> hereetria </a>
+                </span>
+                <span class="fw-semibold" style="font-size: 14px; color: #a9a9a9">yusufokansirkeci</span>
+                <span class="fw-semibold" style="font-size: 13px; color: #a9a9a9"
+                  >Followed by yusufokansirkeci + 7 more</span
+                >
+              </div>
+              <div
+                class="notificationsTimePeriod d-flex justify-content-center align-items-center h-100 ms-auto"
+                style="width: 90px"
+              >
+                <button
+                  class="followButton btn text-white d-flex align-items-center border-rounded fw-semibold mx-3"
+                  style="font-size: 14px; height: 30px"
+                >
+                  Follow
+                </button>
+              </div>
+              <div class="suggestedAlignHelper d-none h-100" style="width: 20px"></div>
+            </div>
+          </article>
+          <article>
+            <div class="d-flex flex-row w-100 mt-2" style="height: 60px">
+              <div class="d-flex justify-content-center align-items-center h-100" style="width: 55px">
+                <a href="" class="preventDefault">
+                  <img
+                    src="../assets/images/example.jpg"
+                    alt=""
+                    class="border border-2 border-danger rounded-circle img-fluid"
+                    style="object-fit: cover; width: 50px; min-width: 50px; height: 50px; min-height: 50px"
+                  />
+                </a>
+              </div>
+              <div
+                class="suggestedProfileBody h-100 d-flex justify-content-evenly flex-column ps-2 flex-grow-1"
+                style="width: 125px"
+              >
+                <span class="text-white fw-semibold" style="font-size: 14px">
+                  <a href="" class="preventDefault text-white text-decoration-none"> hereetria </a>
+                </span>
+                <span class="fw-semibold" style="font-size: 14px; color: #a9a9a9">yusufokansirkeci</span>
+                <span class="fw-semibold" style="font-size: 13px; color: #a9a9a9"
+                  >Followed by yusufokansirkeci + 7 more</span
+                >
+              </div>
+              <div
+                class="notificationsTimePeriod d-flex justify-content-center align-items-center h-100 ms-auto"
+                style="width: 90px"
+              >
+                <button
+                  class="followButton btn text-white d-flex align-items-center border-rounded fw-semibold mx-3"
+                  style="font-size: 14px; height: 30px"
+                >
+                  Follow
+                </button>
+              </div>
+              <div class="suggestedAlignHelper d-none h-100" style="width: 20px"></div>
+            </div>
+          </article>
+          <article>
+            <div class="d-flex flex-row w-100 mt-2" style="height: 60px">
+              <div class="d-flex justify-content-center align-items-center h-100" style="width: 55px">
+                <a href="" class="preventDefault">
+                  <img
+                    src="../assets/images/example.jpg"
+                    alt=""
+                    class="border border-2 border-danger rounded-circle img-fluid"
+                    style="object-fit: cover; width: 50px; min-width: 50px; height: 50px; min-height: 50px"
+                  />
+                </a>
+              </div>
+              <div
+                class="suggestedProfileBody h-100 d-flex justify-content-evenly flex-column ps-2 flex-grow-1"
+                style="width: 125px"
+              >
+                <span class="text-white fw-semibold" style="font-size: 14px">
+                  <a href="" class="preventDefault text-white text-decoration-none"> hereetria </a>
+                </span>
+                <span class="fw-semibold" style="font-size: 14px; color: #a9a9a9">yusufokansirkeci</span>
+                <span class="fw-semibold" style="font-size: 13px; color: #a9a9a9"
+                  >Followed by yusufokansirkeci + 7 more</span
+                >
+              </div>
+              <div
+                class="notificationsTimePeriod d-flex justify-content-center align-items-center h-100 ms-auto"
+                style="width: 90px"
+              >
+                <button
+                  class="followButton btn text-white d-flex align-items-center border-rounded fw-semibold mx-3"
+                  style="font-size: 14px; height: 30px"
+                >
+                  Follow
+                </button>
+              </div>
+              <div class="suggestedAlignHelper d-none h-100" style="width: 20px"></div>
+            </div>
+          </article>
+          <article>
+            <div class="d-flex flex-row w-100 mt-2" style="height: 60px">
+              <div class="d-flex justify-content-center align-items-center h-100" style="width: 55px">
+                <a href="" class="preventDefault">
+                  <img
+                    src="../assets/images/example.jpg"
+                    alt=""
+                    class="border border-2 border-danger rounded-circle img-fluid"
+                    style="object-fit: cover; width: 50px; min-width: 50px; height: 50px; min-height: 50px"
+                  />
+                </a>
+              </div>
+              <div
+                class="suggestedProfileBody h-100 d-flex justify-content-evenly flex-column ps-2 flex-grow-1"
+                style="width: 125px"
+              >
+                <span class="text-white fw-semibold" style="font-size: 14px">
+                  <a href="" class="preventDefault text-white text-decoration-none"> hereetria </a>
+                </span>
+                <span class="fw-semibold" style="font-size: 14px; color: #a9a9a9">yusufokansirkeci</span>
+                <span class="fw-semibold" style="font-size: 13px; color: #a9a9a9"
+                  >Followed by yusufokansirkeci + 7 more</span
+                >
+              </div>
+              <div
+                class="notificationsTimePeriod d-flex justify-content-center align-items-center h-100 ms-auto"
+                style="width: 90px"
+              >
+                <button
+                  class="followButton btn text-white d-flex align-items-center border-rounded fw-semibold mx-3"
+                  style="font-size: 14px; height: 30px"
+                >
+                  Follow
+                </button>
+              </div>
+              <div class="suggestedAlignHelper d-none h-100" style="width: 20px"></div>
+            </div>
+          </article>
+          <article>
+            <div class="d-flex flex-row w-100 mt-2" style="height: 60px">
+              <div class="d-flex justify-content-center align-items-center h-100" style="width: 55px">
+                <a href="" class="preventDefault">
+                  <img
+                    src="../assets/images/example.jpg"
+                    alt=""
+                    class="border border-2 border-danger rounded-circle img-fluid"
+                    style="object-fit: cover; width: 50px; min-width: 50px; height: 50px; min-height: 50px"
+                  />
+                </a>
+              </div>
+              <div
+                class="suggestedProfileBody h-100 d-flex justify-content-evenly flex-column ps-2 flex-grow-1"
+                style="width: 125px"
+              >
+                <span class="text-white fw-semibold" style="font-size: 14px">
+                  <a href="" class="preventDefault text-white text-decoration-none"> hereetria </a>
+                </span>
+                <span class="fw-semibold" style="font-size: 14px; color: #a9a9a9">yusufokansirkeci</span>
+                <span class="fw-semibold" style="font-size: 13px; color: #a9a9a9"
+                  >Followed by yusufokansirkeci + 7 more</span
+                >
+              </div>
+              <div
+                class="notificationsTimePeriod d-flex justify-content-center align-items-center h-100 ms-auto"
+                style="width: 90px"
+              >
+                <button
+                  class="followButton btn text-white d-flex align-items-center border-rounded fw-semibold mx-3"
+                  style="font-size: 14px; height: 30px"
+                >
+                  Follow
+                </button>
+              </div>
+              <div class="suggestedAlignHelper d-none h-100" style="width: 20px"></div>
+            </div>
+          </article>
+          <article>
+            <div class="d-flex flex-row w-100 mt-2" style="height: 60px">
+              <div class="d-flex justify-content-center align-items-center h-100" style="width: 55px">
+                <a href="" class="preventDefault">
+                  <img
+                    src="../assets/images/example.jpg"
+                    alt=""
+                    class="border border-2 border-danger rounded-circle img-fluid"
+                    style="object-fit: cover; width: 50px; min-width: 50px; height: 50px; min-height: 50px"
+                  />
+                </a>
+              </div>
+              <div
+                class="suggestedProfileBody h-100 d-flex justify-content-evenly flex-column ps-2 flex-grow-1"
+                style="width: 125px"
+              >
+                <span class="text-white fw-semibold" style="font-size: 14px">
+                  <a href="" class="preventDefault text-white text-decoration-none"> hereetria </a>
+                </span>
+                <span class="fw-semibold" style="font-size: 14px; color: #a9a9a9">yusufokansirkeci</span>
+                <span class="fw-semibold" style="font-size: 13px; color: #a9a9a9"
+                  >Followed by yusufokansirkeci + 7 more</span
+                >
+              </div>
+              <div
+                class="notificationsTimePeriod d-flex justify-content-center align-items-center h-100 ms-auto"
+                style="width: 90px"
+              >
+                <button
+                  class="followButton btn text-white d-flex align-items-center border-rounded fw-semibold mx-3"
+                  style="font-size: 14px; height: 30px"
+                >
+                  Follow
+                </button>
+              </div>
+              <div class="suggestedAlignHelper d-none h-100" style="width: 20px"></div>
+            </div>
+          </article>
+          <article>
+            <div class="d-flex flex-row w-100 mt-2" style="height: 60px">
+              <div class="d-flex justify-content-center align-items-center h-100" style="width: 55px">
+                <a href="" class="preventDefault">
+                  <img
+                    src="../assets/images/example.jpg"
+                    alt=""
+                    class="border border-2 border-danger rounded-circle img-fluid"
+                    style="object-fit: cover; width: 50px; min-width: 50px; height: 50px; min-height: 50px"
+                  />
+                </a>
+              </div>
+              <div
+                class="suggestedProfileBody h-100 d-flex justify-content-evenly flex-column ps-2 flex-grow-1"
+                style="width: 125px"
+              >
+                <span class="text-white fw-semibold" style="font-size: 14px">
+                  <a href="" class="preventDefault text-white text-decoration-none"> hereetria </a>
+                </span>
+                <span class="fw-semibold" style="font-size: 14px; color: #a9a9a9">yusufokansirkeci</span>
+                <span class="fw-semibold" style="font-size: 13px; color: #a9a9a9"
+                  >Followed by yusufokansirkeci + 7 more</span
+                >
+              </div>
+              <div
+                class="notificationsTimePeriod d-flex justify-content-center align-items-center h-100 ms-auto"
+                style="width: 90px"
+              >
+                <button
+                  class="followButton btn text-white d-flex align-items-center border-rounded fw-semibold mx-3"
+                  style="font-size: 14px; height: 30px"
+                >
+                  Follow
+                </button>
+              </div>
+              <div class="suggestedAlignHelper d-none h-100" style="width: 20px"></div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!--Main End-->
+    </div>
+    <!--Page End-->
+    <script type="module" src="../modules/pages/seeAll.js"></script>
+    <script type="module" src="../modules/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "socialmedia_project_design",
+  "version": "1.0.0",
+  "main": "bundle.js", 
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "prettier": {
+    "printWidth": 120
+  },
+  "devDependencies": {
+    "babel-loader": "^9.2.1",
+    "lite-server": "^2.6.1",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.7.2",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.0"
+  }
+}
