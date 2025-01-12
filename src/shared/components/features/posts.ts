@@ -1,6 +1,6 @@
 import checkNull from "../../utils/nullguard.js";
-import { makeOverlayVisible } from "../../utils/overlay.js";
-import { changeVisibleElement, makeElementHidden, makeElementVisible, toggleElementVisibility } from "../../utils/ui.js";
+import { hideOverlay, makeOverlayVisible } from "../../utils/overlay.js";
+import { changeVisibleElement, makeElementHidden, makeElementVisible, setBackgroundColor, spinner, toggleElementClass, toggleElementVisibility } from "../../utils/ui.js";
 
 const adjustTextareaHeight = (commentDiv: HTMLElement): void => {
   const textarea = commentDiv.querySelector(".comment-textarea") as HTMLTextAreaElement;
@@ -123,10 +123,9 @@ const makeResponsiveShareProfile = (): void => {
 const commentContainer = document.getElementById("commentContainer") as HTMLElement;
 
 const adjustCommentWidth = (): void => {
-  const miniCommentContainer = document.getElementById("miniCommentContainer") as HTMLElement;
   const screenWidth = window.innerWidth;
   const screenMaxWidth = window.screen.width;
-  if (!checkNull(commentContainer, "commentContainer") || !checkNull(miniCommentContainer, "miniCommentContainer"))
+  if (!checkNull(commentContainer, "commentContainer"))
     return;
 
   const minThreshold = screenMaxWidth * 0.2;
@@ -140,19 +139,59 @@ const adjustCommentWidth = (): void => {
   }
 
   const overlayContainer = document.getElementById("overlayContainer") as HTMLElement;
-  if (!checkNull(overlayContainer, "overlayContainer")) return;
+  const commentPost = document.querySelector("#commentPost") as HTMLElement;
+  const commentMiniPost = document.querySelector("#commentMiniPost") as HTMLElement
+  const comments = document.querySelector("#comments") as HTMLElement;
+  const commentContainerExpander = document.querySelector("#commentContainerExpander") as HTMLElement;
+  if(!checkNull(commentPost, "commentPost") || !checkNull(commentMiniPost, "commentMiniPost") ||
+   !checkNull(comments, "comments") || !checkNull(commentContainerExpander, "commentContainerExpander") ||
+   !checkNull(overlayContainer, "overlayContainer")) return;
+  
 
   if (overlayContainer.style.visibility === "visible") {
-    const isMobile = screenWidth <= 680;
-    const shouldChangeToMini = isMobile && !commentContainer.classList.contains("d-none");
-    const shouldChangeToFull = !isMobile && !miniCommentContainer.classList.contains("d-none");
-  
-    if (shouldChangeToMini) {
-      changeVisibleElement(commentContainer, miniCommentContainer);
-    } else if (shouldChangeToFull) {
-      changeVisibleElement(miniCommentContainer, commentContainer);
+    if (screenWidth <= 680) {
+      commentContainer.style.height = "660px";
+      commentContainer.style.minHeight = "660px";
+      commentContainer.style.width = "335px";
+      commentContainer.classList.remove("ms-auto");
+      commentMiniPost.style.width = "100%";
+      makeElementHidden(comments, "d-block")
+      makeElementHidden(commentContainerExpander, "d-flex")
+      changeVisibleElement(commentPost, commentMiniPost, "d-flex");
+    } else {
+      commentContainer.style.height = "95%";
+      commentContainer.style.minHeight = "400px";
+      commentContainer.style.width = "87%";
+      commentContainer.classList.add("ms-auto");
+      commentMiniPost.style.width = "55%";
+      makeElementVisible(comments, "d-flex")
+      makeElementVisible(commentContainerExpander, "d-block")
+      changeVisibleElement(commentMiniPost, commentPost, "d-flex");
     }
   }
+};
+
+const emojiWheels = document.querySelectorAll<HTMLElement>(".emojiWheel");
+
+const adjustEmojiWheelPosition = () => {
+  // Null kontrolü yapılıyor
+  if (!checkNull(emojiWheels, "emojiWheel")) return;
+  
+  emojiWheels.forEach((wheel) => {
+    const pageWidth = window.innerWidth;
+
+    if (pageWidth <= 865 && pageWidth > 800) {
+      console.log(`-${(865 - pageWidth)}px`)
+      console.log(`-${167 - (865 - pageWidth)}px`)
+      wheel.style.right = `-${167 - ((865 - pageWidth) / 2)}px`;
+
+    } 
+    else if (pageWidth <= 800 && pageWidth > 770) {
+      wheel.style.right = `-167px`;
+    } else if (pageWidth <= 770){
+      wheel.style.right = `-${167 - ((770 - pageWidth) / 2)}px`;
+    }
+  });
 };
 
 export const adjustPostWidths = (): void => {
@@ -160,6 +199,7 @@ export const adjustPostWidths = (): void => {
   adjustShareProfileWidth();
   makeResponsiveShareProfile();
   adjustCommentWidth();
+  adjustEmojiWheelPosition();
 };
 
 const addShareMouseEvents = (element: HTMLElement, link: string): void => {
@@ -312,7 +352,7 @@ export const initializeCommentLikeItemEvents = () => {
 const getShareButtonText = (selectedItems: number): string =>
   selectedItems > 1 ? "Send Separately" : "Send";
 
-const updateUI = (): void => {
+const updateShareUI = (): void => {
   const selectedItems: number = document.querySelectorAll(".sharePostItem .checkedIcon.d-inline").length;
   if (!checkNull(selectedItems, "selectedItems")) return;
 
@@ -341,7 +381,8 @@ const updateUI = (): void => {
 
 export const initializeShareEvents = () => {
   const sharePostItems = document.querySelectorAll<HTMLElement>(".sharePostItem");
-  if (!checkNull(sharePostItems, "sharePostItems")) return;
+  const shareButton = document.querySelector("#shareButton") as HTMLButtonElement;
+  if (!checkNull(sharePostItems, "sharePostItems") || !checkNull(shareButton, "shareButton")) return;
 
   sharePostItems.forEach((item) => {
     item.style.cursor = "pointer";
@@ -349,7 +390,7 @@ export const initializeShareEvents = () => {
       const checkedIcon = item.querySelector(".checkedIcon") as HTMLElement;
       if (checkedIcon) {
         toggleElementVisibility(checkedIcon, "d-inline");
-        updateUI();
+        updateShareUI();
       }
     });
   });
@@ -375,3 +416,65 @@ export const initializeShowComments = () => {
     link.addEventListener("click", showComments);
   })
 }
+
+const commentDivs = document.querySelectorAll<HTMLElement>(".commentDiv");
+
+const handleEmojiWheelOpen = () => {
+  if(!checkNull(emojiWheels, "emojiWheel")) return;
+
+  commentDivs.forEach((div) => {
+    const emojiWheel = div.querySelector(".emojiWheel") as HTMLElement
+    const openEmojiWheelIcon = div.querySelector(".openEmojiWheelIcon") as HTMLTextAreaElement
+    if(!checkNull(emojiWheel, "emojiWheel") || !checkNull(openEmojiWheelIcon, "openEmojiWheelIcon")) return;
+
+    openEmojiWheelIcon.addEventListener("click", () => {
+      toggleElementVisibility(emojiWheel, "d-grid");
+    });
+
+
+    document.addEventListener("click", (event) => {
+      commentDivs.forEach((div) => {
+        const emojiWheel = div.querySelector(".emojiWheel") as HTMLElement;
+        const openEmojiWheelIcon = div.querySelector(".openEmojiWheelIcon") as HTMLTextAreaElement;
+        if (!checkNull(emojiWheel, "emojiWheel") || !checkNull(openEmojiWheelIcon, "openEmojiWheelIcon")) return;
+        if (
+          !emojiWheel.contains(event.target as Node) &&
+          (!openEmojiWheelIcon.contains(event.target as Node))
+        )  {
+          makeElementHidden(emojiWheel, "d-grid");
+        }
+      });
+    });
+  })
+}
+
+const insertEmojiToTextArea = () => {
+  if (!checkNull(commentDivs, "commentDiv")) return;
+
+  commentDivs.forEach((div) => {
+    const emojiWheel = div.querySelector(".emojiWheel") as HTMLElement
+    const commentTextarea = div.querySelector(".comment-textarea") as HTMLTextAreaElement
+    if (!checkNull(emojiWheel, "emojiWheel") || !checkNull(commentTextarea, "commentTextarea")) return;
+
+    const emojis = emojiWheel.querySelectorAll<HTMLElement>(".emoji");
+    emojis.forEach((emoji) => {
+      emoji.addEventListener("click", () => {
+        commentTextarea.value += emoji.textContent;
+      })
+    })
+  })
+}
+
+export const initializeEmojiWheelActions = () => {
+  handleEmojiWheelOpen();
+  insertEmojiToTextArea();
+};
+
+export const initializeClearAllTextareasOnPageLoad = () => {
+    const textAreas = document.querySelectorAll<HTMLTextAreaElement>("textarea");
+    if (!checkNull(textAreas, "textArea")) return;
+
+    textAreas.forEach((textarea:HTMLTextAreaElement) => {
+      textarea.value = "";
+    });
+};

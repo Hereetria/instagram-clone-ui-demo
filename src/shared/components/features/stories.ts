@@ -1,5 +1,18 @@
 import checkNull from "../../utils/nullguard.js";
 
+export const initializeAdjustStoriesWidth = () => {
+  const stories = document.querySelector("#stories") as HTMLElement;
+  if (!checkNull(stories, "stories")) return;
+
+  const windowWidth = window.innerWidth;
+  
+  if (windowWidth < 630) {
+    stories.style.width = `${windowWidth}px`;
+  } else {
+    stories.style.width = "630px";
+  }
+};
+
 const scrollContent = (direction: "left" | "right"): void => {
   const scrollContainer = document.getElementById("scrollContainer") as HTMLElement;
   if (!checkNull(scrollContainer, "scrollContainer")) return;

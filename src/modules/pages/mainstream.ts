@@ -1,6 +1,6 @@
 import { initializeToggleText, toggleOverlayWhileLogin } from "../../shared/components/features/contentSelection.js";
-import { adjustPostWidths, initializeCommentLikeItemEvents, initializeLikeEvents, initializePostIconClickEvents, initializeShareEvents, initializeShareNavigationEvents, initializeShowComments, setupTextAreaEventListeners } from "../../shared/components/features/posts.js";
-import { setupStoryScrollButtons } from "../../shared/components/features/stories.js";
+import { adjustPostWidths, initializeClearAllTextareasOnPageLoad, initializeCommentLikeItemEvents, initializeEmojiWheelActions, initializeLikeEvents, initializePostIconClickEvents, initializeShareEvents, initializeShareNavigationEvents, initializeShowComments, setupTextAreaEventListeners } from "../../shared/components/features/posts.js";
+import { initializeAdjustStoriesWidth, setupStoryScrollButtons } from "../../shared/components/features/stories.js";
 import { handleLoginButtonClick, handleSwitchButtonClick, initializeOpenLoginPage, toggleShowHide } from "../../shared/components/features/switchAccount.js";
 import { adjustNavbarWidth, initializaOpenNavbarSearch } from "../../shared/components/features/navbar.js";
 import { initializeCloseButtonListeners } from "../../shared/components/features/modalController.js";
@@ -22,16 +22,20 @@ const handleDOMContentLoaded = (): void => {
   initializaOpenNavbarSearch();
   initializeLikeEvents();
   initializeShowComments();
+  initializeEmojiWheelActions();
 };
 
 const handleLoad = (): void => {
   adjustPostWidths();
   adjustNavbarWidth();
+  initializeAdjustStoriesWidth();
+  initializeClearAllTextareasOnPageLoad();
 };
 
 const handleResize = (): void => {
   adjustPostWidths();
   adjustNavbarWidth();
+  initializeAdjustStoriesWidth();
 };
 
 document.addEventListener("DOMContentLoaded", handleDOMContentLoaded);

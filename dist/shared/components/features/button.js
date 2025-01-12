@@ -95,20 +95,6 @@ const handleFollowButtonClick = (button) => {
         button.innerHTML = "Requested";
     }, 1000);
 };
-const handleButtonHoverEvent = (event) => {
-    const button = event.target;
-    if (button.tagName.toLowerCase() !== "button")
-        return;
-    const isMouseOver = event.type === "mouseover";
-    if (event.type === "mouseover" || event.type === "mouseout") {
-        if (button.classList.contains("requestedButton") || button.classList.contains("followingButton")) {
-            button.style.backgroundColor = isMouseOver ? "#444444" : "#555555";
-        }
-        else if (button.classList.contains("followButton")) {
-            button.style.backgroundColor = isMouseOver ? "rgb(22, 104, 192)" : "rgb(19, 133, 255)";
-        }
-    }
-};
 const handleButtonClickEvent = (event) => {
     const button = event.target;
     if (button.tagName.toLowerCase() !== "button")
@@ -123,11 +109,47 @@ const handleButtonClickEvent = (event) => {
         handleFollowButtonClick(button);
     }
 };
+const baseButtonStyles = {
+    blueButton: {
+        mouseover: "rgb(22, 104, 192)",
+        mouseout: "rgb(19, 133, 255)",
+        mousedown: "rgb(16, 90, 168)",
+    },
+    grayButton: {
+        mouseover: "#444444",
+        mouseout: "#555555",
+        mousedown: "#333333",
+    },
+};
+const derivedButtonTypes = {
+    followButton: "blueButton",
+    requestedButton: "grayButton",
+    followingButton: "grayButton",
+};
+const handleButtonEvents = (event) => {
+    var _a;
+    const button = event.target;
+    if (!checkNull(button, "button"))
+        return;
+    const buttonClass = Object.keys(baseButtonStyles).find((baseClass) => button.classList.contains(baseClass)) || Object.keys(derivedButtonTypes).find((derivedClass) => button.classList.contains(derivedClass));
+    if (!buttonClass)
+        return;
+    const baseType = baseButtonStyles[buttonClass]
+        ? buttonClass
+        : derivedButtonTypes[buttonClass];
+    if (baseType) {
+        const color = (_a = baseButtonStyles[baseType]) === null || _a === void 0 ? void 0 : _a[event.type];
+        if (color) {
+            button.style.backgroundColor = color;
+        }
+    }
+};
 export const initializeButtonEvents = () => {
     const notificationsTimePeriod = document.querySelector("#notificationsTimePeriod");
     if (!checkNull(notificationsTimePeriod, "notificationsTimePeriod"))
         return;
-    document.addEventListener("mouseover", handleButtonHoverEvent);
-    document.addEventListener("mouseout", handleButtonHoverEvent);
+    document.addEventListener("mouseover", handleButtonEvents);
+    document.addEventListener("mouseout", handleButtonEvents);
+    document.addEventListener("mousedown", handleButtonEvents);
     document.addEventListener("click", handleButtonClickEvent);
 };

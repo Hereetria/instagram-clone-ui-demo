@@ -29,6 +29,14 @@ export const toggleElementVisibility = (element: HTMLElement, visibleClass: stri
   }
 };
 
+export const toggleElementClass = (element: HTMLElement, className: string): void => {
+  if (element.classList.contains(className)) {
+    element.classList.remove(className);
+  } else {
+    element.classList.add(className);
+  }
+};
+
 export const initializePreventDefault = () => {
   const preventDefaultElements = document.querySelectorAll(".preventDefault") as NodeListOf<HTMLElement>;
   if (!checkNull(preventDefaultElements, "preventDefaultElements")) return;
@@ -42,4 +50,8 @@ export const initializePreventDefault = () => {
 
 export const getScrollbarWidth = (): number => {
   return window.innerWidth - document.documentElement.clientWidth;
+};
+
+export const setBackgroundColor = (element: HTMLElement, color: string) => {
+  element.style.backgroundColor = color;
 };
