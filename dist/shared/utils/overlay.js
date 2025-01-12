@@ -36,14 +36,12 @@ export const makeOverlayVisible = (event, elementToShow) => {
         return;
     if (overlayContainer.style.visibility === "hidden") {
         if (elementToShow) {
-            event.stopPropagation();
             makeElementVisible(elementToShow, "d-flex");
             overlayContainer.style.visibility = "visible";
         }
     }
     else {
         if (elementToShow) {
-            event.stopPropagation();
             makeElementVisible(elementToShow, "d-flex");
             const currentDivs = getCurrentDivsInOverlay();
             currentDivs.forEach((div) => {

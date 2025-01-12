@@ -28,6 +28,14 @@ export const toggleElementClass = (element, className) => {
         element.classList.add(className);
     }
 };
+export const isElementOpen = (element) => {
+    if (element.classList.contains("d-none")) {
+        return false;
+    }
+    else {
+        return true;
+    }
+};
 export const initializePreventDefault = () => {
     const preventDefaultElements = document.querySelectorAll(".preventDefault");
     if (!checkNull(preventDefaultElements, "preventDefaultElements"))

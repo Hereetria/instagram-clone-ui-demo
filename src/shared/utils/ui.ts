@@ -37,6 +37,14 @@ export const toggleElementClass = (element: HTMLElement, className: string): voi
   }
 };
 
+export const isElementOpen = (element: HTMLElement): boolean => {
+  if (element.classList.contains("d-none")) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 export const initializePreventDefault = () => {
   const preventDefaultElements = document.querySelectorAll(".preventDefault") as NodeListOf<HTMLElement>;
   if (!checkNull(preventDefaultElements, "preventDefaultElements")) return;

@@ -1,6 +1,6 @@
 import checkNull from "../../utils/nullguard.js";
-import { makeOverlayVisible } from "../../utils/overlay.js";
-import { changeVisibleElement, makeElementHidden, makeElementVisible, toggleElementVisibility } from "../../utils/ui.js";
+import { hideOverlay, makeOverlayVisible } from "../../utils/overlay.js";
+import { changeVisibleElement, isElementOpen, makeElementHidden, makeElementVisible, toggleElementVisibility } from "../../utils/ui.js";
 const adjustTextareaHeight = (commentDiv) => {
     const textarea = commentDiv.querySelector(".comment-textarea");
     textarea.style.height = "auto";
@@ -218,14 +218,9 @@ export const initializeShareNavigationEvents = () => {
 };
 const showComments = (event) => {
     const commentContainer = document.getElementById("commentContainer");
-    const miniCommentContainer = document.getElementById("miniCommentContainer");
-    const screenWidth = window.innerWidth;
-    if (screenWidth > 680) {
-        makeOverlayVisible(event, commentContainer);
-    }
-    else {
-        makeOverlayVisible(event, miniCommentContainer);
-    }
+    if (!checkNull(commentContainer, "commentContainer"))
+        return;
+    makeOverlayVisible(event, commentContainer);
 };
 const handleIconClickEvents = (container, index) => {
     const share = document.getElementById("share");
@@ -301,9 +296,8 @@ export const initializeCommentLikeItemEvents = () => {
 };
 const getShareButtonText = (selectedItems) => selectedItems > 1 ? "Send Separately" : "Send";
 const updateShareUI = () => {
-    const selectedItems = document.querySelectorAll(".sharePostItem .checkedIcon.d-inline").length;
-    if (!checkNull(selectedItems, "selectedItems"))
-        return;
+    const selectedItems = document.querySelectorAll(".sharePostItem .checkedIcon.d-inline");
+    const selectedItemCount = selectedItems.length > 0 ? selectedItems.length : 0;
     const shareNavigationContainer = document.getElementById("shareNavigationContainer");
     const shareFormContainer = document.getElementById("shareFormContainer");
     const shareButton = document.getElementById("shareButton");
@@ -311,13 +305,32 @@ const updateShareUI = () => {
         !checkNull(shareFormContainer, "shareFormContainer") ||
         !checkNull(shareButton, "shareButton"))
         return;
-    shareNavigationContainer.classList.toggle("d-flex", selectedItems === 0);
-    shareNavigationContainer.classList.toggle("d-none", selectedItems > 0);
-    shareFormContainer.classList.toggle("d-flex", selectedItems >= 1);
-    shareFormContainer.classList.toggle("d-none", selectedItems < 1);
-    shareButton.classList.toggle("d-flex", selectedItems >= 1);
-    shareButton.classList.toggle("d-none", selectedItems < 1);
-    shareButton.innerHTML = getShareButtonText(selectedItems);
+    shareNavigationContainer.classList.toggle("d-flex", selectedItemCount === 0);
+    shareNavigationContainer.classList.toggle("d-none", selectedItemCount > 0);
+    shareFormContainer.classList.toggle("d-flex", selectedItemCount >= 1);
+    shareFormContainer.classList.toggle("d-none", selectedItemCount < 1);
+    shareButton.classList.toggle("d-flex", selectedItemCount >= 1);
+    shareButton.classList.toggle("d-none", selectedItemCount < 1);
+    shareButton.innerHTML = getShareButtonText(selectedItemCount);
+    shareButton.addEventListener("click", (event) => {
+        hideOverlay(event);
+    });
+    const share = document.querySelector("#share");
+    if (!checkNull(share, "share"))
+        return;
+    const observer = new MutationObserver(() => {
+        if (share.classList.contains("d-none")) {
+            makeElementHidden(shareFormContainer, "d-flex");
+            makeElementVisible(shareNavigationContainer, "d-flex");
+            selectedItems.forEach((item) => {
+                makeElementHidden(item, "d-inline");
+            });
+        }
+    });
+    observer.observe(share, {
+        attributes: true,
+        attributeFilter: ["class"],
+    });
 };
 export const initializeShareEvents = () => {
     const sharePostItems = document.querySelectorAll(".sharePostItem");
@@ -374,7 +387,9 @@ const handleEmojiWheelOpen = () => {
                     return;
                 if (!emojiWheel.contains(event.target) &&
                     (!openEmojiWheelIcon.contains(event.target))) {
-                    makeElementHidden(emojiWheel, "d-grid");
+                    if (isElementOpen(emojiWheel)) {
+                        makeElementHidden(emojiWheel, "d-grid");
+                    }
                 }
             });
         });
