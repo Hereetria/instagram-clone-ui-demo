@@ -102,7 +102,7 @@
       <label for="password" class="form-label mt-3 ms-2 text-secondary" style="font-size: 10px; position: absolute; top: -10px;">Password</label>
       <input id="password" type="password" class="form-control text-white" placeholder=" " style="height: 45px; font-size: 14px; padding-top: 20px; padding-right: 50px; background-color: rgb(44, 44, 44); outline: none; box-shadow: none;">
       <a href="#" id="showHideLink">
-        <span id="showHide" class="position-absolute top-50 end-0 translate-middle-y fw-semibold text-white" style="font-size: 14px; padding-right: 8px;">Show</span>
+        <span id="showHide" class="position-absolute top-50 end-0 translate-middle-y fw-semibold text-white user-select-none" style="font-size: 14px; padding-right: 8px;">Show</span>
       </a>      
     </div>
   </div>
@@ -126,7 +126,7 @@
       <div id="clearAllButtonDiv" class="d-flex justify-content-center align-items-center border-top border-bottom border-secondary w-100" style="height: 50px;">
         <span class="text-danger fw-bold no-select" style="font-size: 15px; user-select: none !important;">Clear all</span>
       </div>
-      <div id="clearAllNotNowButtonDiv" class="w-100 d-flex justify-content-center align-items-center " style="height: 50px;">
+      <div id="clearAllNotNowButtonDiv" class="w-100 roundBottom d-flex justify-content-center align-items-center " style="height: 50px;">
         <span class="text-white fw-semibold" style="font-size: 14px; user-select: none !important;">Not now</span>
       </div>
     </div>
@@ -136,7 +136,7 @@
     style="width: 400px; height: 310px; z-index: 1350; position: absolute; border-radius: 15px;">
  <div class="d-flex justify-content-evenly align-items-center flex-column w-100 flex-grow-1 px-5">
    <div class="align-items-center" style="width: 90px; height: 90px;">
-     <img src="../assets/images/example.jpg" alt="" class="rounded-circle" style="width: 90px; height: 90px;">
+     <img src="../assets/images/example.jpg" alt="" class="rounded-circle user-select-none" style="width: 90px; height: 90px;">
    </div>
    <div class="w-100 h-auto text-center">
      <span class="text-white" style="font-size: 14px;">If you change your mind, you'll have to request to follow @yusufokansirkeci again.</span>
@@ -145,7 +145,7 @@
  <div id="unfollowButtonDiv" class="d-flex justify-content-center align-items-center border-top border-bottom border-secondary w-100" style="height: 50px;">
    <span class="text-danger fw-bold no-select" style="font-size: 15px; user-select: none !important;">Unfollow</span>
  </div>
- <div id="unfollowCancelButtonDiv" class="w-100 d-flex justify-content-center align-items-center" style="height: 50px;">
+ <div id="unfollowCancelButtonDiv" class="roundBottom w-100 d-flex justify-content-center align-items-center" style="height: 50px;">
    <span class="text-white fw-semibold" style="font-size: 14px; user-select: none !important;">Cancel</span>
  </div>
 </div>
@@ -456,7 +456,7 @@
           <span class="text-white" style="font-size: 13px;">Izmir Guzelbahce</span>
         </div>
         <div class="d-flex justify-content-center align-items-center text-white fw-5 ms-auto" style="height: 40px; width: 40px;">
-          <a href="" class="text-decoration-none preventDefault text-white">
+          <a href="" class="reportIconLink text-decoration-none preventDefault text-white">
           <i class="fa fa-ellipsis-h"></i>
         </a>
         </div> 
@@ -514,7 +514,7 @@
               <span>1w</span>
               <a href="#" class="ms-2 user-select-none" style="color: #a9a9a9; text-decoration: none;">673 likes</a>
               <a href="#" class="ms-2 user-select-none" style="color: #a9a9a9; text-decoration: none;">Reply</a>
-              <a href="#" class="ms-2 user-select-none" style="color: #a9a9a9; text-decoration: none;">
+              <a href="#" class="reportIconLink ms-2 user-select-none" style="color: #a9a9a9; text-decoration: none;">
                 <i class="fa fa-ellipsis-h pt-1"></i>
               </a>
             </div>
@@ -621,7 +621,7 @@
               <span>1w</span>
               <a href="#" class="ms-2 user-select-none" style="color: #a9a9a9; text-decoration: none;">673 likes</a>
               <a href="#" class="ms-2 user-select-none" style="color: #a9a9a9; text-decoration: none;">Reply</a>
-              <a href="#" class="ms-2 user-select-none" style="color: #a9a9a9; text-decoration: none;">
+              <a href="#" class="reportIconLink ms-2 user-select-none" style="color: #a9a9a9; text-decoration: none;">
                 <i class="fa fa-ellipsis-h pt-1"></i>
               </a>
             </div>
@@ -662,7 +662,7 @@
               <span>1w</span>
               <a href="#" class="ms-2 user-select-none" style="color: #a9a9a9; text-decoration: none;">673 likes</a>
               <a href="#" class="ms-2 user-select-none" style="color: #a9a9a9; text-decoration: none;">Reply</a>
-              <a href="#" class="ms-2 user-select-none" style="color: #a9a9a9; text-decoration: none;">
+              <a href="#" class="reportIconLink ms-2 user-select-none" style="color: #a9a9a9; text-decoration: none;">
                 <i class="fa fa-ellipsis-h pt-1"></i>
               </a>
             </div>
@@ -790,10 +790,10 @@
                         style="font-size: 14px; resize: none; outline: none; box-shadow: none; margin: 0; padding: 0; max-height: 80px; min-height: 40px; overflow-y: auto;" 
                         rows="1"></textarea>
             </form>
-          </div>
+          </div class="d-flex">
           <div class="bg-dark d-flex align-items-center justify-content-center ms-auto me-2 h-100" style="width: 50px;">
-            <a href="" class="post-link willReadonly d-flex align-items-center text-decoration-none preventDefault" style="opacity: 0.5;">
-            <p class="fw-semibold mb-0" style="color: rgb(19, 133, 255);">Post</p>
+            <a href="" class="post-link willReadonly d-flex align-items-center text-decoration-none preventDefault" style="color: rgb(19, 133, 255); opacity: 0.5;">
+            <span class="fw-semibold user-select-none mb-0">Post</span>
             </a>
           </div>
 
@@ -813,7 +813,7 @@
           <!--Comment End-->
 
     <!--Likes Start-->
-    <div id="likesContainer" class="bg-openable d-none flex-column" style="width: 410px; height: 400px; border-radius: 7px; z-index: 1100; position: relative; overflow-y: auto;">
+    <div id="likesContainer" class="bg-openable d-none position: relative flex-column" style="width: 410px; height: 400px; border-radius: 7px; z-index: 1100; overflow-y: auto;">
       <div class="position-relative d-flex justify-content-center align-items-center border-bottom border-secondary w-100" style="min-height: 45px;">
         <span class="text-white fw-semibold">Likes</span>
         <button id="shareCloseButton" class="closeButton btn-close position-absolute top-50 end-0 me-3" style="transform: translateY(-50%);"></button>
@@ -1119,6 +1119,24 @@
       </div>
     </div>
     <!--Likes End-->
+    
+    <!--Report Start-->
+    <div id="report" class="bg-openable d-none position-absolute flex-column" style="width: 400px;height: 101px; border-radius: 7px; z-index: 1100;">
+      <div class="w-100 roundTop d-flex justify-content-center align-items-center report-item" style="height: 50px;">
+        <a href="" class="reportLink d-flex justify-content-center align-items-center text-decoration-none text-danger preventDefault">
+          <span class="fw-semibold user-select-none" style="font-size: 13px;">Report</span>
+        </a>
+      </div>
+    
+      <div class="border border-secondary" style="height: 1px;"></div>
+    
+      <div class="w-100 roundBottom d-flex justify-content-center align-items-center report-item" style="height: 50px;">
+        <a href="" class="reportLink d-flex justify-content-center align-items-center text-decoration-none text-white preventDefault">
+          <span class="fw-semibold user-select-none" style="font-size: 13px;">Cancel</span>
+        </a>
+      </div>
+    </div>
+    <!--Report End-->
   </div>
   <!--OverlayContainer End-->
   
@@ -1132,127 +1150,99 @@
     <div id="sidebarContent" class="border-end border-secondary pe-2" style="width: 235px;">
       <div id="sidebarContentInner" class="d-flex flex-column flex-shrink-0 h-100" style="width: 225px;">
         <div class="d-flex justify-content-center align-items-center border-bottom border-secondary my-2" style="min-height: 69px;">
-          <a href="mainstream.html" id="sidebarIconLink" class="d-flex align-items-center text-white text-decoration-none">
+          <a id="sidebarMainIconLink" href="mainstream.html" class="d-flex align-items-center text-white text-decoration-none">
             <i id="sidebarIcon" class="fa fa-globe d-none fs-3 d-flex justify-content-center align-items-center" style="min-width: 40px; min-height: 40px;"></i>
             <span class="sidebarHideableItem fst-italic fs-4 my-3 user-select-none" style="min-width: 128px; min-height: 36px;">Instagram Jr</span>
           </a>
         </div>
+        
         <div class="h-100 mt-4">
           <ul class="nav nav-pills flex-column mb-auto d-flex justify-content-center">
-            <li class="nav-item mb-3 w-100" style="min-height: 42px !important">
-              <a href="mainstream.html" class="d-flex flex-row nav-link text-white m-0" data-action="homeAction">
-                <img
-                  src="../assets/images/home.png"
-                  class="d-none sidebarIconPassive me-3 user-select-none"
-                  style="width: 1.5em; height: 1.5em"
-                  alt=""
-                />
+            <li class="nav-item mb-3 w-100" style="min-height: 42px;">
+              <a href="mainstream.html" class="sidebarIconLink d-flex flex-row nav-link text-white m-0 preventDefault" data-action="homeAction">
+                <img src="../assets/images/home.png" alt="" class="d-none sidebarIconPassive me-3 user-select-none" style="width: 1.5em; height: 1.5em"/>
                 <i class="fa fa-home me-3 sidebarIconActive user-select-none" style="font-size: 1.5em"></i>
-                <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px"
-                  >Home</span
-                >
+                <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px;">Home</span>
               </a>
             </li>
-
-            <li class="nav-item mb-3" style="min-height: 42px !important">
-              <a href="" class="d-flex flex-row nav-link text-white" data-action="searchAction">
-                <img
-                  src="../assets/images/search.png"
-                  class="sidebarIconPassive me-3 user-select-none"
-                  style="width: 1.5em; height: 1.5em"
-                  alt=""
-                />
-                <i class="d-none fa fa-search me-3 sidebarIconActive user-select-none" style="font-size: 1.5em"></i>
-                <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px"
-                  >Search</span
-                >
+            
+            <li class="nav-item mb-3 w-100" style="min-height: 42px;">
+              <a href="" class="sidebarIconLink d-flex flex-row nav-link text-white" data-action="searchAction">
+                <img src="../assets/images/search.png" class="sidebarIconPassive me-3 user-select-none" style="width: 1.5em; height: 1.5em" alt=""/>
+                <i class="fa fa-search sidebarIconActive d-none me-3 user-select-none" style="font-size: 1.5em"></i>
+                <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px;">Search</span>
               </a>
             </li>
-
-            <li class="nav-item mb-3" style="min-height: 42px !important">
-              <a href="explore.html" class="d-flex flex-row nav-link text-white" data-action="exploreAction">
+    
+            <li class="nav-item mb-3 w-100" style="min-height: 42px;">
+              <a href="explore.html" class="sidebarIconLink d-flex flex-row nav-link text-white" data-action="exploreAction">
                 <i class="far fa-compass me-3 sidebarIconPassive user-select-none" style="font-size: 1.5em"></i>
                 <i class="d-none fa fa-compass me-3 sidebarIconActive user-select-none" style="font-size: 1.5em"></i>
-                <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px"
-                  >Explore</span
-                >
+                <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px;">Explore</span>
               </a>
             </li>
-
-            <li class="nav-item mb-3" style="min-height: 42px !important">
-              <a href="reels.html" class="d-flex flex-row nav-link text-white" data-action="reelsAction">
+    
+            <li class="nav-item mb-3 w-100" style="min-height: 42px;">
+              <a href="reels.html" class="sidebarIconLink d-flex flex-row nav-link text-white" data-action="reelsAction">
                 <i class="far fa-caret-square-right me-3 sidebarIconPassive user-select-none" style="font-size: 1.5em"></i>
                 <i class="d-none fa fa-caret-square-right me-3 sidebarIconActive user-select-none" style="font-size: 1.5em"></i>
-                <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px"
-                  >Reels</span
-                >
+                <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px;">Reels</span>
               </a>
             </li>
-
-            <li class="nav-item mb-3" style="min-height: 42px !important">
-              <a href="messages.html" class="d-flex flex-row nav-link text-white" data-action="messagesAction">
+    
+            <li class="nav-item mb-3 w-100" style="min-height: 42px;">
+              <a href="messages.html" class="sidebarIconLink d-flex flex-row nav-link text-white" data-action="messagesAction">
                 <i class="far fa-comment me-3 sidebarIconPassive user-select-none" style="font-size: 1.5em"></i>
                 <i class="d-none fa fa-comment me-3 sidebarIconActive user-select-none" style="font-size: 1.5em"></i>
-                <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px"
-                  >Messages</span
-                >
+                <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px;">Messages</span>
               </a>
             </li>
-
-            <li class="nav-item mb-3" style="min-height: 42px !important">
-              <a href="" class="d-flex flex-row nav-link text-white" data-action="notificationsAction">
+    
+            <li class="nav-item mb-3 w-100" style="min-height: 42px;">
+              <a href="" class="sidebarIconLink d-flex flex-row nav-link text-white preventDefault" data-action="notificationsAction">
                 <i class="far fa-bell me-3 sidebarIconPassive user-select-none" style="font-size: 1.5em"></i>
                 <i class="d-none fa fa-bell me-3 sidebarIconActive user-select-none" style="font-size: 1.5em"></i>
-                <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px"
-                  >Notifications</span
-                >
+                <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px;">Notifications</span>
               </a>
             </li>
-
-            <li class="nav-item mb-3" style="min-height: 42px !important">
-              <a href="" class="d-flex flex-row nav-link text-white" data-action="createAction">
+    
+            <li class="nav-item mb-3 w-100" style="min-height: 42px;">
+              <a href="" class="sidebarIconLink d-flex flex-row nav-link text-white" data-action="createAction">
                 <i class="far fa-plus-square me-3 user-select-none" style="font-size: 1.5em"></i>
-                <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px"
-                  >Create</span
-                >
+                <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px;">Create</span>
               </a>
             </li>
-
-            <li class="nav-item mb-3" style="min-height: 42px !important">
-              <a href="profile.html" class="d-flex flex-row nav-link text-white">
-                <img
-                  src="../assets/images/example.jpg"
-                  alt=""
-                  class="rounded-circle me-3 user-select-none"
-                  style="width: 1.5em; height: 1.5em"
-                />
-                <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px"
-                  >Profile</span
-                >
+    
+            <li class="nav-item mb-3 w-100" style="min-height: 42px;">
+              <a href="profile.html" class="sidebarIconLink d-flex flex-row nav-link text-white">
+                <img src="../assets/images/example.jpg" alt="" class="rounded-circle me-3 user-select-none" style="width: 1.5em; height: 1.5em"/>
+                <span class="sidebarHideableItem fw-bold" style="font-family: 'Arial', sans-serif; margin-top: 2px;">Profile</span>
               </a>
             </li>
           </ul>
         </div>
-        
-      <div class="d-flex flex-column pt-auto border-top border-secondary mt-auto mb-2" style="min-height: 40px; height: 12%;">
-        <div class="mt-auto">
-<div class="dropdown">
-  <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-     id="dropdownLink" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="fa fa-bars rounded-circle ms-3" style="font-size: 1.5em;"></i>
-    <span class="sidebarHideableItem fw-bold ms-3 user-select-none">More</span>
-  </a>
-  <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownLink">
-    <li><a href="profile.html" class="dropdown-item">Profile</a></li>
-    <li><a href="profile.html" class="dropdown-item">Saved Posts</a></li>
-    <li><a href="#" class="dropdown-item preventDefault">Sign out</a></li>
-  </ul>
-</div>
-
+    
+        <!-- Dropdown Menu -->
+        <div class="d-flex flex-column pt-auto border-top border-secondary mt-auto" style="min-height: 40px; height: 12%;">
+          <div class="mt-auto">
+            <div class="dropdown">
+              <a id="dropdownLink" href="#" class="sidebarIconLink w-auto d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" 
+              style="padding-top: 10px; padding-bottom: 10px; border-radius: 8px; justify-content: flex-start; text-align: left;">
+                <i class="fa fa-bars rounded-circle ms-3" style="font-size: 1.5em;"></i>
+                <span class="sidebarHideableItem fw-bold ms-3 user-select-none">More</span>
+              </a>
+              
+              <ul class="dropdown-menu mt-2 d-flex flex-column justify-content-center dropdown-menu-dark text-small shadow" style="" aria-labelledby="dropdownLink">
+                <li><a href="profile.html" class="dropdownItem"><span>Profile</span></a></li>
+                <li><a href="profile.html" class="dropdownItem"><span>Saved Posts</span></a></li>
+                <li><a href="#" class="dropdownItem preventDefault"><span>Sign out</span></a></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    </div>
+    
     <!--Sidebar Content End-->
 
   <!--Sidebar Openable Start-->
@@ -2299,8 +2289,8 @@
                     </a>
                   </div>
                   <div class="ms-auto me-1">
-                    <a href="" class="preventDefault">
-                      <i class="fa fa-ellipsis-h ms-auto text-light mb-1 me-1 fs-5"></i>
+                    <a href="" class="reportIconLink preventDefault text-light">
+                      <i class="fa fa-ellipsis-h ms-auto mb-1 me-1 fs-5"></i>
                     </a>
                   </div>
                 </div>
@@ -2331,15 +2321,15 @@
                     
                     <!-- İkinci bölüm (like sayısı) -->
                     <div class="w-100 d-flex align-items-center mt-1 ps-1" style="height: 15%; flex-grow: 0;">
-                      <a href="" class="likesText preventDefault" style="text-decoration: none; ">
-                        <strong class="text-white" style="font-size: 14px;">46 Likes</strong>
+                      <a href="" class="likesLink text-white preventDefault" style="text-decoration: none; ">
+                        <strong class="" style="font-size: 14px;"><span>46 Likes</span></strong>
                       </a>
                     </div>
                     
                     <!-- Üçüncü bölüm (yorumlar) -->
                     <div class="w-100 mt-2 ps-1" style="height: 20%; flex-grow: 0;">
-                      <a href="" class="viewCommentLink preventDefault" style="text-decoration: none;">
-                        <p class="text-secondary mt-1" style="font-size: 14px">View 3 comment</p>
+                      <a href="" class="viewCommentLink preventDefault" style="text-decoration: none; color: #555555;">
+                        <span class="mt-1" style="font-size: 14px">View 3 comment</span>
                       </a>
                     </div>
                   </div>
@@ -2355,13 +2345,13 @@
                                     rows="1"></textarea>
                         </form>
                       </div>
-                      <div>
-                        <a href="" class="post-link d-none align-items-center text-decoration-none preventDefault">
-                          <p class="fw-semibold mb-0 pe-2" style="color: rgb(19, 133, 255);">Post</p>
+                      <div class="d-flex">
+                        <a href="" class="post-link justify-content-center d-none text-decoration-none preventDefault" style="min-width: 40px; min-height: 30px; color: rgb(19, 133, 255);">
+                          <span class="fw-semibold user-select-none mb-0">Post</span>
                         </a>
                       </div>
-                      <div class="me-2 d-flex justify-content-center align-items-center" style="height: 20px; width: 20px; min-width: 20px; margin-top: 2px;">
-                        <a href="#" class="d-flex justify-content-center align-items-center text-decoration-none preventDefault">
+                      <div class="me-2 d-flex justify-content-center h-auto" style="width: 20px; min-width: 20px;">
+                        <a href="#" class="openEmojiWheelLink d-flex justify-content-center text-decoration-none preventDefault" style="margin-top: 5px;">
                           <i class="far fa-smile openEmojiWheelIcon text-white" style="font-size: 14px;"></i>
                         </a>
                       </div>
@@ -2435,7 +2425,7 @@
               </div>
             </article>
             <article>
-              <div class="d-flex flex-column mt-3 w-100" style="min-height: 590px;">
+              <div class="d-flex flex-column position-relative  mt-3 w-100" style="min-height: 590px;">
                 <div class="w-100 d-flex flex-row align-items-center mb-2 ps-1" style="height: 7%;">
                   <div class="" style="max-width: 100%; max-height: 100%">
                     <a href="" class="d-flex align-items-center preventDefault" style="text-decoration: none;">
@@ -2445,8 +2435,8 @@
                     </a>
                   </div>
                   <div class="ms-auto me-1">
-                    <a href="" class="preventDefault">
-                      <i class="fa fa-ellipsis-h ms-auto text-light mb-1 me-1 fs-5"></i>
+                    <a href="" class="reportIconLink preventDefault text-light">
+                      <i class="fa fa-ellipsis-h ms-auto mb-1 me-1 fs-5"></i>
                     </a>
                   </div>
                 </div>
@@ -2469,7 +2459,7 @@
                       <div class="shareItem d-flex align-items-center d-flex align-items-center" style="max-width: 40px; max-height: 40px;">
                           <img src="../assets/images/share.png" alt="share" class="user-select-none" style="max-width: 60%;">
                       </div>
-                      <div class="saveItem d-flex align-items-center ms-auto me-1" style="max-width: 40px; max-height: 40px;">
+                      <div class="saveItem d-flex align-items-center ms-auto" style="max-width: 40px; max-height: 40px;">
                           <img src="../assets/images/save.png" alt="save" class="saveIcon d-inline user-select-none" style="max-width: 60%;">
                           <img src="../assets/images/saved.png" alt="saved" class="savedIcon d-none user-select-none" style="max-width: 60%;">
                       </div>
@@ -2477,15 +2467,15 @@
                     
                     <!-- İkinci bölüm (like sayısı) -->
                     <div class="w-100 d-flex align-items-center mt-1 ps-1" style="height: 15%; flex-grow: 0;">
-                      <a href="" class="likesText preventDefault" style="text-decoration: none; ">
-                        <strong class="text-white" style="font-size: 14px;">46 Likes</strong>
+                      <a href="" class="likesLink text-white preventDefault" style="text-decoration: none; ">
+                        <strong class="" style="font-size: 14px;"><span>46 Likes</span></strong>
                       </a>
                     </div>
                     
                     <!-- Üçüncü bölüm (yorumlar) -->
                     <div class="w-100 mt-2 ps-1" style="height: 20%; flex-grow: 0;">
-                      <a href="" class="viewCommentLink preventDefault" style="text-decoration: none;">
-                        <p class="text-secondary mt-1" style="font-size: 14px">View 3 comment</p>
+                      <a href="" class="viewCommentLink preventDefault" style="text-decoration: none; color: #555555;">
+                        <span class="mt-1" style="font-size: 14px">View 3 comment</span>
                       </a>
                     </div>
                   </div>
@@ -2493,7 +2483,7 @@
                   <div>
                     <!-- Dördüncü bölüm (yorum ekleme) -->
                     <div class="commentDiv mt-0 w-100 d-flex direction-row" style="flex-grow: 1;">
-                      <div class="ps-1 d-flex direction-row" style="position: relative; overflow: visible; width: 100%; margin: 0; padding: 0;">
+                      <div class="ps-1 d-flex direction-row" style=" overflow: visible; width: 100%; margin: 0; padding: 0;">
                         <form action="post" class="w-100 h-100 d-flex flex-column">
                           <textarea class="form-control comment-textarea border-0 bg-transparent text-white" 
                                     placeholder="Add a comment..." 
@@ -2501,19 +2491,87 @@
                                     rows="1"></textarea>
                         </form>
                       </div>
-                      <div>
-                        <a href="" class="post-link d-none align-items-center text-decoration-none preventDefault">
-                          <p class="fw-semibold mb-0" style="color: rgb(19, 133, 255);">Post</p>
+                      <div class="d-flex">
+                        <a href="" class="post-link justify-content-center d-none align-items-center text-decoration-none preventDefault" style="min-width: 40px; min-height: 30px;">
+                          <span class="fw-semibold user-select-none mb-0" style="color: rgb(19, 133, 255);">Post</span>
                         </a>
                       </div>
-                    </div>
+                      <div class="me-2 d-flex justify-content-center align-items-center" style="height: 20px; width: 20px; min-width: 20px; margin-top: 2px;">
+                        <a href="#" class="openEmojiWheelLink d-flex justify-content-center text-decoration-none preventDefault" style="margin-top: 5px;">
+                          <i class="far fa-smile openEmojiWheelIcon text-white" style="font-size: 14px;"></i>
+                        </a>
+                      </div>
+          <div class="emojiWheel position-absolute bg-openable p-3 rounded-3 d-none"
+          style="top: 265px; right: -167px; width: auto; display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; max-width: 400px; z-index: 1000; overflow: visible">
+      
+       <!-- Smileys and Emotion -->
+       <div class="emoji">😊</div>
+       <div class="emoji">😂</div>
+       <div class="emoji">😍</div>
+       <div class="emoji">😎</div>
+       <div class="emoji">😢</div>
+       <div class="emoji">😭</div>
+       <div class="emoji">😡</div>
+       <div class="emoji">😜</div>
+     
+       <!-- Animals -->
+       <div class="emoji">🐶</div>
+       <div class="emoji">🐱</div>
+       <div class="emoji">🐯</div>
+       <div class="emoji">🦁</div>
+       <div class="emoji">🐮</div>
+       <div class="emoji">🐰</div>
+       <div class="emoji">🐼</div>
+       <div class="emoji">🐵</div>
+     
+       <!-- Food -->
+       <div class="emoji">🍎</div>
+       <div class="emoji">🍔</div>
+       <div class="emoji">🍕</div>
+       <div class="emoji">🍩</div>
+       <div class="emoji">🍉</div>
+       <div class="emoji">🍣</div>
+       <div class="emoji">🍦</div>
+       <div class="emoji">🍪</div>
+     
+       <!-- Nature -->
+       <div class="emoji">🌳</div>
+       <div class="emoji">🌷</div>
+       <div class="emoji">🌺</div>
+       <div class="emoji">🌍</div>
+       <div class="emoji">☀️</div>
+       <div class="emoji">🌈</div>
+       <div class="emoji">⛰️</div>
+       <div class="emoji">🌊</div>
+     
+       <!-- Activities -->
+       <div class="emoji">⚽</div>
+       <div class="emoji">🏀</div>
+       <div class="emoji">🎮</div>
+       <div class="emoji">🎤</div>
+       <div class="emoji">🎸</div>
+       <div class="emoji">🎻</div>
+       <div class="emoji">🏃‍♂️</div>
+       <div class="emoji">⛷️</div>
+     
+       <!-- Weather -->
+       <div class="emoji">☁️</div>
+       <div class="emoji">🌧️</div>
+       <div class="emoji">🌨️</div>
+       <div class="emoji">⚡</div>
+       <div class="emoji">🌪️</div>
+       <div class="emoji">🌩️</div>
+       <div class="emoji">🌬️</div>
+       <div class="emoji">❄️</div>
+     </div>
+                      
 
                   </div>
                 </div>
               </div>
             </article>
             <article>
-              <div class="d-flex flex-column mt-3 w-100" style="min-height: 590px;">
+              <div class="d-flex flex-column position-relative  mt-3 w-100" style="min-height: 590px;">
                 <div class="w-100 d-flex flex-row align-items-center mb-2 ps-1" style="height: 7%;">
                   <div class="" style="max-width: 100%; max-height: 100%">
                     <a href="" class="d-flex align-items-center preventDefault" style="text-decoration: none;">
@@ -2523,8 +2581,8 @@
                     </a>
                   </div>
                   <div class="ms-auto me-1">
-                    <a href="" class="preventDefault">
-                      <i class="fa fa-ellipsis-h ms-auto text-light mb-1 me-1 fs-5"></i>
+                    <a href="" class="reportIconLink preventDefault text-light">
+                      <i class="fa fa-ellipsis-h ms-auto mb-1 me-1 fs-5"></i>
                     </a>
                   </div>
                 </div>
@@ -2547,7 +2605,7 @@
                       <div class="shareItem d-flex align-items-center d-flex align-items-center" style="max-width: 40px; max-height: 40px;">
                           <img src="../assets/images/share.png" alt="share" class="user-select-none" style="max-width: 60%;">
                       </div>
-                      <div class="saveItem d-flex align-items-center ms-auto me-1" style="max-width: 40px; max-height: 40px;">
+                      <div class="saveItem d-flex align-items-center ms-auto" style="max-width: 40px; max-height: 40px;">
                           <img src="../assets/images/save.png" alt="save" class="saveIcon d-inline user-select-none" style="max-width: 60%;">
                           <img src="../assets/images/saved.png" alt="saved" class="savedIcon d-none user-select-none" style="max-width: 60%;">
                       </div>
@@ -2555,15 +2613,15 @@
                     
                     <!-- İkinci bölüm (like sayısı) -->
                     <div class="w-100 d-flex align-items-center mt-1 ps-1" style="height: 15%; flex-grow: 0;">
-                      <a href="" class="likesText preventDefault" style="text-decoration: none; ">
-                        <strong class="text-white" style="font-size: 14px;">46 Likes</strong>
+                      <a href="" class="likesLink text-white preventDefault" style="text-decoration: none; ">
+                        <strong class="" style="font-size: 14px;"><span>46 Likes</span></strong>
                       </a>
                     </div>
                     
                     <!-- Üçüncü bölüm (yorumlar) -->
                     <div class="w-100 mt-2 ps-1" style="height: 20%; flex-grow: 0;">
-                      <a href="" class="viewCommentLink preventDefault" style="text-decoration: none;">
-                        <p class="text-secondary mt-1" style="font-size: 14px">View 3 comment</p>
+                      <a href="" class="viewCommentLink preventDefault" style="text-decoration: none; color: #555555;">
+                        <span class="mt-1" style="font-size: 14px">View 3 comment</span>
                       </a>
                     </div>
                   </div>
@@ -2571,7 +2629,7 @@
                   <div>
                     <!-- Dördüncü bölüm (yorum ekleme) -->
                     <div class="commentDiv mt-0 w-100 d-flex direction-row" style="flex-grow: 1;">
-                      <div class="ps-1 d-flex direction-row" style="position: relative; overflow: visible; width: 100%; margin: 0; padding: 0;">
+                      <div class="ps-1 d-flex direction-row" style=" overflow: visible; width: 100%; margin: 0; padding: 0;">
                         <form action="post" class="w-100 h-100 d-flex flex-column">
                           <textarea class="form-control comment-textarea border-0 bg-transparent text-white" 
                                     placeholder="Add a comment..." 
@@ -2579,19 +2637,87 @@
                                     rows="1"></textarea>
                         </form>
                       </div>
-                      <div>
-                        <a href="" class="post-link d-none align-items-center text-decoration-none preventDefault">
-                          <p class="fw-semibold mb-0" style="color: rgb(19, 133, 255);">Post</p>
+                      <div class="d-flex">
+                        <a href="" class="post-link justify-content-center d-none align-items-center text-decoration-none preventDefault" style="min-width: 40px; min-height: 30px;">
+                          <span class="fw-semibold user-select-none mb-0" style="color: rgb(19, 133, 255);">Post</span>
                         </a>
                       </div>
-                    </div>
+                      <div class="me-2 d-flex justify-content-center align-items-center" style="height: 20px; width: 20px; min-width: 20px; margin-top: 2px;">
+                        <a href="#" class="openEmojiWheelLink d-flex justify-content-center text-decoration-none preventDefault" style="margin-top: 5px;">
+                          <i class="far fa-smile openEmojiWheelIcon text-white" style="font-size: 14px;"></i>
+                        </a>
+                      </div>
+          <div class="emojiWheel position-absolute bg-openable p-3 rounded-3 d-none"
+          style="top: 265px; right: -167px; width: auto; display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; max-width: 400px; z-index: 1000; overflow: visible">
+      
+       <!-- Smileys and Emotion -->
+       <div class="emoji">😊</div>
+       <div class="emoji">😂</div>
+       <div class="emoji">😍</div>
+       <div class="emoji">😎</div>
+       <div class="emoji">😢</div>
+       <div class="emoji">😭</div>
+       <div class="emoji">😡</div>
+       <div class="emoji">😜</div>
+     
+       <!-- Animals -->
+       <div class="emoji">🐶</div>
+       <div class="emoji">🐱</div>
+       <div class="emoji">🐯</div>
+       <div class="emoji">🦁</div>
+       <div class="emoji">🐮</div>
+       <div class="emoji">🐰</div>
+       <div class="emoji">🐼</div>
+       <div class="emoji">🐵</div>
+     
+       <!-- Food -->
+       <div class="emoji">🍎</div>
+       <div class="emoji">🍔</div>
+       <div class="emoji">🍕</div>
+       <div class="emoji">🍩</div>
+       <div class="emoji">🍉</div>
+       <div class="emoji">🍣</div>
+       <div class="emoji">🍦</div>
+       <div class="emoji">🍪</div>
+     
+       <!-- Nature -->
+       <div class="emoji">🌳</div>
+       <div class="emoji">🌷</div>
+       <div class="emoji">🌺</div>
+       <div class="emoji">🌍</div>
+       <div class="emoji">☀️</div>
+       <div class="emoji">🌈</div>
+       <div class="emoji">⛰️</div>
+       <div class="emoji">🌊</div>
+     
+       <!-- Activities -->
+       <div class="emoji">⚽</div>
+       <div class="emoji">🏀</div>
+       <div class="emoji">🎮</div>
+       <div class="emoji">🎤</div>
+       <div class="emoji">🎸</div>
+       <div class="emoji">🎻</div>
+       <div class="emoji">🏃‍♂️</div>
+       <div class="emoji">⛷️</div>
+     
+       <!-- Weather -->
+       <div class="emoji">☁️</div>
+       <div class="emoji">🌧️</div>
+       <div class="emoji">🌨️</div>
+       <div class="emoji">⚡</div>
+       <div class="emoji">🌪️</div>
+       <div class="emoji">🌩️</div>
+       <div class="emoji">🌬️</div>
+       <div class="emoji">❄️</div>
+     </div>
+                      
 
                   </div>
                 </div>
               </div>
             </article>
             <article>
-              <div class="d-flex flex-column mt-3 w-100" style="min-height: 590px;">
+              <div class="d-flex flex-column position-relative  mt-3 w-100" style="min-height: 590px;">
                 <div class="w-100 d-flex flex-row align-items-center mb-2 ps-1" style="height: 7%;">
                   <div class="" style="max-width: 100%; max-height: 100%">
                     <a href="" class="d-flex align-items-center preventDefault" style="text-decoration: none;">
@@ -2601,8 +2727,8 @@
                     </a>
                   </div>
                   <div class="ms-auto me-1">
-                    <a href="" class="preventDefault">
-                      <i class="fa fa-ellipsis-h ms-auto text-light mb-1 me-1 fs-5"></i>
+                    <a href="" class="reportIconLink preventDefault text-light">
+                      <i class="fa fa-ellipsis-h ms-auto mb-1 me-1 fs-5"></i>
                     </a>
                   </div>
                 </div>
@@ -2625,7 +2751,7 @@
                       <div class="shareItem d-flex align-items-center d-flex align-items-center" style="max-width: 40px; max-height: 40px;">
                           <img src="../assets/images/share.png" alt="share" class="user-select-none" style="max-width: 60%;">
                       </div>
-                      <div class="saveItem d-flex align-items-center ms-auto me-1" style="max-width: 40px; max-height: 40px;">
+                      <div class="saveItem d-flex align-items-center ms-auto" style="max-width: 40px; max-height: 40px;">
                           <img src="../assets/images/save.png" alt="save" class="saveIcon d-inline user-select-none" style="max-width: 60%;">
                           <img src="../assets/images/saved.png" alt="saved" class="savedIcon d-none user-select-none" style="max-width: 60%;">
                       </div>
@@ -2633,15 +2759,15 @@
                     
                     <!-- İkinci bölüm (like sayısı) -->
                     <div class="w-100 d-flex align-items-center mt-1 ps-1" style="height: 15%; flex-grow: 0;">
-                      <a href="" class="likesText preventDefault" style="text-decoration: none; ">
-                        <strong class="text-white" style="font-size: 14px;">46 Likes</strong>
+                      <a href="" class="likesLink text-white preventDefault" style="text-decoration: none; ">
+                        <strong class="" style="font-size: 14px;"><span>46 Likes</span></strong>
                       </a>
                     </div>
                     
                     <!-- Üçüncü bölüm (yorumlar) -->
                     <div class="w-100 mt-2 ps-1" style="height: 20%; flex-grow: 0;">
-                      <a href="" class="viewCommentLink preventDefault" style="text-decoration: none;">
-                        <p class="text-secondary mt-1" style="font-size: 14px">View 3 comment</p>
+                      <a href="" class="viewCommentLink preventDefault" style="text-decoration: none; color: #555555;">
+                        <span class="mt-1" style="font-size: 14px">View 3 comment</span>
                       </a>
                     </div>
                   </div>
@@ -2649,7 +2775,7 @@
                   <div>
                     <!-- Dördüncü bölüm (yorum ekleme) -->
                     <div class="commentDiv mt-0 w-100 d-flex direction-row" style="flex-grow: 1;">
-                      <div class="ps-1 d-flex direction-row" style="position: relative; overflow: visible; width: 100%; margin: 0; padding: 0;">
+                      <div class="ps-1 d-flex direction-row" style=" overflow: visible; width: 100%; margin: 0; padding: 0;">
                         <form action="post" class="w-100 h-100 d-flex flex-column">
                           <textarea class="form-control comment-textarea border-0 bg-transparent text-white" 
                                     placeholder="Add a comment..." 
@@ -2657,12 +2783,80 @@
                                     rows="1"></textarea>
                         </form>
                       </div>
-                      <div>
-                        <a href="" class="post-link d-none align-items-center text-decoration-none preventDefault">
-                          <p class="fw-semibold mb-0" style="color: rgb(19, 133, 255);">Post</p>
+                      <div class="d-flex">
+                        <a href="" class="post-link justify-content-center d-none align-items-center text-decoration-none preventDefault" style="min-width: 40px; min-height: 30px;">
+                          <span class="fw-semibold user-select-none mb-0" style="color: rgb(19, 133, 255);">Post</span>
                         </a>
                       </div>
-                    </div>
+                      <div class="me-2 d-flex justify-content-center align-items-center" style="height: 20px; width: 20px; min-width: 20px; margin-top: 2px;">
+                        <a href="#" class="openEmojiWheelLink d-flex justify-content-center text-decoration-none preventDefault" style="margin-top: 5px;">
+                          <i class="far fa-smile openEmojiWheelIcon text-white" style="font-size: 14px;"></i>
+                        </a>
+                      </div>
+          <div class="emojiWheel position-absolute bg-openable p-3 rounded-3 d-none"
+          style="top: 265px; right: -167px; width: auto; display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; max-width: 400px; z-index: 1000; overflow: visible">
+      
+       <!-- Smileys and Emotion -->
+       <div class="emoji">😊</div>
+       <div class="emoji">😂</div>
+       <div class="emoji">😍</div>
+       <div class="emoji">😎</div>
+       <div class="emoji">😢</div>
+       <div class="emoji">😭</div>
+       <div class="emoji">😡</div>
+       <div class="emoji">😜</div>
+     
+       <!-- Animals -->
+       <div class="emoji">🐶</div>
+       <div class="emoji">🐱</div>
+       <div class="emoji">🐯</div>
+       <div class="emoji">🦁</div>
+       <div class="emoji">🐮</div>
+       <div class="emoji">🐰</div>
+       <div class="emoji">🐼</div>
+       <div class="emoji">🐵</div>
+     
+       <!-- Food -->
+       <div class="emoji">🍎</div>
+       <div class="emoji">🍔</div>
+       <div class="emoji">🍕</div>
+       <div class="emoji">🍩</div>
+       <div class="emoji">🍉</div>
+       <div class="emoji">🍣</div>
+       <div class="emoji">🍦</div>
+       <div class="emoji">🍪</div>
+     
+       <!-- Nature -->
+       <div class="emoji">🌳</div>
+       <div class="emoji">🌷</div>
+       <div class="emoji">🌺</div>
+       <div class="emoji">🌍</div>
+       <div class="emoji">☀️</div>
+       <div class="emoji">🌈</div>
+       <div class="emoji">⛰️</div>
+       <div class="emoji">🌊</div>
+     
+       <!-- Activities -->
+       <div class="emoji">⚽</div>
+       <div class="emoji">🏀</div>
+       <div class="emoji">🎮</div>
+       <div class="emoji">🎤</div>
+       <div class="emoji">🎸</div>
+       <div class="emoji">🎻</div>
+       <div class="emoji">🏃‍♂️</div>
+       <div class="emoji">⛷️</div>
+     
+       <!-- Weather -->
+       <div class="emoji">☁️</div>
+       <div class="emoji">🌧️</div>
+       <div class="emoji">🌨️</div>
+       <div class="emoji">⚡</div>
+       <div class="emoji">🌪️</div>
+       <div class="emoji">🌩️</div>
+       <div class="emoji">🌬️</div>
+       <div class="emoji">❄️</div>
+     </div>
+                      
 
                   </div>
                 </div>
@@ -2692,14 +2886,14 @@
           </div>
           
           <div class="d-flex justify-content-center align-items-center ms-auto fw-semibold text-primary" style="font-size: 14px; width: 50px;">
-            <a id="switchButton" href="" class="text-decoration-none preventDefault">
-              <span class="user-select-none">Switch</span>
+            <a id="switchLink" href="" class="text-decoration-none preventDefault">
+              <span class="user-select-none ps-2">Switch</span>
             </a>
           </div>
         </div>
-        <div class="mt-3 d-flex align-items-center flex-row w-100" style="height: 25px;">
-          <p class="fw-semibold text-secondary m-0 me-auto">Suggest for you</p>
-          <a href="seeAll.html" style="text-decoration: none;"><p class="text-white m-0" style="font-size: 15px;">See All</p></a> 
+        <div class="text-white mt-3 d-flex align-items-center flex-row w-100" style="height: 25px;">
+          <span class="fw-semibold text-secondary m-0 me-auto">Suggest for you</span>
+          <a id="seeAllLink" class="text-white" href="seeAll.html" style="text-decoration: none;"><span class="m-0" style="font-size: 15px;">See All</span></a> 
         </div>
 
         <article>
@@ -2711,9 +2905,9 @@
             </div>
             <div class="d-flex align-items-center" style="width: 220px;">
               <div class="d-flex flex-column w-100" style="height: 85%;">
-                <p class="h-50 m-0 d-flex align-items-center ms-2 text-white">
+                <p class="h-50 w-100 m-0 d-flex align-items-center ps-2 text-white">
                   <a href="" class="text-decoration-none text-white preventDefault">yusufokansirkeci</a></p>
-                <div class="h-50 m-0 d-flex align-items-center ms-2 text-secondary" style="overflow: hidden; display: flex; width: 100%;">
+                <div class="h-50 m-0 d-flex align-items-center ps-2 text-secondary" style="overflow: hidden; display: flex; width: 100%;">
                   <p class="m-0 text-truncate" style="flex-shrink: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
                     Followed by hereetria + 8 more users
                   </p>
@@ -2723,8 +2917,8 @@
               
             </div>
             
-            <div class="d-flex justify-content-center align-items-center ms-auto fw-semibold text-primary" style="font-size: 14px; width: 50px;">
-              <a href="" class="text-decoration-none preventDefault">
+            <div class="d-flex w-auto justify-content-center align-items-center ms-auto fw-semibold text-primary" style="font-size: 14px; width: 50px;">
+              <a href="" class="followLink text-decoration-none preventDefault">
                 <span class="user-select-none">Follow</span>
               </a>
             </div>
@@ -2739,9 +2933,9 @@
             </div>
             <div class="d-flex align-items-center" style="width: 220px;">
               <div class="d-flex flex-column w-100" style="height: 85%;">
-                <p class="h-50 m-0 d-flex align-items-center ms-2 text-white">
+                <p class="h-50 w-100 m-0 d-flex align-items-center ps-2 text-white">
                   <a href="" class="text-decoration-none text-white preventDefault">yusufokansirkeci</a></p>
-                <div class="h-50 m-0 d-flex align-items-center ms-2 text-secondary" style="overflow: hidden; display: flex; width: 100%;">
+                <div class="h-50 m-0 d-flex align-items-center ps-2 text-secondary" style="overflow: hidden; display: flex; width: 100%;">
                   <p class="m-0 text-truncate" style="flex-shrink: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
                     Followed by hereetria + 8 more users
                   </p>
@@ -2751,8 +2945,8 @@
               
             </div>
             
-            <div class="d-flex justify-content-center align-items-center ms-auto fw-semibold text-primary" style="font-size: 14px; width: 50px;">
-              <a href="" class="text-decoration-none preventDefault">
+            <div class="d-flex w-auto justify-content-center align-items-center ms-auto fw-semibold text-primary" style="font-size: 14px; width: 50px;">
+              <a href="" class="followLink text-decoration-none preventDefault">
                 <span class="user-select-none">Follow</span>
               </a>
             </div>
@@ -2767,9 +2961,9 @@
             </div>
             <div class="d-flex align-items-center" style="width: 220px;">
               <div class="d-flex flex-column w-100" style="height: 85%;">
-                <p class="h-50 m-0 d-flex align-items-center ms-2 text-white">
+                <p class="h-50 w-100 m-0 d-flex align-items-center ps-2 text-white">
                   <a href="" class="text-decoration-none text-white preventDefault">yusufokansirkeci</a></p>
-                <div class="h-50 m-0 d-flex align-items-center ms-2 text-secondary" style="overflow: hidden; display: flex; width: 100%;">
+                <div class="h-50 m-0 d-flex align-items-center ps-2 text-secondary" style="overflow: hidden; display: flex; width: 100%;">
                   <p class="m-0 text-truncate" style="flex-shrink: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
                     Followed by hereetria + 8 more users
                   </p>
@@ -2779,8 +2973,8 @@
               
             </div>
             
-            <div class="d-flex justify-content-center align-items-center ms-auto fw-semibold text-primary" style="font-size: 14px; width: 50px;">
-              <a href="" class="text-decoration-none preventDefault">
+            <div class="d-flex w-auto justify-content-center align-items-center ms-auto fw-semibold text-primary" style="font-size: 14px; width: 50px;">
+              <a href="" class="followLink text-decoration-none preventDefault">
                 <span class="user-select-none">Follow</span>
               </a>
             </div>
@@ -2795,9 +2989,9 @@
             </div>
             <div class="d-flex align-items-center" style="width: 220px;">
               <div class="d-flex flex-column w-100" style="height: 85%;">
-                <p class="h-50 m-0 d-flex align-items-center ms-2 text-white">
+                <p class="h-50 w-100 m-0 d-flex align-items-center ps-2 text-white">
                   <a href="" class="text-decoration-none text-white preventDefault">yusufokansirkeci</a></p>
-                <div class="h-50 m-0 d-flex align-items-center ms-2 text-secondary" style="overflow: hidden; display: flex; width: 100%;">
+                <div class="h-50 m-0 d-flex align-items-center ps-2 text-secondary" style="overflow: hidden; display: flex; width: 100%;">
                   <p class="m-0 text-truncate" style="flex-shrink: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
                     Followed by hereetria + 8 more users
                   </p>
@@ -2807,8 +3001,8 @@
               
             </div>
             
-            <div class="d-flex justify-content-center align-items-center ms-auto fw-semibold text-primary" style="font-size: 14px; width: 50px;">
-              <a href="" class="text-decoration-none preventDefault">
+            <div class="d-flex w-auto justify-content-center align-items-center ms-auto fw-semibold text-primary" style="font-size: 14px; width: 50px;">
+              <a href="" class="followLink text-decoration-none preventDefault">
                 <span class="user-select-none">Follow</span>
               </a>
             </div>
@@ -2823,9 +3017,9 @@
             </div>
             <div class="d-flex align-items-center" style="width: 220px;">
               <div class="d-flex flex-column w-100" style="height: 85%;">
-                <p class="h-50 m-0 d-flex align-items-center ms-2 text-white">
+                <p class="h-50 w-100 m-0 d-flex align-items-center ps-2 text-white">
                   <a href="" class="text-decoration-none text-white preventDefault">yusufokansirkeci</a></p>
-                <div class="h-50 m-0 d-flex align-items-center ms-2 text-secondary" style="overflow: hidden; display: flex; width: 100%;">
+                <div class="h-50 m-0 d-flex align-items-center ps-2 text-secondary" style="overflow: hidden; display: flex; width: 100%;">
                   <p class="m-0 text-truncate" style="flex-shrink: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
                     Followed by hereetria + 8 more users
                   </p>
@@ -2835,8 +3029,8 @@
               
             </div>
             
-            <div class="d-flex justify-content-center align-items-center ms-auto fw-semibold text-primary" style="font-size: 14px; width: 50px;">
-              <a href="" class="text-decoration-none preventDefault">
+            <div class="d-flex w-auto justify-content-center align-items-center ms-auto fw-semibold text-primary" style="font-size: 14px; width: 50px;">
+              <a href="" class="followLink text-decoration-none preventDefault">
                 <span class="user-select-none">Follow</span>
               </a>
             </div>

@@ -44,10 +44,11 @@ export const makeOverlayVisible = (event, elementToShow) => {
         if (elementToShow) {
             makeElementVisible(elementToShow, "d-flex");
             const currentDivs = getCurrentDivsInOverlay();
-            currentDivs.forEach((div) => {
-                const divZIndex = parseInt(window.getComputedStyle(div).zIndex, 10) || 0;
-                overlay.style.zIndex = (divZIndex + 1).toString();
-            });
+            const maxzIndexDiv = getMaxZIndexDiv(currentDivs);
+            if (maxzIndexDiv && maxzIndexDiv.style.zIndex) {
+                const maxZIndex = parseInt(maxzIndexDiv.style.zIndex, 10);
+                overlay.style.zIndex = (maxZIndex - 1).toString();
+            }
         }
     }
 };

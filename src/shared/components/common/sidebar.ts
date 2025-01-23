@@ -1,6 +1,6 @@
 import checkNull from "../../utils/nullguard.js";
 import { hideOverlay, isClickInsideActiveDiv } from "../../utils/overlay.js";
-import { makeElementHidden, makeElementVisible, changeVisibleElement } from "../../utils/ui.js";
+import { makeElementHidden, makeElementVisible, changeVisibleElement, isElementOpen, setBackgroundColor } from "../../utils/ui.js";
 
 const sidebar = document.getElementById("sidebar") as HTMLElement;
 const search = document.getElementById("search") as HTMLElement;
@@ -8,13 +8,15 @@ const sidebarOpenable = document.getElementById("sidebarOpenable") as HTMLElemen
 const sidebarContent = document.getElementById("sidebarContent") as HTMLElement;
 const sidebarContentInner = document.getElementById("sidebarContentInner") as HTMLElement;
 const sidebarHideableItems = document.querySelectorAll(".sidebarHideableItem") as NodeListOf<HTMLElement>;
+const sidebarIcon = document.querySelector("#sidebarIcon") as HTMLElement;
 
 const sidebarSmallOpenState = (): void => {
   if (
     !checkNull(sidebarContent, "sidebarContent") ||
     !checkNull(sidebarContentInner, "sidebarContentInner") ||
     !checkNull(search, "search") ||
-    !checkNull(sidebarOpenable, "sidebarOpenable")
+    !checkNull(sidebarOpenable, "sidebarOpenable") ||
+    !checkNull(sidebarIcon, "sidebarIcon")
   )
     return;
 
@@ -27,6 +29,8 @@ const sidebarSmallOpenState = (): void => {
   sidebarHideableItems.forEach((item) => {
     makeElementHidden(item, "d-inline");
   });
+
+  makeElementVisible(sidebarIcon, "d-flex");
 };
 
 const sidebarSmallClosedState = (): void => {
@@ -34,7 +38,8 @@ const sidebarSmallClosedState = (): void => {
     !checkNull(sidebarContent, "sidebarContent") ||
     !checkNull(sidebarContentInner, "sidebarContentInner") ||
     !checkNull(sidebar, "sidebar") ||
-    !checkNull(sidebarOpenable, "sidebarOpenable")
+    !checkNull(sidebarOpenable, "sidebarOpenable") ||
+    !checkNull(sidebarIcon, "sidebarIcon")
   )
     return;
 
@@ -46,6 +51,8 @@ const sidebarSmallClosedState = (): void => {
   sidebarHideableItems.forEach((item) => {
     makeElementHidden(item, "d-inline");
   });
+
+  makeElementVisible(sidebarIcon, "d-flex");
 };
 
 const sidebarBigClosedState = (): void => {
@@ -65,6 +72,8 @@ const sidebarBigClosedState = (): void => {
   sidebarHideableItems.forEach((item) => {
     makeElementVisible(item, "inline");
   });
+
+  makeElementHidden(sidebarIcon)
 };
 
 const handleSidebarClosedState = (): void => {
@@ -74,6 +83,14 @@ const handleSidebarClosedState = (): void => {
     sidebarSmallClosedState();
   }
 };
+
+export const initializeAdjustSidebarState = () => {
+  if (!checkNull(sidebarOpenable, "sidaberOpenable")) return;
+
+  if (!isElementOpen(sidebarOpenable)) {
+    handleSidebarClosedState();
+  }
+}
 
 let previousIconLink = document.querySelector('[data-action="homeAction"]') as HTMLElement;
 let previousWithoutToggleIcons = previousIconLink as HTMLElement;
@@ -163,28 +180,12 @@ const handleSidebarIconClick = (iconLink: HTMLElement): void => {
   }
 };
 
-export const sidebarIconOnClick = () => {
-  const sidebarIconLinks = document.querySelectorAll(".nav-item a") as NodeListOf<HTMLAnchorElement>;
-  if (!checkNull(sidebarIconLinks, "sidebarIconLinks")) return;
-
-  sidebarIconLinks.forEach((link) => {
-    link.addEventListener("click", (event: MouseEvent) => {
-      let action = link.getAttribute("data-action");
-      if (action === "searchAction" || action === "notificationsAction" || action === "createAction") {
-        event.preventDefault();
-      }
-      handleSidebarIconClick(link);
-    });
-  });
-};
-
 const handleSidebarSizeWhileClick = (event: MouseEvent): void => {
   const overlayContainer = document.getElementById("overlayContainer") as HTMLElement;
   if (!checkNull(overlayContainer, "overlayContainer")) return
 
   if (overlayContainer.style.visibility === "visible") {
     if (!isClickInsideActiveDiv(event)) {
-      console.log(1);
       const overlay = document.getElementById("overlay") as HTMLElement;
       if (!checkNull(overlay, "overlay")) return;
 
@@ -227,6 +228,84 @@ const handleSidebarSizeWhileClick = (event: MouseEvent): void => {
   }
 };
 
-export const initializeSidebarSizeWhileClick = () => {
+export const initializeSidebarSizeWhileClick = (): void => {
   document.addEventListener("click", handleSidebarSizeWhileClick);
 }
+
+const preventDefaultOnSamePage = (event: MouseEvent, link: HTMLAnchorElement) => {
+  const currentPage = window.location.pathname;
+  const linkPage = new URL(link.href).pathname;
+  if (currentPage === linkPage ) {
+    event.preventDefault();
+  }
+}
+
+const handleSidebarIconActions = (event: MouseEvent, link: HTMLAnchorElement): void => {
+  const handleLinkStyleReset = (link: HTMLAnchorElement): void => {
+    link.style.filter = "brightness(1)";
+    link.style.opacity = "1";
+  };
+
+  switch (event.type) {
+    case "mouseover":
+      setBackgroundColor(link, "rgb(55, 63, 68)");
+      break;
+
+    case "mouseout":
+      handleLinkStyleReset(link);
+      setBackgroundColor(link, "");
+      break;
+
+    case "mouseup":
+      handleLinkStyleReset(link);
+      break;
+
+    case "mousedown":
+      link.style.transition = "filter 0.1s ease, opacity 0.3s ease";
+      link.style.filter = "brightness(0.8)";
+      link.style.opacity = "0.7";
+      break;
+
+    case "click":
+
+      let action = link.getAttribute("data-action");
+      if (action === "searchAction" || action === "notificationsAction" || action === "createAction") {
+        event.preventDefault();
+      }
+      preventDefaultOnSamePage(event, link);
+      handleSidebarIconClick(link);
+      break;
+
+    default:
+      console.log("Invalid Action Type");
+  }
+};
+
+const getMoreElements = () => {
+  const dropdownItems = document.querySelectorAll<HTMLAnchorElement>('.dropdownItem');
+  
+  dropdownItems.forEach((item: HTMLAnchorElement) => {
+    item.addEventListener("mouseover", (event) => handleSidebarIconActions(event, item));
+    item.addEventListener("mouseout", (event) => handleSidebarIconActions(event, item));
+    item.addEventListener("mouseup", (event) => handleSidebarIconActions(event, item));
+    item.addEventListener("mousedown", (event) => handleSidebarIconActions(event, item));
+
+  });
+};
+
+export const initializeSidebarIconEvents = () => {
+  const sidebarIconLinks = document.querySelectorAll<HTMLAnchorElement>(".sidebarIconLink");
+  const sidebarMainIconLink = document.querySelector("#sidebarMainIconLink") as HTMLAnchorElement;
+  if (!checkNull(sidebarIconLinks, "sidebarIconLink")) return;
+
+  sidebarIconLinks.forEach((link: HTMLAnchorElement) => {
+    link.addEventListener("mouseover", (event) => handleSidebarIconActions(event, link));
+    link.addEventListener("mouseout", (event) => handleSidebarIconActions(event, link));
+    link.addEventListener("mouseup", (event) => handleSidebarIconActions(event, link));
+    link.addEventListener("mousedown", (event) => handleSidebarIconActions(event, link));
+    link.addEventListener("click", (event) => handleSidebarIconActions(event, link));
+  });
+  sidebarMainIconLink.addEventListener("click", (event) => preventDefaultOnSamePage(event, sidebarMainIconLink));
+
+  getMoreElements();
+};

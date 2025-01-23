@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import checkNull from "../../utils/nullguard.js";
 import { hideOverlay, makeOverlayVisible } from "../../utils/overlay.js";
-import { spinner } from "../../utils/ui.js";
+import { grayShinyWithoutHoverColors, handleButtonStyleEvents, spinner } from "../../utils/ui.js";
 const handleRequestedButtonClick = (button) => {
     if (button.classList.contains("processing") || button.innerHTML.includes(spinner))
         return;
@@ -36,23 +36,9 @@ const handleFollowingButtonClick = (button, event) => {
         return;
     makeOverlayVisible(event, unfollow);
     button.classList.add("processing");
-    const setMouseEffects = (element) => {
-        element.addEventListener("mouseover", () => {
-            element.style.cursor = "pointer";
-            element.style.backgroundColor = "#444444";
-        });
-        element.addEventListener("mousedown", () => {
-            element.style.backgroundColor = "#555555";
-        });
-        element.addEventListener("mouseleave", () => {
-            element.style.cursor = "default";
-            element.style.backgroundColor = "rgb(53, 53, 53)";
-        });
-    };
     const handleUnfollowClick = (event) => __awaiter(void 0, void 0, void 0, function* () {
         event.stopPropagation();
         if (button.classList.contains("processing")) {
-            console.log(8);
             hideOverlay(event);
             button.innerHTML = spinner;
             yield new Promise((resolve) => setTimeout(resolve, 1000));
@@ -65,21 +51,21 @@ const handleFollowingButtonClick = (button, event) => {
     });
     const handleCancelClick = (event) => {
         event.stopPropagation();
-        console.log(1);
         hideOverlay(event);
         button.classList.remove("processing");
     };
     unfollowButtonDiv.onclick = (event) => {
-        event.stopPropagation(); // Önce event propagation'ı durdur
-        handleUnfollowClick(event); // Sonra handleUnfollowClick fonksiyonunu çağır
-        console.log(1);
+        event.stopPropagation();
+        handleUnfollowClick(event);
     };
     unfollowCancelButtonDiv.onclick = (event) => {
-        event.stopPropagation(); // Önce event propagation'ı durdur
-        handleCancelClick(event); // Sonra handleCancelClick fonksiyonunu çağır
+        event.stopPropagation();
+        handleCancelClick(event);
     };
-    setMouseEffects(unfollowButtonDiv);
-    setMouseEffects(unfollowCancelButtonDiv);
+    unfollowButtonDiv.style.cursor = "pointer";
+    unfollowCancelButtonDiv.style.cursor = "pointer";
+    handleButtonStyleEvents(unfollowButtonDiv, grayShinyWithoutHoverColors);
+    handleButtonStyleEvents(unfollowCancelButtonDiv, grayShinyWithoutHoverColors);
 };
 const handleFollowButtonClick = (button) => {
     if (button.classList.contains("processing") || button.innerHTML.includes(spinner))

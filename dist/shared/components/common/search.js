@@ -1,6 +1,6 @@
 import checkNull from "../../utils/nullguard.js";
 import { hideOverlay, makeOverlayVisible } from "../../utils/overlay.js";
-import { makeElementHidden, makeElementVisible } from "../../utils/ui.js";
+import { grayShinyWithoutHoverColors, handleBlueLinkEvents, handleButtonStyleEvents, makeElementHidden, makeElementVisible } from "../../utils/ui.js";
 const handleSearchbarActions = (searchBar, searchBarIcon) => {
     searchBar.addEventListener("focus", () => {
         searchBar.placeholder = "Search";
@@ -77,42 +77,26 @@ export const initSearchedProfileEventListeners = () => {
         container.addEventListener("mouseout", () => handleSearchedProfileContainerMouseOut(container));
     });
 };
-const handleClearAllLinkEvents = (event, targetElement) => {
-    const clearSearchHistory = document.getElementById("clearSearchHistory");
-    if (!checkNull(clearSearchHistory, "clearSearchHistory"))
-        return;
-    switch (event.type) {
-        case "mouseover":
-            targetElement.style.transition = "color 0.2s ease";
-            targetElement.style.color = "white";
-            break;
-        case "mouseout":
-            targetElement.style.transition = "color 0.1s ease";
-            targetElement.style.color = "rgb(19, 133, 255)";
-            break;
-        case "mousedown":
-            targetElement.style.transition = "color 0s ease";
-            targetElement.style.color = "#555555";
-            break;
-        case "click":
-            event.preventDefault();
-            makeOverlayVisible(event, clearSearchHistory);
-            break;
-    }
-};
 export const initializeClearAllLinkEvents = () => {
-    const clearAllTextElements = document.querySelectorAll(".clearAllText");
-    clearAllTextElements.forEach((element) => {
-        element.addEventListener("mouseover", (event) => handleClearAllLinkEvents(event, element));
-        element.addEventListener("mouseout", (event) => handleClearAllLinkEvents(event, element));
-        element.addEventListener("mousedown", (event) => handleClearAllLinkEvents(event, element));
-        element.addEventListener("click", (event) => handleClearAllLinkEvents(event, element));
+    const clearAllTexts = document.querySelectorAll(".clearAllText");
+    const clearSearchHistory = document.getElementById("clearSearchHistory");
+    if (!checkNull(clearAllTexts, "clearAllText") || !checkNull(clearSearchHistory, "clearSearchHistory"))
+        return;
+    clearAllTexts.forEach((element) => {
+        element.addEventListener("mouseover", (event) => handleBlueLinkEvents(event, element));
+        element.addEventListener("mouseout", (event) => handleBlueLinkEvents(event, element));
+        element.addEventListener("mousedown", (event) => handleBlueLinkEvents(event, element));
+        element.addEventListener("click", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            makeOverlayVisible(event, clearSearchHistory);
+        });
     });
 };
-const handleClearAllButtonEvents = (event) => {
+const handleSearchButtonEvents = (event) => {
     let target = null;
     if (event.target instanceof HTMLDivElement) {
-        target = event.target; // Eğer target bir div ise, target değişkenine ata
+        target = event.target;
     }
     if (target) {
         switch (event.type) {
@@ -127,12 +111,9 @@ const handleClearAllButtonEvents = (event) => {
                 target.style.cursor = "pointer";
                 target.style.backgroundColor = "rgb(53, 53, 53)";
                 break;
-            case "click":
-                event.stopPropagation();
-                hideOverlay(event);
-                break;
         }
     }
+    ;
 };
 export const setupClearAllButtonEvents = () => {
     const clearAllButtonDiv = document.getElementById("clearAllButtonDiv");
@@ -140,12 +121,22 @@ export const setupClearAllButtonEvents = () => {
     if (!checkNull(clearAllButtonDiv, "clearAllButtonDiv") ||
         !checkNull(clearAllNotNowButtonDiv, "clearAllNotNowButtonDiv"))
         return;
-    clearAllButtonDiv.addEventListener("mousedown", handleClearAllButtonEvents);
-    clearAllButtonDiv.addEventListener("mouseover", handleClearAllButtonEvents);
-    clearAllButtonDiv.addEventListener("mouseleave", handleClearAllButtonEvents);
-    clearAllButtonDiv.addEventListener("click", handleClearAllButtonEvents);
-    clearAllNotNowButtonDiv.addEventListener("mousedown", handleClearAllButtonEvents);
-    clearAllNotNowButtonDiv.addEventListener("mouseover", handleClearAllButtonEvents);
-    clearAllNotNowButtonDiv.addEventListener("mouseleave", handleClearAllButtonEvents);
-    clearAllNotNowButtonDiv.addEventListener("click", handleClearAllButtonEvents);
+    clearAllButtonDiv.style.cursor = "pointer";
+    clearAllNotNowButtonDiv.style.cursor = "pointer";
+    clearAllButtonDiv.addEventListener("mouseover", () => handleButtonStyleEvents(clearAllButtonDiv, grayShinyWithoutHoverColors));
+    clearAllButtonDiv.addEventListener("mouseout", () => handleButtonStyleEvents(clearAllButtonDiv, grayShinyWithoutHoverColors));
+    clearAllButtonDiv.addEventListener("mousedown", () => handleButtonStyleEvents(clearAllButtonDiv, grayShinyWithoutHoverColors));
+    clearAllButtonDiv.addEventListener("mouseup", () => handleButtonStyleEvents(clearAllButtonDiv, grayShinyWithoutHoverColors));
+    clearAllButtonDiv.addEventListener("click", (event) => {
+        event.stopPropagation();
+        hideOverlay(event);
+    });
+    clearAllNotNowButtonDiv.addEventListener("mouseover", () => handleButtonStyleEvents(clearAllNotNowButtonDiv, grayShinyWithoutHoverColors));
+    clearAllNotNowButtonDiv.addEventListener("mouseout", () => handleButtonStyleEvents(clearAllNotNowButtonDiv, grayShinyWithoutHoverColors));
+    clearAllNotNowButtonDiv.addEventListener("mousedown", () => handleButtonStyleEvents(clearAllNotNowButtonDiv, grayShinyWithoutHoverColors));
+    clearAllNotNowButtonDiv.addEventListener("mouseup", () => handleButtonStyleEvents(clearAllNotNowButtonDiv, grayShinyWithoutHoverColors));
+    clearAllNotNowButtonDiv.addEventListener("click", (event) => {
+        event.stopPropagation();
+        hideOverlay(event);
+    });
 };

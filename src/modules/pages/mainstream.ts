@@ -1,16 +1,15 @@
-import { initializeToggleText, toggleOverlayWhileLogin } from "../../shared/components/features/contentSelection.js";
-import { adjustPostWidths, initializeClearAllTextareasOnPageLoad, initializeCommentLikeItemEvents, initializeEmojiWheelActions, initializeLikeEvents, initializePostIconClickEvents, initializeShareEvents, initializeShareNavigationEvents, initializeShowComments, setupTextAreaEventListeners } from "../../shared/components/features/posts.js";
+import { initializeToggleText } from "../../shared/components/features/contentSelection.js";
+import { adjustPostWidths, initializeClearAllTextareasOnPageLoad, initializeCommentLikeItemEvents, initializeEmojiWheelActions, initializeLikeEvents, initializePostIconClickEvents, initializeReportEvents, initializeShareEvents, initializeShareNavigationEvents, initializeShowComments, setupTextAreaEventListeners } from "../../shared/components/features/posts.js";
 import { initializeAdjustStoriesWidth, setupStoryScrollButtons } from "../../shared/components/features/stories.js";
-import { handleLoginButtonClick, handleSwitchButtonClick, initializeOpenLoginPage, toggleShowHide } from "../../shared/components/features/switchAccount.js";
+import { handleLoginButtonClick, initializeSwitchLinkEvents, initializeOpenLoginPage, toggleShowHide } from "../../shared/components/features/switchAccount.js";
 import { adjustNavbarWidth, initializaOpenNavbarSearch } from "../../shared/components/features/navbar.js";
-import { initializeCloseButtonListeners } from "../../shared/components/features/modalController.js";
+import { initializeFollowLinkEvents, initializeCloseButtonListeners } from "../../shared/components/features/modalController.js";
 
 const handleDOMContentLoaded = (): void => {
   setupTextAreaEventListeners();
   setupStoryScrollButtons();
   initializeToggleText();
-  toggleOverlayWhileLogin();
-  handleSwitchButtonClick();
+  initializeSwitchLinkEvents();
   toggleShowHide();
   handleLoginButtonClick();
   initializeShareNavigationEvents();
@@ -23,6 +22,8 @@ const handleDOMContentLoaded = (): void => {
   initializeLikeEvents();
   initializeShowComments();
   initializeEmojiWheelActions();
+  initializeFollowLinkEvents();
+  initializeReportEvents();
 };
 
 const handleLoad = (): void => {

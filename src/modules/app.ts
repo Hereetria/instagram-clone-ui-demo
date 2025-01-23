@@ -1,8 +1,8 @@
 import { loadScript } from "../shared/components/common/scripts.js";
 import { clearSearchOnClick, handleSearchbarIconVisibility, initializeClearAllLinkEvents, initSearchedProfileEventListeners, setupClearAllButtonEvents } from "../shared/components/common/search.js";
-import { initializeSidebarSizeWhileClick, sidebarIconOnClick } from "../shared/components/common/sidebar.js";
+import { initializeAdjustSidebarState, initializeSidebarSizeWhileClick, initializeSidebarIconEvents } from "../shared/components/common/sidebar.js";
 import { initializeButtonEvents } from "../shared/components/features/button.js";
-import { initializeNotificationItemEvents } from "../shared/components/features/notification.js";
+import { initializeNotificationItemEvents } from "../shared/components/common/notification.js";
 import { initializePreventDefault } from "../shared/utils/ui.js";
 
 const handleDomContentLoaded = (): void => {
@@ -16,11 +16,21 @@ const handleDomContentLoaded = (): void => {
   initSearchedProfileEventListeners();
   initializeClearAllLinkEvents();
   setupClearAllButtonEvents();
-  sidebarIconOnClick();
   initializeSidebarSizeWhileClick();
   initializeNotificationItemEvents();
   initializeButtonEvents();
   initializePreventDefault();
+  initializeSidebarIconEvents();
+};
+
+const handleLoad = (): void => {
+  initializeAdjustSidebarState();
+};
+
+const handleResize = (): void => {
+  initializeAdjustSidebarState();
 };
 
 document.addEventListener("DOMContentLoaded", handleDomContentLoaded);
+window.addEventListener("load", handleLoad);
+window.addEventListener("resize", handleResize);

@@ -42,7 +42,6 @@ export const hideOverlay = (event: Event): void => {
 
 export const makeOverlayVisible = (event: MouseEvent, elementToShow: HTMLElement | null): void => {
   if (!checkNull(overlayContainer, "overlayContainer")) return;
-
   if (overlayContainer.style.visibility === "hidden") {
     if (elementToShow) {
       makeElementVisible(elementToShow, "d-flex");
@@ -51,11 +50,14 @@ export const makeOverlayVisible = (event: MouseEvent, elementToShow: HTMLElement
   } else {
     if (elementToShow) {
       makeElementVisible(elementToShow, "d-flex");
-      const currentDivs = getCurrentDivsInOverlay();
-      currentDivs.forEach((div) => {
-        const divZIndex = parseInt(window.getComputedStyle(div).zIndex, 10) || 0;
-        overlay.style.zIndex = (divZIndex + 1).toString();
-      });
+
+      const currentDivs: HTMLElement[] = getCurrentDivsInOverlay();
+      const maxzIndexDiv = getMaxZIndexDiv(currentDivs);
+      
+      if (maxzIndexDiv && maxzIndexDiv.style.zIndex) {
+        const maxZIndex = parseInt(maxzIndexDiv.style.zIndex, 10);
+        overlay.style.zIndex = (maxZIndex - 1).toString();
+      }
     }
   }
 };
@@ -73,7 +75,7 @@ export const toggleOverlayVisibility = (): void => {
 
 export const isClickInsideDiv = (event: MouseEvent, targetDiv: HTMLElement): boolean => {
   if (!checkNull(overlayContainer, "overlayContainer")) return false;
-
+  
   const { top, bottom, left, right } = targetDiv.getBoundingClientRect();
   const { clientX: x, clientY: y } = event;
 
@@ -84,7 +86,6 @@ export const isClickInsideActiveDiv = (event: MouseEvent): boolean => {
   if (!checkNull(overlayContainer, "overlayContainer")) return false;
   const currentDivs: HTMLElement[] = getCurrentDivsInOverlay();
   const activeDiv: HTMLElement | null = getMaxZIndexDiv(currentDivs);
-
   if (!activeDiv) return false;
 
   return isClickInsideDiv(event, activeDiv);

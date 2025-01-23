@@ -1,6 +1,6 @@
 import checkNull from "../../utils/nullguard.js";
 import { hideOverlay, makeOverlayVisible } from "../../utils/overlay.js";
-import { changeVisibleElement, isElementOpen, makeElementHidden, makeElementVisible, setBackgroundColor, spinner, toggleElementClass, toggleElementVisibility } from "../../utils/ui.js";
+import { addCursorToElement, blueElementColors, changeVisibleElement, grayElementColors, grayShinyColors, handleButtonStyleEvents, handleFilterStyleEvents, handleTextStyleEvents, isElementOpen, makeElementHidden, makeElementVisible, setBackgroundColor, setClickActionWithSpinner, spinner, toggleElementClass, toggleElementVisibility, whiteElementColors } from "../../utils/ui.js";
 
 const adjustTextareaHeight = (commentDiv: HTMLElement): void => {
   const textarea = commentDiv.querySelector(".comment-textarea") as HTMLTextAreaElement;
@@ -36,21 +36,65 @@ const togglePostLinkVisibility = (commentDiv: HTMLElement): void => {
   }
 };
 
+const handlePostLinkDisplay = (postLink: HTMLElement, textArea: HTMLTextAreaElement, openEmojiWheelLink: HTMLAnchorElement): void => {
+  const observer = new MutationObserver(() => {
+    const currentHeight = parseInt(window.getComputedStyle(textArea).height, 10);
+  
+    if (currentHeight > 40) {
+      postLink.classList.add("align-items-center");
+      openEmojiWheelLink.classList.add("align-items-center");
+      openEmojiWheelLink.style.marginTop = "2px";
+    } else {
+      postLink.classList.remove("align-items-center");
+      openEmojiWheelLink.classList.remove("align-items-center");
+      openEmojiWheelLink.style.marginTop = "5px";
+    }
+  });
 
+  observer.observe(textArea, {
+    attributes: true,
+    attributeFilter: ["style"],
+  });
+}
+
+const handlePostLinkClickActions = (postLink: HTMLElement, textArea: HTMLTextAreaElement, div: HTMLElement): void => {
+  postLink.addEventListener("click", () => {
+    const postText = postLink.querySelector("span") as HTMLSpanElement;
+    setClickActionWithSpinner(postText);
+      textArea.readOnly = true;
+    textArea.classList.add("disabled-textarea");
+
+    setTimeout(() => {
+      textArea.value = ""; 
+      textArea.readOnly = false;
+      textArea.classList.remove("disabled-textarea");
+      postLink.style.marginTop = "0px";
+      postText.innerHTML = "Post";
+      adjustTextareaHeight(div);
+    }, 1000);
+  }); 
+}
 
 export const setupTextAreaEventListeners = (): void => {
   const commentDivs = document.querySelectorAll<HTMLElement>(".commentDiv");
-  if (!checkNull(commentDivs, "commentDiv")) return;
+  const postLinks = document.querySelectorAll<HTMLElement>(".post-link");
 
-    commentDivs.forEach((div: HTMLElement) => {
-      div.addEventListener("input", () => {
-        adjustTextareaHeight(div)
-        togglePostLinkVisibility(div);
-      });
+  if (!checkNull(commentDivs, "commentDiv") || !checkNull(postLinks, "postLink")) return;
+
+  commentDivs.forEach((div: HTMLElement) => {
+    const postLink = div.querySelector(".post-link") as HTMLElement;
+    const textArea = div.querySelector(".comment-textarea") as HTMLTextAreaElement;
+    const openEmojiWheelLink = div.querySelector(".openEmojiWheelLink") as HTMLAnchorElement;
+    handleTextStyleEvents(postLink, blueElementColors);
+    handlePostLinkDisplay(postLink, textArea, openEmojiWheelLink);
+    handlePostLinkClickActions(postLink, textArea, div);
+
+    div.addEventListener("input", () => {
+      adjustTextareaHeight(div);
+      togglePostLinkVisibility(div); 
     });
-
+  });
 };
-
 
 const getScrollbarWidth = (): number => {
   const hasScrollbar = window.innerWidth > document.documentElement.clientWidth;
@@ -174,15 +218,13 @@ const adjustCommentWidth = (): void => {
 const emojiWheels = document.querySelectorAll<HTMLElement>(".emojiWheel");
 
 const adjustEmojiWheelPosition = () => {
-  // Null kontrolü yapılıyor
+
   if (!checkNull(emojiWheels, "emojiWheel")) return;
   
   emojiWheels.forEach((wheel) => {
     const pageWidth = window.innerWidth;
 
     if (pageWidth <= 865 && pageWidth > 800) {
-      console.log(`-${(865 - pageWidth)}px`)
-      console.log(`-${167 - (865 - pageWidth)}px`)
       wheel.style.right = `-${167 - ((865 - pageWidth) / 2)}px`;
 
     } 
@@ -266,41 +308,53 @@ const handleIconClickEvents = (container: HTMLElement, index: number): void => {
   const shareItem = container.querySelector(".shareItem") as HTMLElement;
   const saveItem = container.querySelector(".saveItem") as HTMLElement;
 
-  likeItem.addEventListener("click", () => {
-    const likeIcon = likeItem.querySelector(".likeIcon") as HTMLElement;
-    const likedIcon = likeItem.querySelector(".likedIcon") as HTMLElement;
-    if (!checkNull(likeIcon, "likeIcon") || !checkNull(likedIcon, "likedIcon")) return;
-
-    toggleElementVisibility(likeIcon, "d-inline");
-    toggleElementVisibility(likedIcon, "d-inline");
-  });
-
-  commentItem.addEventListener("click", showComments);
-
-  shareItem.addEventListener("click", (event: MouseEvent) => makeOverlayVisible(event, share));
-
-
-  saveItem.addEventListener("click", () => {
-    const saveIcon = saveItem.querySelector(".saveIcon") as HTMLElement;
-    const savedIcon = saveItem.querySelector(".savedIcon") as HTMLElement;
-    if (!checkNull(saveIcon, "saveIcon") || !checkNull(savedIcon, "savedIcon")) return;
-
-    toggleElementVisibility(saveIcon, "d-inline");
-    toggleElementVisibility(savedIcon, "d-inline");
-  });
-
-  [likeItem, commentItem, shareItem, saveItem].forEach((item) => {
-    const img = item.querySelector("img") as HTMLImageElement;
-
-    item.addEventListener("mouseover", () => {
-      item.style.cursor = "pointer";
-      img.style.filter = "brightness(70%)";
-    });
-    //
-    item.addEventListener("mouseout", () => {
-      img.style.filter = "brightness(100%)";
+  likeItem.querySelectorAll<HTMLImageElement>("img").forEach((img) => {
+    img.addEventListener("click", () => {
+      const likeIcon = likeItem.querySelector(".likeIcon") as HTMLElement;
+      const likedIcon = likeItem.querySelector(".likedIcon") as HTMLElement;
+      if (!checkNull(likeIcon, "likeIcon") || !checkNull(likedIcon, "likedIcon")) return;
+  
+      toggleElementVisibility(likeIcon, "d-inline");
+      toggleElementVisibility(likedIcon, "d-inline");
     });
   });
+  
+
+  commentItem.querySelectorAll<HTMLImageElement>("img").forEach((img) => {
+    img.addEventListener("click", showComments);
+  });
+  
+  shareItem.querySelectorAll<HTMLImageElement>("img").forEach((img) => {
+    img.addEventListener("click", (event: MouseEvent) => {
+      event.preventDefault();
+      event.stopPropagation();
+      makeOverlayVisible(event, share)
+    });
+  });
+  
+
+  saveItem.querySelectorAll<HTMLImageElement>("img").forEach((img) => {
+    img.addEventListener("click", () => {
+      const saveIcon = saveItem.querySelector(".saveIcon") as HTMLElement;
+      const savedIcon = saveItem.querySelector(".savedIcon") as HTMLElement;
+      if (!checkNull(saveIcon, "saveIcon") || !checkNull(savedIcon, "savedIcon")) return;
+  
+      toggleElementVisibility(saveIcon, "d-inline");
+      toggleElementVisibility(savedIcon, "d-inline");
+    });
+  });
+  
+
+  [likeItem, commentItem, shareItem, saveItem,].forEach((item) => {
+    const images = item.querySelectorAll<HTMLImageElement>("img");
+
+    images.forEach((img: HTMLImageElement) => {
+      addCursorToElement(img, "pointer");
+      handleFilterStyleEvents(img);
+    });
+
+  });
+
 };
 
 export const initializePostIconClickEvents = (): void => {
@@ -319,6 +373,7 @@ const toggleCommentIcon = (event: MouseEvent): void => {
 
   const likeIcon = commentLikeItem.querySelector(".likeIcon") as HTMLElement;
   const likedIcon = commentLikeItem.querySelector(".likedIcon") as HTMLElement;
+
   if (!checkNull(likeIcon, "likeIcon") || !checkNull(likedIcon, "likedIcon")) return;
 
   toggleElementVisibility(likeIcon, "d-inline");
@@ -329,20 +384,22 @@ export const initializeCommentLikeItemEvents = () => {
   if (!checkNull(commentContainer, "commentContainer")) return;
 
   const commentLikeItems = document.querySelectorAll<HTMLElement>(".commentLikeItem");
-  if (!checkNull(commentLikeItems, "commentLikeItem")) return;
+  if (!commentLikeItems) return;
 
-  
-  commentLikeItems.forEach((item:HTMLElement) => {
-    const imgItems= item.querySelectorAll<HTMLImageElement>("img");
+  commentLikeItems.forEach((item: HTMLElement) => {
+    const imgItems = item.querySelectorAll<HTMLImageElement>("img");
     if (imgItems) {
-      imgItems.forEach((img:HTMLImageElement) => {
+      imgItems.forEach((img: HTMLImageElement) => {
+        handleFilterStyleEvents(img);
+
         img.addEventListener("click", (event: MouseEvent) => {
           toggleCommentIcon(event);
-        });   
-      })
-    } 
-  })
+        });
+      });
+    }
+  });
 };
+
 
 const getShareButtonText = (selectedItems: number): string =>
   selectedItems > 1 ? "Send Separately" : "Send";
@@ -420,11 +477,15 @@ export const initializeShareEvents = () => {
 
 export const initializeLikeEvents= () => {
   const likes = document.querySelector("#likesContainer") as HTMLElement;
-  const likesTexts = document.querySelectorAll<HTMLElement>(".likesText");
-  if (!checkNull(likes, "likes") || !checkNull(likesTexts, "likeText")) return;
+  const likesLinks = document.querySelectorAll<HTMLElement>(".likesLink");
+  if (!checkNull(likes, "likes") || !checkNull(likesLinks, "likesLink")) return;
 
-  likesTexts.forEach((text: HTMLElement) => {
+  likesLinks.forEach((link: HTMLElement) => {
+    const text = link.querySelector("span") as HTMLSpanElement;
+    handleTextStyleEvents(text, whiteElementColors);
     text.addEventListener("click", (event: MouseEvent): void => {
+    event.preventDefault();
+    event.stopPropagation();
     makeOverlayVisible(event,likes);
     })
   })
@@ -435,6 +496,8 @@ export const initializeShowComments = () => {
   if (!checkNull(viewCommentLinks, "viewCommentLink")) return;
 
   viewCommentLinks.forEach((link: HTMLElement) => {
+    const text = link.querySelector("span") as HTMLSpanElement
+    handleTextStyleEvents(text, grayElementColors);
     link.addEventListener("click", showComments);
   })
 }
@@ -448,6 +511,8 @@ const handleEmojiWheelOpen = () => {
     const emojiWheel = div.querySelector(".emojiWheel") as HTMLElement
     const openEmojiWheelIcon = div.querySelector(".openEmojiWheelIcon") as HTMLTextAreaElement
     if(!checkNull(emojiWheel, "emojiWheel") || !checkNull(openEmojiWheelIcon, "openEmojiWheelIcon")) return;
+
+    handleFilterStyleEvents(openEmojiWheelIcon);
 
     openEmojiWheelIcon.addEventListener("click", () => {
       toggleElementVisibility(emojiWheel, "d-grid");
@@ -484,6 +549,8 @@ const insertEmojiToTextArea = () => {
     emojis.forEach((emoji) => {
       emoji.addEventListener("click", () => {
         commentTextarea.value += emoji.textContent;
+        togglePostLinkVisibility(div);
+        adjustTextareaHeight(div);
       })
     })
   })
@@ -502,3 +569,33 @@ export const initializeClearAllTextareasOnPageLoad = () => {
       textarea.value = "";
     });
 };
+
+export const initializeReportEvents = (): void => {
+  const report = document.getElementById("report") as HTMLElement;
+  const reportIconLinks = document.querySelectorAll<HTMLAnchorElement>(".reportIconLink ");
+  const reportItems = report.querySelectorAll<HTMLElement>('.report-item');
+  if (!checkNull(report, "report") ||
+    !checkNull(reportIconLinks, "reportIconLinks") || 
+    !checkNull(reportItems, "reportItems")
+  ) return;
+  
+  reportItems.forEach((item: HTMLElement) => {
+    addCursorToElement(item, "pointer")
+    handleButtonStyleEvents(item, grayShinyColors)
+
+    item.addEventListener("click", (event: MouseEvent) => hideOverlay(event))
+  });
+
+  reportIconLinks.forEach((link) => {
+    const icon = link.querySelector("i") as HTMLElement;
+    if(!checkNull(icon, "icon")) return;
+
+    handleTextStyleEvents(icon, whiteElementColors);
+    link.addEventListener("click", (event: MouseEvent) => {
+      event.preventDefault();
+      event.stopPropagation();
+      makeOverlayVisible(event, report);
+    })
+
+})
+}

@@ -9,12 +9,3 @@ export const initializeToggleText = (): void => {
         toggleText.textContent === "For you" ? "Following" : "For you";
     });
 };
-
-export const toggleOverlayWhileLogin = (): void => {
-  const login = document.getElementById("login") as HTMLElement;
-  if (!checkNull(login, "login")) return;
-    login.addEventListener("click", (event: MouseEvent) => {
-      event.preventDefault();
-      toggleOverlayVisibility();
-    });
-};

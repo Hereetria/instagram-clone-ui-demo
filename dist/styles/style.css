@@ -5,7 +5,7 @@ body {
 }
 
 .comment-textarea::placeholder {
-    color: #6c757d !important; /* Apply Bootstrap's secondary color to placeholder */
+    color: #555555 !important; /* Apply Bootstrap's secondary color to placeholder */
   }
 
   #share-textarea::placeholder {
@@ -299,4 +299,30 @@ html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
 
 .emoji:active {
   background-color: #888;
+}
+
+.roundTop {
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+.roundBottom {
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+.disabled-textarea {
+  color: #8d8d8d !important;         
+  pointer-events: none !important;   
+  cursor: not-allowed !important;
+  opacity: 0.5 !important;
+}
+
+.dropdownItem {
+  padding-left: 12px;
+  color: white;
+  display: flex;  /* Block display kullanarak her öğe bir satırda olacak */
+  text-decoration: none;
+  min-height: 35px;
+  align-items: center;
 }

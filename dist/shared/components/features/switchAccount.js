@@ -1,13 +1,22 @@
 import checkNull from "../../utils/nullguard.js";
 import { makeOverlayVisible } from "../../utils/overlay.js";
-import { makeElementHidden, makeElementVisible, spinner } from "../../utils/ui.js";
+import { handleTextStyleEvents, makeElementHidden, makeElementVisible, spinner } from "../../utils/ui.js";
 const switchAccount = document.getElementById("switchAccount");
+const switchLink = document.querySelector("#switchLink");
 const login = document.getElementById("login");
-export const handleSwitchButtonClick = () => {
-    const switchButton = document.getElementById("switchButton");
-    if (!checkNull(switchButton, "switchButton") || !checkNull(switchAccount, "switchAccount)"))
+export const initializeSwitchLinkEvents = () => {
+    if (!checkNull(switchLink, "switchLink"))
         return;
-    switchButton.addEventListener("click", (event) => makeOverlayVisible(event, switchAccount));
+    const colors = {
+        mousedefault: "rgb(19, 133, 255)",
+        mousehover: "white",
+        mouseclick: "#555555",
+    };
+    handleTextStyleEvents(switchLink, colors);
+    switchLink.addEventListener("click", (event) => {
+        event.stopPropagation();
+        makeOverlayVisible(event, switchAccount);
+    });
 };
 export const toggleShowHide = () => {
     const showHideLink = document.getElementById("showHideLink");
@@ -31,7 +40,7 @@ export const handleLoginButtonClick = () => {
         loginButton.innerHTML = spinner;
     });
     setTimeout(() => {
-        loginButton.innerHTML = "login";
+        loginButton.innerHTML = "Log in";
     }, 2000);
 };
 export const initializeOpenLoginPage = () => {

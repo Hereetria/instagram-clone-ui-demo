@@ -1,16 +1,28 @@
 import checkNull from "../../utils/nullguard.js";
 import { makeOverlayVisible } from "../../utils/overlay.js";
 import { getFileName, getFunctionName } from "../../utils/test.js";
-import { makeElementHidden, makeElementVisible, spinner } from "../../utils/ui.js";
+import { ButtonEventColors, handleBlueLinkEvents, handleTextStyleEvents, makeElementHidden, makeElementVisible, spinner } from "../../utils/ui.js";
 
 const switchAccount = document.getElementById("switchAccount") as HTMLElement;
+const switchLink = document.querySelector("#switchLink") as HTMLAnchorElement;
 const login = document.getElementById("login") as HTMLElement;
 
-export const handleSwitchButtonClick = (): void => {
-  const switchButton = document.getElementById("switchButton") as HTMLElement;
-  if (!checkNull(switchButton, "switchButton") || !checkNull(switchAccount, "switchAccount)")) return;
-  switchButton.addEventListener("click", (event) => makeOverlayVisible(event, switchAccount));
-};
+
+export const initializeSwitchLinkEvents = () => {
+  if (!checkNull(switchLink, "switchLink")) return;
+
+  const colors: ButtonEventColors = {
+    mousedefault: "rgb(19, 133, 255)",
+    mousehover: "white",
+    mouseclick: "#555555", 
+  };
+    handleTextStyleEvents(switchLink, colors)
+    switchLink.addEventListener("click", (event: MouseEvent) => {
+      event.stopPropagation();
+      makeOverlayVisible(event, switchAccount)
+    });
+}
+
 
 export const toggleShowHide = () => { 
   const showHideLink = document.getElementById("showHideLink") as HTMLElement;
@@ -38,7 +50,7 @@ export const handleLoginButtonClick = () => {
   });
 
   setTimeout(() => {
-    loginButton.innerHTML = "login";
+    loginButton.innerHTML = "Log in";
   }, 2000);
 };
 

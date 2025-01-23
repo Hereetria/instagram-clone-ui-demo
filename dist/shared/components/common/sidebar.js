@@ -1,17 +1,19 @@
 import checkNull from "../../utils/nullguard.js";
 import { hideOverlay, isClickInsideActiveDiv } from "../../utils/overlay.js";
-import { makeElementHidden, makeElementVisible, changeVisibleElement } from "../../utils/ui.js";
+import { makeElementHidden, makeElementVisible, changeVisibleElement, isElementOpen, setBackgroundColor } from "../../utils/ui.js";
 const sidebar = document.getElementById("sidebar");
 const search = document.getElementById("search");
 const sidebarOpenable = document.getElementById("sidebarOpenable");
 const sidebarContent = document.getElementById("sidebarContent");
 const sidebarContentInner = document.getElementById("sidebarContentInner");
 const sidebarHideableItems = document.querySelectorAll(".sidebarHideableItem");
+const sidebarIcon = document.querySelector("#sidebarIcon");
 const sidebarSmallOpenState = () => {
     if (!checkNull(sidebarContent, "sidebarContent") ||
         !checkNull(sidebarContentInner, "sidebarContentInner") ||
         !checkNull(search, "search") ||
-        !checkNull(sidebarOpenable, "sidebarOpenable"))
+        !checkNull(sidebarOpenable, "sidebarOpenable") ||
+        !checkNull(sidebarIcon, "sidebarIcon"))
         return;
     sidebarContent.style.width = "68px";
     sidebarContentInner.style.width = "60px";
@@ -20,12 +22,14 @@ const sidebarSmallOpenState = () => {
     sidebarHideableItems.forEach((item) => {
         makeElementHidden(item, "d-inline");
     });
+    makeElementVisible(sidebarIcon, "d-flex");
 };
 const sidebarSmallClosedState = () => {
     if (!checkNull(sidebarContent, "sidebarContent") ||
         !checkNull(sidebarContentInner, "sidebarContentInner") ||
         !checkNull(sidebar, "sidebar") ||
-        !checkNull(sidebarOpenable, "sidebarOpenable"))
+        !checkNull(sidebarOpenable, "sidebarOpenable") ||
+        !checkNull(sidebarIcon, "sidebarIcon"))
         return;
     sidebar.classList.remove("sidebarBorder", "border-end", "border-secondary");
     sidebarContent.style.width = "68px";
@@ -34,6 +38,7 @@ const sidebarSmallClosedState = () => {
     sidebarHideableItems.forEach((item) => {
         makeElementHidden(item, "d-inline");
     });
+    makeElementVisible(sidebarIcon, "d-flex");
 };
 const sidebarBigClosedState = () => {
     if (!checkNull(sidebar, "sidebar") ||
@@ -48,6 +53,7 @@ const sidebarBigClosedState = () => {
     sidebarHideableItems.forEach((item) => {
         makeElementVisible(item, "inline");
     });
+    makeElementHidden(sidebarIcon);
 };
 const handleSidebarClosedState = () => {
     if (window.innerWidth > 1340) {
@@ -55,6 +61,13 @@ const handleSidebarClosedState = () => {
     }
     else {
         sidebarSmallClosedState();
+    }
+};
+export const initializeAdjustSidebarState = () => {
+    if (!checkNull(sidebarOpenable, "sidaberOpenable"))
+        return;
+    if (!isElementOpen(sidebarOpenable)) {
+        handleSidebarClosedState();
     }
 };
 let previousIconLink = document.querySelector('[data-action="homeAction"]');
@@ -130,27 +143,12 @@ const handleSidebarIconClick = (iconLink) => {
         }
     }
 };
-export const sidebarIconOnClick = () => {
-    const sidebarIconLinks = document.querySelectorAll(".nav-item a");
-    if (!checkNull(sidebarIconLinks, "sidebarIconLinks"))
-        return;
-    sidebarIconLinks.forEach((link) => {
-        link.addEventListener("click", (event) => {
-            let action = link.getAttribute("data-action");
-            if (action === "searchAction" || action === "notificationsAction" || action === "createAction") {
-                event.preventDefault();
-            }
-            handleSidebarIconClick(link);
-        });
-    });
-};
 const handleSidebarSizeWhileClick = (event) => {
     const overlayContainer = document.getElementById("overlayContainer");
     if (!checkNull(overlayContainer, "overlayContainer"))
         return;
     if (overlayContainer.style.visibility === "visible") {
         if (!isClickInsideActiveDiv(event)) {
-            console.log(1);
             const overlay = document.getElementById("overlay");
             if (!checkNull(overlay, "overlay"))
                 return;
@@ -188,4 +186,68 @@ const handleSidebarSizeWhileClick = (event) => {
 };
 export const initializeSidebarSizeWhileClick = () => {
     document.addEventListener("click", handleSidebarSizeWhileClick);
+};
+const preventDefaultOnSamePage = (event, link) => {
+    const currentPage = window.location.pathname;
+    const linkPage = new URL(link.href).pathname;
+    if (currentPage === linkPage) {
+        event.preventDefault();
+    }
+};
+const handleSidebarIconActions = (event, link) => {
+    const handleLinkStyleReset = (link) => {
+        link.style.filter = "brightness(1)";
+        link.style.opacity = "1";
+    };
+    switch (event.type) {
+        case "mouseover":
+            setBackgroundColor(link, "rgb(55, 63, 68)");
+            break;
+        case "mouseout":
+            handleLinkStyleReset(link);
+            setBackgroundColor(link, "");
+            break;
+        case "mouseup":
+            handleLinkStyleReset(link);
+            break;
+        case "mousedown":
+            link.style.transition = "filter 0.1s ease, opacity 0.3s ease";
+            link.style.filter = "brightness(0.8)";
+            link.style.opacity = "0.7";
+            break;
+        case "click":
+            let action = link.getAttribute("data-action");
+            if (action === "searchAction" || action === "notificationsAction" || action === "createAction") {
+                event.preventDefault();
+            }
+            preventDefaultOnSamePage(event, link);
+            handleSidebarIconClick(link);
+            break;
+        default:
+            console.log("Invalid Action Type");
+    }
+};
+const getMoreElements = () => {
+    const dropdownItems = document.querySelectorAll('.dropdownItem');
+    dropdownItems.forEach((item) => {
+        item.addEventListener("mouseover", (event) => handleSidebarIconActions(event, item));
+        item.addEventListener("mouseout", (event) => handleSidebarIconActions(event, item));
+        item.addEventListener("mouseup", (event) => handleSidebarIconActions(event, item));
+        item.addEventListener("mousedown", (event) => handleSidebarIconActions(event, item));
+    });
+};
+export const initializeSidebarIconEvents = () => {
+    const sidebarIconLinks = document.querySelectorAll(".sidebarIconLink");
+    const sidebarMainIconLink = document.querySelector("#sidebarMainIconLink");
+    if (!checkNull(sidebarIconLinks, "sidebarIconLink"))
+        return;
+    sidebarIconLinks.forEach((link) => {
+        link.addEventListener("mouseover", (event) => handleSidebarIconActions(event, link));
+        link.addEventListener("mouseout", (event) => handleSidebarIconActions(event, link));
+        link.addEventListener("mouseup", (event) => handleSidebarIconActions(event, link));
+        link.addEventListener("mousedown", (event) => handleSidebarIconActions(event, link));
+        link.addEventListener("click", (event) => handleSidebarIconActions(event, link));
+    });
+    sidebarMainIconLink.addEventListener("click", (event) => preventDefaultOnSamePage(event, sidebarMainIconLink));
+    getMoreElements();
 };
