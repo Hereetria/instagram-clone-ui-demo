@@ -17,8 +17,3 @@ All the features available on the main page of Instagram can be used here as wel
 - Bootstrap
 - JavaScript
 - TypeScript
-
-## Contributions to Me
-I initially started this project to improve my design skills and learn Bootstrap. I completed this goal quickly, and when I was still in the early stages of the project,
-I shifted my focus to learning JavaScript and later building a modular structure with TypeScript. After achieving my goals for the project,
-I decided to move on to React instead of completing the other pages. I will soon share the completed version of this project with React and Material UI.
