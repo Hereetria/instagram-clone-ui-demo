@@ -30,6 +30,7 @@ Shown below in order:
 <p align="center">
   <img src="./public/screenshots/mainstream.png" width="32%">
   <img src="./public/screenshots/see-all.png" width="32%">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif" width="32%">
 </p>
 
 <br>
