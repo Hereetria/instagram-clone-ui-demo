@@ -32,7 +32,7 @@ Shown below in order:
   <img src="./public/screenshots/see-all.png" width="32%">
 </p>
 
-<br
+<br>
 
 ## 🧰 Tech Stack
 
